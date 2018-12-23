@@ -1,0 +1,81 @@
+<!--banner-->
+<div class="bannerbox1"><img src="__PUBLIC__/images/banner_01.png" alt="达晋文章文献查询图片" /></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="">文献搜索</a><span>>></span><a href="">搜索结果</a>
+</div>
+<style>
+.action_tougao .action_rom1 label{margin-right:0px;}
+.action_tougao .action_rom1 .action_txt{width:170px;}
+.page{margin-top:10px;}
+</style>
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+		<div class="online_tougao">
+		<h3>文献查询</h3>
+		<form class="action_tougao" action="{:U('Literature/search')}" method="post" name="formUser" enctype="multipart/form-data">
+			<div class="action_rom1" style="padding-top:20px;">
+				<label><em></em>标题：</label>
+				<input type="text" class="action_txt" name="title" />
+			</div>
+			<div class="action_rom1">
+				<label><em></em>作者：</label>
+				<input type="text" class="action_txt must" name='author' />
+			</div>
+			<div class="action_rom1">
+				<label><em></em>收录者：</label>
+				<input type="text" class="action_txt must" name='included' />
+			</div>
+			<div class="action_rom1">
+				<label><em></em>作者单位：</label>
+				<input type="text" class="action_txt must" name='author_company' />
+			</div>
+			<div class="action_rom1">
+				<label><em></em>年份：</label>
+				从 <input type="text" class="must" style="width:53px;height:30px;line-height:30px;" name='min_year' placeholder="输入年份" id='password'/> 年
+				~<input type="text" class="must" style="width:53px;height:30px;line-height:30px;" name='maxyear' placeholder="输入年份" id='password'/> 年
+			</div>
+			<div class="action_rom2">
+				<input type="submit" name='Submit' class="action_btn" value="查询" />
+			</div>
+		</form>
+	</div>
+    </div>
+
+
+	<!--右边-->
+    <div class="train_r">
+		<div class="search_result">
+			<ul class="search_ul">
+			<volist name="search_info" id="list">
+				<li>
+					<a href="{:U('Journal/detail',array('id'=>$list['pre_id']))}"><img src="{$list.thumb}" alt="文章文献查询图片" width="95" height="100" /></a>
+					<div style="float:left;margin-left:15px;width:490px;">
+						<span style="color: #50c1e9;font-size:16px;line-height:30px;"><a style="color: #50c1e9;" href="{:U('Literature/show',array('id'=>$list['id'],'cat_id'=>$list['cat_id'],'pid'=>$cat_id))}">{$list.title|msubstr=0,32,'utf-8'}</a></span>
+						<p>{$list.summary|msubstr=0,180,'utf-8'}</p>
+					</div>
+					<div style="clear:both;"></div>
+				</li>
+			</volist>
+			</ul>
+			
+			<div class="page">
+				{$pages}
+			</div>
+		</div>	
+    </div>
+			
+  <script>
+	$(function(){
+		$('.search_ul li').last().css('border-bottom','none');
+	});
+  </script>  
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

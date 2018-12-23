@@ -1,0 +1,81 @@
+<!--banner-->
+<div class="bannerbox1"><a href="{$bannerArr.link}"><img src="{$bannerArr.ad_img}" alt="达晋医学各地医学晋升的政策" /></a></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="{:U('Jinsheng/index')}">晋升政策</a><span>>></span><a href="">{$dingwei}</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="t_left_con">
+			<div class="t_left_con_list border_none">
+				<p>热门资讯</p>
+				<ul>
+				<volist name="hot_article" id="list">
+					<li><a title="{$list.title}" href="{:U('Jinsheng/detail',array('id'=>$list['id'],'cat_id'=>$list['cat_id']))}">{$list.title|msubstr=0,16,'utf-8'}</a></li>
+				</volist>
+				</ul>
+			</div>
+			<!-- <div class="t_left_con_list border_none">
+				<p>热点新闻</p>
+				<ul>
+					<li><a href="#">关于选择SCI投稿杂志的几点思考</a></li>
+					<li><a href="#">医学文章写作摘要的写作注意事项</a></li>
+					<li><a href="#">医学文章写作总结的定义及经验要点</a></li>
+					<li><a href="#">医学专业毕业文章提纲写作意义与方</a></li>
+					<li><a href="#">SCI科技文章写作及投稿技巧</a></li>
+					<li><a href="#">关于选择SCI投稿杂志的几点思考</a></li>
+					<li><a href="#">医学文章写作摘要的写作注意事项</a></li>
+					<li><a href="#">医学文章写作总结的定义及经验要点</a></li>
+					<li><a href="#">医学专业毕业文章提纲写作意义与方</a></li>
+					<li><a href="#">SCI科技文章写作及投稿技巧</a></li>
+				</ul>
+			</div> -->
+			
+        </div>
+		<include file="Public/tougao" />
+    </div>
+<script>
+$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+	$(".train_r2_list_right li").last().css('background','none');
+})
+</script>
+
+	<!--右边-->
+    <div class="train_r2">
+		<div class="train_r2_list">
+			<div class="train_r2_list_left"><a href="{:U('Jinsheng/index')}">全部：</a></div>
+			<div class="train_r2_list_right">
+				<ul>
+					<volist name="jisheng_cat" id="list">
+					<li><a href="{:U('Jinsheng/index',array('js_cat_id'=>$list['cat_id']))}">{$list.cat_name}</a></li>
+					</volist>
+					<!-- <li class="back_no"><a href="{:U('Jinsheng/index')}">全部>></a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+        <div class="train_c p_l_r">
+			<ul>
+				<volist name="jisheng_info" id="list" key="k">
+				<?php if($k%5 == 1){ if($k == '1'){}else{?>
+				<hr class="hr_a" />
+				<?php }} ?>
+				<li><a href="{:U('Jinsheng/detail',array('id'=>$list['id'],'cat_id'=>$list['cat_id']))}"><label>></label>{$list.title}</a><span>{$list.addtime|date='Y-m-d',###}</span></li>
+				</volist>
+			</ul>
+			<div class="page">{$pages}</div>
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

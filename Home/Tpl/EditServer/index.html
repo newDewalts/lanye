@@ -1,0 +1,44 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">SCI编修服务</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <p>SCI编修服务</p>
+                  <volist name="EditServer_m" id="menu">
+					<li <if condition="$cat_id eq $menu['cat_id']">class='on'</if>><a href="{:U('EditServer/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				  </volist>
+               </ul>
+           </div>
+        </div>
+    </div>
+	
+<script>
+$(function(){
+	$(".trainmenu2 li>a").click(funcrion(){$(this).css('background-color','#4fc1e9')});
+	$(".trainmenu2 li").last().css('border-bottom','none');
+})
+</script>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="train_c_about">
+           {$result.content}
+        </div>
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

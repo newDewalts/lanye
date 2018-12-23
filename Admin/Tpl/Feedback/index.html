@@ -1,0 +1,57 @@
+<div class="mainnav_title">
+	<a href="{:U('Feedback/index')}" class="btn btn-info">客服反馈列表</a>
+        <a href="{:U('Feedback/add')}" class="btn ">添加留言</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Feedback/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="姓名" name="fullname" value="{$search['fullname']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+	<form method="get" action="{:U('Feedback/daochu_lesson')}" class="form-inline" style="display: inline-block;position: absolute;top: 14px;margin-left: 235px;">
+		<button type="submit" class="btn"> 导出</button>
+	</form>
+</div>
+
+<if condition="!empty($feedbackList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>内容</th>
+			<th>添加时间</th>
+			<th>显示</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="feedbackList" id="feedback">
+		<tr>
+			<td class="span2">{$feedback.fullname}</td>
+			<td>{$feedback.content}</td>
+			<td class="span2">{$feedback.addtime|date="Y-m-d H:i",###}</td>
+			<td class="span2">
+				<if condition="$feedback['status'] eq 1">
+					<span class="color-green">是</span>
+				<else/>
+					<span class="color-red">否</span>
+				</if>
+			</td>
+			<td class="span2">
+				<span class="tooltip-container">
+					<a href="{:U('Feedback/edit', array('id' =>$feedback['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Feedback/delete', array('id' =>$feedback['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

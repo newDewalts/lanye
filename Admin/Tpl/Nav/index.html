@@ -1,0 +1,72 @@
+<div class="mainnav_title">
+	<a href="{:U('Nav/index')}" class="btn btn-info">导航列表</a>
+	&nbsp;
+	<a href="{:U('Nav/add')}" class="btn">添加导航</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Nav/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="标题" name="title" value="{$search['title']}">
+		&nbsp;
+		<select name="pos" id="pos" class="span3">
+			<option value="">--请选择导航分类--</option>
+			<volist name="navPosList" id="navPos">
+				<option value="{$navPos.id}" <if condition="$search['pos'] eq $navPos['id']">selected="selected"</if> >{$navPos.pos_title}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($navList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>标题</th>
+			<th>所属位置</th>
+			<th>Url链接</th>
+			<th>在新窗口打开</th>
+			<th>是否显示</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="navList" id="nav">
+		<tr>
+			<td>{$nav.title}</td>
+			<td>{$navPosArr[$nav['pos']]}</td>
+			<td>{$nav.url}</td>
+			<td>
+				<if condition="$nav['opennew'] eq 1">
+					是
+				<else/>
+					否
+				</if>
+			</td>
+			<td>
+				<if condition="$nav['is_show'] eq 1">
+					<i class="icon-ok"></i>
+				<else/>
+					<i class="icon-remove"></i>
+				</if>
+			</td>
+			<td>{$nav.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Nav/edit', array('id' => $nav['id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Nav/delete', array('id' => $nav['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

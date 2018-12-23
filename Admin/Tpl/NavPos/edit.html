@@ -1,0 +1,45 @@
+<div class="mainnav_title">
+	<a href="{:U('NavPos/index')}" class="btn">导航位列表</a>
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('NavPos/add')}" class="btn btn-info">添加导航位</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改导航位</span>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="navPos-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('NavPos/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('NavPos/edit')}</if>">
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pos_title">导航位名称:</label>
+		<div class="controls">
+			<input type="text" name="pos_title" id="pos_title" value="{$navPos.pos_title}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$navPos['id'] gt 0">
+				<input type="hidden" name="id" value="{$navPos['id']}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+	$('#navPos-form').validate({
+		rules: {
+			'pos_title': {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

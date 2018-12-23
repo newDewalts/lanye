@@ -1,0 +1,25 @@
+<div class="box2 bgc1">
+				<h2>学术资源</h2>
+				<ul class="about-nav edit-nav">
+					<?php foreach($resources_list as $val):?>
+					<?php if($active_cat_id==$val['id']):?>
+						<li class="active">
+					<?php else:?>
+						<li>
+					<?php endif;?>
+						<a class="about-subnav" href="<?php echo U('resources/'.$val['id'])?>"><?php echo $val['title']?></a>
+						<?php if(!empty($val['lists'])):?>
+						<div class="edit-class-nav">
+							<?php $count = count($val['lists']);?>
+							<?php foreach($val['lists'] as $k=>$v):?>
+							<a <?php if($cat_id==$v['cat_id']){echo 'class="active"';}?> href="<?php echo U('editors/'.$v['cat_id'])?>"><?php echo $v['cat_name'];?></a>
+							<?php if(($k+1)!=$count):?>
+							<tt>|</tt>
+							<?php endif;?>
+							<?php endforeach;?>
+						</div>
+						<?php endif;?>
+					</li>
+					<?php endforeach;?>
+				</ul>
+			</div>

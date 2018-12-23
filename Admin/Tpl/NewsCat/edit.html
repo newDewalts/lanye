@@ -1,0 +1,78 @@
+<div class="mainnav_title">
+	<a href="{:U('NewsCat/index')}" class="btn">新闻分类列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('NewsCat/add')}" class="btn btn-info">添加新闻分类</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改新闻分类</span>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="newsCat-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('NewsCat/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('NewsCat/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span2" for="pid">上级分类:</label>
+		<div class="controls">
+			<select name="pid" id="pid">
+				<option value="0">顶级分类</option>
+				<volist name="newsCatOptions" id="vo">
+					<option value="{$vo.cat_id}" <if condition="$vo['cat_id'] eq $pid">selected="selected"</if> ><?php 
+							if ($vo['level'] > 1) {
+								echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $vo['level']);
+							}
+						?>{$vo.cat_name}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="cat_name">分类名称:</label>
+		<div class="controls">
+			<input type="text" name="cat_name" id="cat_name" value="{$newsCat.cat_name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="keywords">关键字:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="keywords" id="keywords" value="{$newsCat.keywords}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="description">描述:</label>
+		<div class="controls">
+			<textarea class="textarea-remark span6" name="description" id="description">{$newsCat.description}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input type="text" name="orders" id="orders" value="{$newsCat.orders}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$newsCat['cat_id'] gt 0">
+				<input type="hidden" name="cat_id" value="{$newsCat['cat_id']}"/>
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#newsCat-form').validate({
+		rules: {
+			'cat_name': {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

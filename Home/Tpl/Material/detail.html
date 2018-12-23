@@ -1,0 +1,66 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">学习资源</a>
+</div>
+
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <li><a>基础医学</a></li>
+                  <li><a>临床医学</a></li>
+				  <li><a>基础医学</a></li>
+                  <li><a>临床医学</a></li>
+               </ul>
+           </div>
+        </div>
+    </div>
+	
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="train_c">
+			<h3>{$detail.title}</h3>
+			<p>来源：{$detail.copyfrom} &nbsp;&nbsp;&nbsp;作者：{$detail.author} &nbsp;&nbsp;&nbsp;时间：{$detail.addtime|date='Y-m-d',###}</p>
+			<!--div style="width:940px;">
+				<img src="__PUBLIC__/images/news_01.jpg" width="700" height="300" style="padding:20px 0px;margin:auto;" />
+			</div-->
+			<div class="news_centent">
+				<p style="text-indent: 2em;">{$detail.content}</p>
+
+				<p class="p_top">上一篇：
+					<?php if(!$on_title){echo '没有了';}?><a href="{:U('Material/sci_detail',array('id' => $on_title['id'],'cat_id' => $on_title['cat_id']))}">{$on_title.title}</a>
+				</p>
+				<p>下一篇：
+					<?php if(!$next_title){echo '没有了';}?><a href="{:U('Material/sci_detail',array('id' => $next_title['id'],'cat_id' => $next_title['cat_id']))}">{$next_title.title}</a>	
+				</p>
+			</div>
+			<!-- 分享 -->
+				<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+				<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+			<!-- bdshare END -->
+				</ul>
+			</div>
+			
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

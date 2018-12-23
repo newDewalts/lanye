@@ -1,0 +1,29 @@
+<div class="position">
+    <div class="position_img">
+        <img src="../Public/images/position.png" alt="">
+    </div>
+    <div class="position_title">
+        <a href="/"> 首页</a> > 
+        <a href="{:U('news/index')}">最新消息</a>
+    </div>
+</div>
+<div class="new">
+    <div class="new_div" style="padding-top:0.8rem; margin-top: 0rem; ">
+        <foreach name="newArr" item="vo">
+            <div class="new_li">
+                <div class="new_li_img">
+                    <img src="http://www.sciedit.cn/{$vo['thumb']}" alt="">
+                </div>
+                <div class="new_li_font">
+                    <a href="{:U('/news/detail2')}?id={$vo['id']}">
+                        <p class="new_li_font1">{$vo['title']}</p>
+                        <p class="new_li_font2">{$vo['summary']}</p>
+                    </a>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+<div style="text-align: center;margin-bottom: 0.5rem;">
+    {$show}
+</div>

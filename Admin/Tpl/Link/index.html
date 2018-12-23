@@ -1,0 +1,57 @@
+<div class="mainnav_title">
+	<a href="{:U('Link/index')}" class="btn btn-info">友情链接列表</a>
+	&nbsp;
+	<a href="{:U('Link/add')}" class="btn">添加友情链接</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Link/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="友情链接名称" name="name" value="{$search['name']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($link_list)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>编号</th>
+			<th>友情链接名称</th>
+			<th>地址</th>
+			<th>是否显示</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="link_list" id="ad">
+		<tr>
+			<td width="50">{$ad.id}</td>
+			<td>{$ad.name}</td>
+			<td>{$ad.link}</td>
+			<td>
+				<if condition="$ad['is_show'] eq 1">
+					<i class="icon-ok"></i>
+				<else/>
+					<i class="icon-remove"></i>
+				</if>
+			</td>
+			<td>{$ad.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Link/edit', array('id' => $ad['id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Link/delete', array('id' => $ad['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

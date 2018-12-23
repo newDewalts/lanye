@@ -1,0 +1,82 @@
+<div class="footer" >
+    <div  ><a href="{:U('/sci/index')}" ><img src="__PUBLIC__/images/sci_img.png"  /></a></div>
+    <div class="footer-box" >
+        <div class="container-box" >
+            <div class="layui-row" >
+                <div class="footer-1" >
+                    <div  ><img src="__PUBLIC__/images/logo_b.png"  /></div>
+                    <div class="footer-title bold" >广州蓝译信息科技有限公司</div>
+                    <div class="footer-1-txt">全国咨询电话：020-89819613</div>
+                    <div class="footer-1-txt">地址：广州市天河区燕岭路89号燕侨大厦2310</div>
+                </div>
+                <div class="footer-2" >
+                    <div class="footer-title " >友情链接</div>
+                    <div>
+                        <volist name='urlLink' id='vo' >
+                            <div class="footer-2-txt"><a href="{$vo.url}">{$vo.title}</a></div>
+                        </volist>
+                    </div>
+                </div>
+                <div class="footer-3" >
+                    <div class="footer-title " >关于我们</div>
+                    <div>
+                        <div class="footer-2-txt"><a href="{:U('About/index')}">公司简介</a></div>
+                        <div class="footer-2-txt"><a href="{:U('About/index',array('cat_id'=>41))}">联系我们</a></div>
+                        <div class="footer-2-txt"><a href="{:U('About/identify')}"  >员工认证</a></div>
+                        <div class="footer-2-txt"><a href="javascript:void(0);" onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww8.53kf.com%2FwebCompany.php%3Farg%3D10151809%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26lnk_overflow%3D0%26language%3Dzh-cn%26charset%3Dgbk%26referer%3D%7Bhz6d_referer%7D%26keyword%3Dhttp%253A%252F%252Fwww.lanye.wood%252Fabout%252Findex.htm%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D9f3cef5346c7881775447248b1b44ab1%26is_group%3D#liyc#%2C#liyc#_blank#liyc#%2C#liyc#height%3D600%2Cwidth%3D800%2Ctop%3D50%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');" target="_blank">在线咨询</a></div>
+                        <div class="footer-2-txt"><a href="{:U('About/index',array('cat_id'=>40))}">支付方式</a></div>
+                    </div>
+                </div>
+                <div class="footer-4" >
+                    <div class="footer-title " >关注我们</div>
+                    <div >
+                        <div class="layui-row" >
+                            <div class="layui-col-lg6" >
+                                <div><img src="__PUBLIC__/images/weixin_1.jpg" class='weixin_img'/></div>
+                                <div class="footer-4-txt" >微信公众号</div>
+                            </div>
+                            <div class="layui-col-lg6" >
+                                <div><img src="__PUBLIC__/images/weixin_2.jpg" class='weixin_img'/></div>
+                                <div class="footer-4-txt" >微信小程序</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="beian" >版权所有 © 2009-2019 蓝译版权归广州蓝译信息科技服务有限公司所有盗用必究  <a href="http://www.miitbeian.gov.cn/" target="_blank">{$sConfig.record_number}</a></div>
+   <!-- <div style='display:none;' >
+        <script src="https://s22.cnzz.com/z_stat.php?id=1275018430&web_id=1275018430" language="JavaScript"></script>
+    </div>-->
+
+</div>
+<script>
+    b_width=$('#banner').innerWidth();
+    b_height=b_width/1920*540;
+    if(b_height>540){
+        b_height=540;
+    }
+    // 你可以在这里继续使用$作为别名...
+    layui.use('carousel', function(){
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#banner'
+            ,width: '100%' //设置容器宽度
+            ,arrow: 'none' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+            ,height:b_height+'px'
+            ,indicator:'none'
+        });
+    });
+
+
+
+</script>
+<!--<script> (function () {var _53code=document.createElement("script");_53code.src = '//tb.53kf.com/code/code/10151809/1'; var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(_53code, s);})(); </script>-->
+
+
+
+

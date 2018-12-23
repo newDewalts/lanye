@@ -1,0 +1,48 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">客户反馈</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <li class=""><a href="{:U('About/messages')}">客户反馈</a></li>
+               </ul>
+           </div>
+        </div>
+		<include file="Public/tougao" />
+    </div>
+	
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="message2">
+			<ul>
+				<volist name="msg_list" id="list">
+					<li>{$list.content}<br/><span style="float:right;margin-right:5px;color:#28a3f0;">--{$list.fullname}</span></li>
+				</volist>	
+			</ul>
+			<div style="clear:both;"></div>
+			<div class="page">{$pages}</div>
+		</div>
+        
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

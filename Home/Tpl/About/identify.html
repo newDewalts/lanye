@@ -1,0 +1,33 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/about_us.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > <a href="{:U('About/index')}" >关于我们</a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:about_left_menu" />
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-title' >
+                        <img src="__PUBLIC__/images/news_icon_title.png"  class='news_icon_title'  /> 
+                        <div class='layui-inline bold letter' >员工认证</div> 
+                        <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                    </div>
+                    <div class='artice-right-content' >
+                        <table class='table-style' border='0'>
+					<form action="{:U('About/employee')}" method='post'>
+						<tr><td class='td_attr'><label>姓名：</label></td><td><input class='inp-style' type='text' name='fullname' /></td></tr>
+						<tr class='r-height'><td colspan='2'></td></tr>
+						<tr><td class='td_attr'><label>工号：</label></td><td><input class='inp-style' type='text' name='identifier' required /></td></tr>
+						<tr class='r-height'><td colspan='2'></td></tr>
+						<tr class='tr-btn'><td colspan='2' ><input class='but-style' type='submit' value='确认' /></td>
+					</form>
+			  </table>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

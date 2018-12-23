@@ -1,0 +1,55 @@
+<div class="mainnav_title">
+	<a href="{:U('Node/index')}" class="btn btn-info">节点列表</a>
+	<a href="{:U('Node/add')}" class="btn">添加节点</a>
+</div>
+<div class="height20"></div>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>节点名</th>
+			<th>状态</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="nodeList" id="app">
+		<tr id="cat_id_{$app.id}"  parent-id="{$app.pid}"
+			<if condition="$app['children'] gt 0">
+				is-load="0" status="close" 
+			<else />
+				is-load="1" status="open"
+			</if> 
+		>
+			<td>
+				<if condition="$app['children'] gt 0">
+					<a href="javascript:void(0);" onclick="getChildrenCategory(this, '{:U('Node/getChildren')}', {$app.id}, 0);" title="展开"><img src="../Public/img/icon-plus.gif"/></a>
+				<else />
+					<a href="javascript:void(0);" title="折叠"><img src="../Public/img/icon-minus.gif"/></a>
+				</if>
+				{$app.title}
+			</td>
+			<td>
+				<if condition="$app['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>{$app.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Node/add', array('pid'=>$app['id']))}" title="添加子节点"><i class="icon-plus"></i></a> 
+					&nbsp;&nbsp;
+					<a href="{:U('Node/edit', array('id'=>$app['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;
+					<if condition="empty($app['children'])">
+						<a href="{:U('Node/delete', array('id'=>$app['id']))}" title="删除" onclick="return confirm_redirect('你确认删除此记录吗？');"><i class="icon-trash"></i></a>
+					</if>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>

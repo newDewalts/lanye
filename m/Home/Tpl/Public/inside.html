@@ -1,0 +1,11 @@
+<!-- 主菜单 -->
+<div class="container-fluid padheight index-menu" id="#DIV_HomeColBlock">
+    <volist name="fund_ap" id="vo" key="k">
+        <div class="col-xs-4">
+            <a  <if condition="$k eq 6">href="__APP__/categorylists"<else />href="__APP__/serlists/{$vo['cat_id']}"</if> looyu_bound="1" >
+                <img class="img100pw"  style="background:#71c3fc;" src="{$url}{$vo['thumb']}">
+                <p>{$vo['cat_name']}</p>
+            </a>
+        </div>
+    </volist>
+</div>

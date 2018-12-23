@@ -1,0 +1,20 @@
+<div class="height20"></div>
+<div style="font-size: 18px; font-weight: bold;">
+
+<if condition="$hasMore">
+	<p>生成文件: <span style="color: #08C;">{$file}</span></p>
+	<p>下一个...</p>
+	<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			window.location.href = "{:U('ExportUser/createExcelFile', array('page' => $nextPage))}";
+		}, 800);
+	});
+	</script>
+<else />
+	<p> 
+		文件已经生成完 &nbsp;&nbsp;
+		<a href="{:U('ExportUser/download')}" class="btn btn-info btn-small">进入下载页</a>
+	</p>
+</if>
+</div>

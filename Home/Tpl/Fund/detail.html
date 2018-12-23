@@ -1,0 +1,118 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">学习资源</a>
+</div>
+
+<div class="qikan_query">
+	<div class="qu_tit">期刊查询</div>
+	<div class="screenBox">
+		<form class="action_form_qk" action="" method="post" name="ykseach">
+			<div class="action_rom1">
+				<label>期刊名：</label>
+				<input type="text" class="action_txt" name="username" id="username" />
+			</div>
+			<div class="action_rom1">
+				<label>ISSN号：</label>
+				<input type="text" class="action_txt" name='issn' id='password'/>
+			</div>
+			<div class="action_rom1">
+				<label>研究领域：</label>
+				<input type="text" class="action_txt" name='sciences' id="code"/> 
+			</div>
+			<div class="action_rom1">
+				<label>影响因子范围：</label>
+				小于&nbsp;&nbsp;<input type="text" class="must" name='factor_min' id='password'/>&nbsp;
+				大于&nbsp;&nbsp;<input type="text" class="must" name='factor_max' id='password'/>
+			</div>
+			<div class="action_rom1">
+				<label>排列方式：</label>
+				<select name="order" class="action_txt">
+					<option value="factor_desc">影响因子从大到小</option>
+					<option value="factor_asc">影响因子从小到大</option>
+					<option value="record_asc">文章数量从少到多</option>
+					<option value="record_desc">文章数量从多到少</option>
+				</select> 
+			</div>
+			<div class="action_rom2">
+				<input type="submit" name='Submit' class="action_btn" value="查询" />
+				<input type="submit" name='Submit' class="action_btn sp" value="清除" />
+			</div>
+		</form>
+	</div>
+</div>
+<div style="clear:both;"></div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <li><a>基础医学</a></li>
+                  <li><a>临床医学</a></li>
+				  <li><a>基础医学</a></li>
+                  <li><a>临床医学</a></li>
+               </ul>
+           </div>
+        </div>
+    </div>
+	
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="train_c">
+			<h3>{$detail.title}</h3>
+			<p>来源：{$detail.copyfrom} &nbsp;&nbsp;&nbsp;作者：{$detail.author} &nbsp;&nbsp;&nbsp;时间：{$detail.addtime|date='Y-m-d',###}</p>
+			<!--div style="width:940px;">
+				<img src="__PUBLIC__/images/news_01.jpg" width="700" height="300" style="padding:20px 0px;margin:auto;" />
+			</div-->
+			<div class="news_centent">
+				<p style="text-indent: 2em;">{$detail.content}</p>
+
+				<p class="p_top">上一篇：<?php if(!$on_title){echo '没有了';}?><a href="{:U('Material/sci_detail',array('id' => $on_title['id'],'cat_id' => $on_title['cat_id']))}">{$on_title.title}</a></p>
+				<p>下一篇：<?php if(!$next_title){echo '没有了';}?><a href="{:U('Material/sci_detail',array('id' => $next_title['id'],'cat_id' => $next_title['cat_id']))}">{$next_title.title}</a></p>
+			</div>
+			<!-- 分享 -->
+			<div>
+				<ul style="height:40px;margin-left: 250px; padding: 30px 0px;">
+				<!-- JiaThis Button BEGIN -->
+				<div class="jiathis_style_32x32">
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_renren"></a>
+					<a class="jiathis_button_kaixin001"></a>
+					<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+					<a class="jiathis_counter_style"></a>
+				</div>
+				<script type="text/javascript" >
+					var jiathis_config={
+						summary:"",
+						shortUrl:false,
+						hideMore:false
+					}
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+				<!-- JiaThis Button END -->
+				</ul>
+			</div>
+			
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

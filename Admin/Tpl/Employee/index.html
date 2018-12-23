@@ -1,0 +1,69 @@
+<div class="mainnav_title">
+	<a href="{:U('Employee/index')}" class="btn btn-info">员工列表</a>
+	&nbsp;
+	<a href="{:U('Employee/add')}" class="btn">添加员工</a>
+        &nbsp;
+	<a href="{:U('Employee/exportExcel')}" class="btn">导出excel</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Employee/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="姓名" name="fullname" value="{$search['fullname']}">
+		&nbsp;&nbsp;
+		<input type="text" class="input-medium" placeholder="工号" name="identifier" value="{$search['identifier']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($employeeList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>头像</th>
+			<th>姓名</th>
+			<th>工号</th>
+			<th>部门</th>
+			<th>职位</th>
+			<th>添加时间</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="employeeList" id="employee">
+		<tr>
+			<td class="span2">
+				<if condition="!empty($employee['avatar'])">
+					<img src="{$employee['avatar']}" style="width: 100px;"/>
+				</if>
+			</td>
+			<td>{$employee.fullname}</td>
+			<td>{$employee.identifier}</td>
+			<td>{$employee.department}</td>
+			<td>{$employee.position}</td>
+			<td>{$employee.addtime|date="Y-m-d H:i",###}</td>
+			<td>
+				<if condition="$employee['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Employee/edit', array('id' =>$employee['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Employee/delete', array('id' =>$employee['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

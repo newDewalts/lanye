@@ -1,0 +1,75 @@
+<div class="content">
+	<include file="Public:content_top" />
+
+	<div class="n_place">
+		<p><span class="sp">当前位置</span><a href="/">达晋医学文章</a> &gt; <span style="color:#345f92;">{$nowCat.cat_name}</span>
+		</p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="n_content">
+		<div class="n_sidebar">
+			<ul>
+				<volist name="subCat" id="vo">
+					<li <eq name="vo['cat_id']" value="$nowCat['cat_id']">class="sp"</eq> ><a href="{:U('ServiceCat/index', array('id' => $vo['cat_id']))}">{$vo.cat_name}</a></li>
+				</volist>
+			</ul>
+		</div>
+	
+		<div class="n_main">
+			<div class="ns_main">
+				<if condition="$hasChildren">
+					<volist name="catList" id="cat">
+						<div style="font-size:16px; padding-top: 15px;">{$cat.cat_name}</div>
+						<if condition="!empty($cat['service_list'])">
+						<volist name="cat['service_list']" id="vo">
+							<div class="ns_main_zu">
+								<div class="ns_main_zu_left">
+									<a href="{:U('Service/show', array('id' => $vo['id']))}" target="_blank">
+										<if condition="!empty($vo['thumb'])">
+											<img src="{$vo.thumb}" width="58" height="78" />
+										<else/>
+											<img src="../Public/images/article_cat_default.jpg" width="58" height="78" />
+										</if>
+									</a>
+								</div>
+								<div class="ns_main_zu_right">
+									<h3><a href="{:U('Service/show', array('id' => $vo['id']))}" target="_blank">{$vo.title}</a></h3>
+									<p style="height:55px; overflow:hidden;">{$vo.summary|msubstr=0,95,'utf-8'}</p>
+								</div>
+							</div>
+						</volist>
+						<else/>
+							<div>没有任何记录</div>
+						</if>
+					</volist>
+				<else/>
+					<if condition="!empty($nowCat['service_list'])">
+					<volist name="nowCat['service_list']" id="vo">
+						<div class="ns_main_zu">
+							<div class="ns_main_zu_left">
+								<a href="{:U('Service/show', array('id' => $vo['id']))}" target="_blank">
+									<if condition="!empty($vo['thumb'])">
+										<img src="{$vo.thumb}" width="58" height="78" />
+									<else/>
+										<img src="../Public/images/article_cat_default.jpg" width="58" height="78" />
+									</if>
+								</a>
+							</div>
+							<div class="ns_main_zu_right">
+								<h3><a href="{:U('Service/show', array('id' => $vo['id']))}" target="_blank">{$vo.title}</a></h3>
+								<p style="height:55px; overflow:hidden;">{$vo.summary|msubstr=0,95,'utf-8'}</p>
+							</div>
+						</div>
+					</volist>
+					<else/>
+						<div>没有任何记录</div>
+					</if>
+				</if>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div class="clear"></div>
+<include file="Public:ad_bottom" />

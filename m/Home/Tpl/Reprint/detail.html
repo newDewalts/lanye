@@ -1,0 +1,27 @@
+<div class="position">
+    <div class="position_img">
+        <img src="../Public/images/position.png" alt="">
+    </div>
+    <div class="position_title">
+        <a href="/"> 首页</a> >
+        <a href="{:U('news/index')}">文章转载</a>
+    </div>
+</div>
+
+<div class="detail_div">
+	<div class="detail_title">
+		<h2>{$detail.title}</h2>
+		<p>{$detail.addtime|date='Y-m-d H:i:s',###}</p>
+	</div>
+	
+	<div class="detail_content">
+		{$detail.content}
+	</div>
+
+	<div class="reprint_url">
+		<div class="reprint_url_title">
+			转载地址：
+		</div>	
+		<p class="reprint_reprint_url">{$detail.reprint_url}</p>
+	</div>
+</div>

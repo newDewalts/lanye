@@ -1,0 +1,45 @@
+<!--banner-->
+<div class="bannerbox1"><img src="__PUBLIC__/images/banner_01.png" /></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">学习资源</a><notempty name="cat_name"><span>>></span><a href="javascript:;">{$cat_name}</a></notempty>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+                  <volist name="material_menu" id="menu">
+					<li <if condition="$cat_id eq $menu['cat_id']">class='on'</if>><a href="{:U('Material/mat_list',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				  </volist>
+               </ul>
+           </div>
+        </div>
+		<include file="Public/tougao" />
+    </div>
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+	<!--右边-->
+    <div class="train_r">
+		<div class="train_c">
+			<ul class="matr_ul">
+				<volist name="listArr" id="list">
+					<li><a href="{:U('Material/mat_detail',array('id' => $list['id'],'cat_id'=>$cat_id))}"><label>></label>{$list.title}</a><span>{$list.addtime|date='Y-m-d',###}</span></li>
+				</volist>
+			</ul>
+			<div style="clear:both;"></div>
+			<div class="page">{$pages}</div>
+		</div>
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

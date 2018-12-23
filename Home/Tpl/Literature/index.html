@@ -1,0 +1,66 @@
+<!--banner-->
+<div class="bannerbox1"><a href="{$bannerArr.link}"><img src="{$bannerArr.ad_img}" alt="达晋医学文章参考文献" /></a></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="{:U('Literature/index')}">文献频道</a><notempty name="cat_name"><span>>></span><a href="javascript:;">{$cat_name}</a></notempty>
+</div>
+
+<!--文献查询-->
+<include file="Public/wenxian_query" />
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu border_top">
+               <ul class="trainmenu2">
+                  <volist name="menu" id="ls">
+					<li <if condition="$cat_id eq $ls['cat_id']">class='on'</if>><a href="{:U('Literature/index',array('cat_id'=>$ls['cat_id']))}">{$ls.cat_name}</a></li>
+				  </volist>
+               </ul>
+           </div>
+        </div>
+    </div>
+<script>
+$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+	$(".train_r2_list_right li").last().css('background','none');
+})
+</script>
+
+	<!--右边-->
+    <div class="train_r2 border_top">
+		<div class="train_r2_list">
+			<div class="train_r2_list_left"><a href="{:U('Literature/index',array('cat_id'=>$cat_id))}">全部：</a></div>
+			<div class="train_r2_list_right">
+				<ul>
+					<volist name="sort_list" id="list">
+						<li><a href="{:U('Literature/index',array('style'=>$list['cat_id'],'cat_id'=>$cat_id))}">{$list.cat_name}</a></li>
+					</volist>
+					<!-- <li class="back_no"><a href="{:U('Literature/index',array('cat_id'=>$cat_id))}">全部>></a></li> -->
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>
+        <div class="train_c p_l_r">
+			<ul>
+				<volist name="listArr" id="list" key="k">
+				<?php if($k%5 == 1){ if($k == '1'){}else{?>
+				<hr class="hr_a" />
+				<?php }} ?>
+				<li><a target="_blank" href="{:U('Literature/show',array('id'=>$list['id'],'cat_id'=>$list['cat_id'],'pid'=>$cat_id))}" title="{$list.title}"><label>></label>{$list.title|msubstr=0,70,'utf-8'}</a><span>{$list.addtime|date='Y-m-d',###}</span></li>
+				</volist>
+			</ul>
+			<div class="page">{$pages}</div>
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

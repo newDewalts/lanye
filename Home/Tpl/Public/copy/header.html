@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$sConfig.site_name}-{$sConfig.seo_title}</title>
+<meta name="keywords" content="{$sConfig.seo_keywords}"/>
+<meta name="description" content="{$sConfig.seo_description}"/>
+<link href="../Public/css/style.css" rel="stylesheet" type="text/css" />
+<script src="__PUBLIC__/Js/jquery-1.8.3.min.js" type="text/javascript" ></script>
+<!--script type="text/javascript" src="../jquery1.42.min.js"></script-->
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+
+<body>
+<!--top-->
+<div class="topbox">
+    <div class="top">
+        <h1>您好，欢迎来到sciedit!</h1>
+        <p>
+		<?php 
+		if(!empty($_SESSION['username'])){
+		?>
+		<a href="{:U('User/index')}"><?php echo $_SESSION['username']; ?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('User/logout')}">退出</a>
+		<?php }else{ ?>
+		<a href="{:U('User/login')}">登陆</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{:U('User/register')}">注册</a>
+		<?php } ?>
+			
+		</p>
+    </div>
+</div>
+<!--logo-->
+<div class="logobox">
+    <div class="logo">
+      <a href="/"><img src="__PUBLIC__/images/logo_07.png" /></a>
+	  <div>
+		<p class="p1">020-66242515<br/>020-66242516</p>
+		<p class="p2">dajin8@sciedit.cn</p>
+	  </div>
+    </div>
+</div>
+<!--nav-->
+<div class="navbox">
+    <div class="nav">
+        <ul>
+           <li><a href="/" class="">主页</a></li>
+           <li>
+              <a href="{:U('Assess/index')}">SCI评估服务</a>
+              <ul>
+				<volist name="Assess_m" id="menu" offset="0" length='6'>
+					<li><a href="{:U('Assess/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				</volist>
+              </ul>
+           </li>
+           <li>
+              <a href="{:U('EditServer/index')}">SCI编修服务</a>
+              <ul>
+			    <volist name="EditServer_m" id="menu" offset="0" length='6'>
+					<li><a href="{:U('EditServer/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				</volist>
+              </ul>
+           </li>
+           <li>
+              <a href="{:U('Issue/index')}">SCI发表支持</a>
+              <ul>
+				<volist name="Issue_m" id="menu" offset="0" length='6'>
+					<li><a href="{:U('Issue/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				</volist>
+              </ul>
+           </li>
+           <li>
+              <a href="{:U('Advantage/index')}">服务优势</a>
+              <ul>
+                <volist name="Advantage_m" id="menu" offset="0" length='6'>
+					<li><a href="{:U('Advantage/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				</volist>
+              </ul>
+           </li>
+           <!--li><a href="{:U('Issue/design')}">课题设计</a></li-->
+           <li>
+				<a href="{:U('Jijing/index')}">基金申请</a>
+				<ul>
+					<volist name="Jijing" id="menu" offset="0" length='6'>
+						<li><a href="{:U('Jijing/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+					</volist>
+				</ul>
+		   </li>
+           <li><a href="{:U('Material/index')}">学习资源</a></li>
+           <li style="background:none;"><a href="{:U('Contribute/index')}" class="last">在线投稿</a></li>
+        </ul>
+    </div>
+</div>

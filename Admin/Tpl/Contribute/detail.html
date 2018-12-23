@@ -1,0 +1,56 @@
+<div class="mainnav_title">
+	<span class="btn btn-info">在线投稿详情</span>
+	&nbsp;
+	<a href="{$forward_url}" class="btn">返回</a>
+</div>
+<div class="height20"></div>
+
+<table class="table table-bordered table-hover">
+	<tbody>
+		<tr>
+			<td class="span2">真实姓名</td>
+			<td>{$contribute.realname}</td>
+		</tr>
+		<tr>
+			<td class="span2">手机号码</td>
+			<td>{$contribute.mobile}</td>
+		</tr>
+		<tr>
+			<td class="span2">电子邮件</td>
+			<td>{$contribute.email}</td>
+		</tr>
+		<tr>
+			<td class="span2">期刊级别</td>
+			<td>{$contribute.grade}</td>
+		</tr>
+		
+		<tr>
+			<td class="span2">上传文章</td>
+			<td><a href="__ROOT__/Uploads/attachment/{$contribute.attach}" target="_blank">下载</a></td>
+			<!--td><a href="__ROOT__/Uploads/attachment/{$contribute.attach}" target="_blank">下载</a></td-->
+		</tr>
+		<!-- <tr>
+			<td class="span2">QQ</td>
+			<td>{$contribute.qq}</td>
+		</tr> -->
+		<tr>
+			<td class="span2">论文标题</td>
+			<td>{$contribute.title}</td>
+		</tr>
+		
+		<tr>
+			<td class="span2">服务类型</td>
+			<td>{$contribute['service_type']|get_sci_app}</td>
+		</tr>
+		<tr>
+			<td class="span2">科学领域</td>
+			<td>{$contribute['sciences_area']}</td>
+		</tr>
+		
+		<tr>
+			<td class="span2">补充说明</td>
+			<td>{$contribute['content']}</td>
+		</tr>
+		
+	</tbody>
+</table>

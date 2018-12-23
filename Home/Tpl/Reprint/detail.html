@@ -1,0 +1,30 @@
+<body class="sciedit-news">
+
+<!-- 左边服务项目导航栏 -->
+<include file="Public:side"/>
+
+    <div class="content">
+		<h3 class='title_h3'>{$news_info.title}</h3>
+		<span class="span_summary">时间：<?php echo date('Y-m-d H:i:s',$news_info['addtime']); ?> 作者：{$news_info.author} 点击：{$news_info.hits}次</span>
+		<p class='content_p'>{$news_info.content}</p>
+		
+		<br /><br />
+		<p>转载网址：{$news_info.reprint_url}</p>
+		
+		<div class="detail_prev" style="padding:0px 15px;">
+			<div style="font-size:14px;"><span>↑</span>上一篇：<if condition="$one_prev neq ''"><a href="{:U('Reprint/detail',array('id'=>$one_prev['id']))}">{$one_prev.title}</a><else/>暂无</if></div>
+			<div style="font-size:14px;"><span>↓</span>下一篇：<if condition="$one_next neq ''"><a href="{:U('Reprint/detail',array('id'=>$one_next['id']))}">{$one_next.title}</a><else/>暂无</if></div>
+		</div>
+
+	</div>
+
+	 <div class="server-bottom">
+        <a onclick="kf1()"><div class="server-bottom-button">在线咨询</div></a>
+    </div>
+
+</div>
+<script type="text/javascript">
+    
+    $('#a-nav').text('文章转载');
+    $('#a-nav').attr('href',"{:U('Reprint/index')}");
+</script>

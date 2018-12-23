@@ -1,0 +1,46 @@
+<style type="text/css">
+body{background:#3A6EA5;}
+</style>
+<div class="container">
+	<div class="login-form">
+		<h2>蓝译(中文)后台管理</h2>
+		<form action="{:U('Public/doLogin')}" method="post">
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<input type="text" name="username" placeholder="用户名" autofocus="autofocus">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input type="password" name="password" placeholder="密码">
+					</div>
+				</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on" ><img src="{:U('Public/verify')}" onclick="fleshVerify();" title="点击刷新" style="cursor:pointer;" id="verifyImg"></span>
+						<input name="verify" type="text" placeholder="验证码" style="width: 172px;">
+					</div>
+				</div>
+			</div>
+			<div class="login-submit-box">
+				<input type="submit" class="btn btn-large btn-primary" value="登录"/>
+			</div>
+		</form> 
+	</div>
+</div>
+
+<script type="text/javascript">
+// 刷新验证码
+function fleshVerify()
+{ 
+	var src = '__URL__/verify/' + new Date().getTime();
+	$('#verifyImg').attr('src', src);
+}
+</script>

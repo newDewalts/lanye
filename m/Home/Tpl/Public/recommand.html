@@ -1,0 +1,17 @@
+    <span class="span_text">推荐服务</span>
+    <div id="list_class">
+       <volist name="service_re" id="vo">
+        	<ul>
+        	  <li class="left">
+        	    <div><a href="__APP__/serdetail/{$vo['id']}">{$vo['title'] | strip_tags | msubstr=0,12,'utf-8',false}</a></div>
+        	    <div>{$vo['summary'] | strip_tags | msubstr=0,200,'utf-8',false}</div>
+        	  </li>
+            <li class="right">
+              <div>
+                <a href="http://tb.53kf.com/code/client/10130292/1][img]http://tb.53kf.com/kfimg.php?arg=10130292&style=1"><img src="../Public/images/cyc001.gif" alt="我要报名" style="cursor:pointer"></a>
+              </div>
+            </li>
+            <li class="clear"></li>
+        	</ul>
+      </volist>
+    </div>

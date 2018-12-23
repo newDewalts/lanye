@@ -1,0 +1,52 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_ys.jpg"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > 服务优势</div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <div class="artice-left-title" >服务优势</div>
+                    <div class="artice-menu" >
+                        <foreach name='service_list' item='vo'>
+                            <div class="artice-menu-list <if condition='$vo.cat_id eq $cid ' >artice-menu-select</if>" >
+                                <div class="artice-menu-title" >
+                                    <img src="__PUBLIC__/images/page_menu_active.png" class="artice-active"  />
+                                    <img src="__PUBLIC__/images/page_icon_{$key+1}.png" class="artice-icon"  /> 
+                                    <div class='txt' ><a href="{:U('ServiceAdvant/index',array('cat_id'=>$vo['cat_id']))}">{$vo.cat_name}</div>
+                                </div>
+                            </div>
+                        </foreach>
+                    </div>
+                    <div class='hotline' >
+                        <div class='txt' >服务热线</div>
+                        <div class='number' >020-89819613</div>
+                    </div>    
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-content' >
+                         <div class='artice-right-title' >
+                            <img src="__PUBLIC__/images/page_title_icon.png"  class='page_icon_title'  /> 
+                            <div class='layui-inline bold letter' >{$service_info.title}</div> 
+                            <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                        </div>
+                        <div class='artice-content' >
+                            {$service_info.content}
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>   
+</div>
+
+
+
+
+
+
+
+

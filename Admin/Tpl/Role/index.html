@@ -1,0 +1,46 @@
+<div class="mainnav_title">
+	<a href="{:U('Role/index')}" class="btn btn-info">角色列表</a>
+	<a href="{:U('Role/add')}" class="btn">添加角色</a>
+</div>
+<div class="height20"></div>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>角色名称</th>
+			<th>描述</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="roleList" id="vo">
+		<tr>
+			<td>{$vo.id}</td>
+			<td>{$vo.name}</td>
+			<td>{$vo.remark}</td>
+			<td>
+				<if condition="$vo['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+	
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Role/access', array('role_id' => $vo['id']))}" title="授权"><i class="icon-certificate"></i></a> &nbsp;&nbsp;
+					<a href="{:U('Role/edit', array('id' => $vo['id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a href="{:U('Role/delete', array('id' => $vo['id']))}" title="删除" onclick="return confirm_redirect('你确认删除此记录吗？');"><i class="icon-trash"></i></a> &nbsp;&nbsp;
+					<a href="{:U('User/index', array('role_id' => $vo['id']))}" title="用户列表"><i class=" icon-list"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+
+</script>

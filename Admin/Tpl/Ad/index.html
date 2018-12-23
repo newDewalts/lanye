@@ -1,0 +1,77 @@
+<div class="mainnav_title">
+    <a href="{:U('Ad/index')}" class="btn btn-info">广告列表</a>
+    &nbsp;
+    <a href="{:U('Ad/add')}" class="btn">添加广告</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+    <form method="get" action="{:U('Ad/index')}" class="form-inline">
+        <span>筛选: </span>
+        <input type="text" class="input-medium" placeholder="广告名称" name="name" value="{$search['name']}">
+        <select name="pos_id" id="pos_id" class="span2">
+            <option value="">--请选择广告位--</option>
+            <volist name="adPosList" id="vo">
+                <option value="{$vo.pos_id}" <if condition="$search['pos_id'] eq $vo['pos_id']">selected="selected"</if> >{$vo.pos_title}</option>
+            </volist>
+        </select>
+        &nbsp;&nbsp;
+        <button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+    </form>
+</div>
+
+<if condition="!empty($adList)">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>广告名称</th>
+            <th>广告位置</th>
+            <th>广告链接</th>
+            <th>广告图片</th>
+            <th>缩略图片</th>
+            <th>广告说明</th>
+            <th>是否显示</th>
+            <th>排序</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="adList" id="ad">
+            <tr>
+                <td>{$ad.name}</td>
+                <td>{$adPosArr[$ad['pos_id']]}</td>
+                <td>{$ad.link}</td>
+                <td class="span2">
+                    <if condition="!empty($ad['ad_img'])">
+                        <img src="{$ad.ad_img}" style="width: 150px;height: 60px;"/>
+                    </if>
+                </td>
+                <td class="span2">
+                    <if condition="!empty($ad['ad_img_thumb'])">
+                        <img src="{$ad.ad_img_thumb}" style="width: 100px;40px;"/>
+                    </if>
+                </td>
+                <td>{$ad.img_text}</td>
+                <td>
+                    <if condition="$ad['is_show'] eq 1">
+                        <i class="icon-ok"></i>
+                        <else/>
+                        <i class="icon-remove"></i>
+                    </if>
+                </td>
+                <td>{$ad.orders}</td>
+                <td>
+				<span class="tooltip-container">
+					<a href="{:U('Ad/edit', array('id' => $ad['id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Ad/delete', array('id' => $ad['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    {$pageShow}
+    <else/>
+    <div>没有任何记录</div>
+</if>
+

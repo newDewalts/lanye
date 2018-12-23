@@ -1,0 +1,26 @@
+<div class="mainnav_title">
+	<a href="{:U('ExportUser/index')}" class="btn btn-info">返回</a>
+</div>
+<div class="height20"></div>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th>文件名</th>
+			<th>下载</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="files" id="vo" key="key">
+		<tr>
+			<td class="span1">{$key}</td>
+			<td><a href="__ROOT__/{$vo.file}">{$vo.file}</a></td>
+			<td>
+				<span class="tooltip-container">
+					<a href="__ROOT__/{$vo.file}" title="下载"><i class="icon-download-alt"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>

@@ -1,0 +1,77 @@
+<div class="mainnav_title">
+	<a href="{:U('Link/index')}" class="btn">友情链接列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Link/add')}" class="btn btn-info">添加友情链接</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改友情链接</span>
+		&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="ad-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Link/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Link/edit')}</if>" enctype="multipart/form-data">
+	<div class="control-group">
+		<label class="control-label span2" for="name">友情链接名称:</label>
+		<div class="controls">
+			<input type="text" name="name" id="name" value="{$link_info.name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="link">广告链接:</label>
+		<div class="controls">
+			<input class="span4" type="text" name="link" id="link" value="{$link_info.link}">
+			<em class="color-red">*</em>
+			<span class="help-inline">以“http:”//开头</span>
+		</div>
+	</div>
+	
+	
+	<div class="control-group">
+		<label class="control-label span2">是否显示:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="is_show" value="1" <if condition="empty($link_info) || ($link_info['is_show'] eq 1)">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="is_show" value="0" <if condition="!empty($link_info) && ($link_info['is_show'] eq 0)">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input  type="text" name="orders" id="orders" value="{$link_info.orders}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<input type="hidden" name="id" value="{$link_info['id']}">
+			<input type="hidden" name="forward_url" value="{$forward_url}">
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#ad-form').validate({
+		rules: {
+			name: {
+				required: true
+			},
+			link: {
+				required: true, 
+				url: true
+			},
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

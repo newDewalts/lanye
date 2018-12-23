@@ -1,0 +1,92 @@
+	<!-- header -->	
+	<include file="Public:menu" />
+	
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+		
+		
+			<div class="column-title">
+				<h2>{$pre_array['cat_name']}</h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">首页</a>
+				<tt>></tt>
+				<a href="{:U('/contact/index',array('id'=>31))}">{$class_name}</a>
+				<tt>></tt>
+				<span>{$pre_array['cat_name']}</span>
+			</div>
+			
+			
+			<div class="complain mt20">
+				<p class="red">*为必填项</p>	
+				<!-- <form class="form3" id="form1" method="REQUEST" action="{:U('/contact/complain',array('id'=>$pre_array['cat_id']))}"> -->
+				<form class="form3" id="form1" method="post" action="{:U('/Form/complain')}">
+					<ul class="clearfix">
+						<li>
+							<label>
+								<span class="red">*</span>
+								客户姓名：
+							</label>
+							<input type="text" name="fullname" placeholder="姓名" datatype="zh2-4" />
+						</li>
+						<li>
+							<label>
+								<span class="red">*</span>
+								联系电话：
+							</label>
+							<input type="text" name="phone" placeholder="电话" datatype="m" />
+						</li>
+						<li>
+							<label>
+								<span class="red">*</span>
+								联系邮箱：
+							</label>
+							<input type="text" name="email" placeholder="邮箱" datatype="e" />
+						</li>
+						<li>
+							<label>
+								联系 QQ：
+							</label>
+							<input type="text" name="QQ" placeholder="QQ" datatype="n6-16" />
+						</li>
+						<li class="max">
+							<label>
+								投诉或建议内容：
+							</label>
+							<textarea type="text" name="content" placeholder="投诉或建议" datatype="*" ></textarea>
+						</li>
+						<li class="max">
+							<label>
+								备注说明：
+							</label>
+							<textarea type="text" name="remark" placeholder="备注说明" datatype="*" ></textarea>
+						</li>
+						<li class="clearfix" style="width:400px">
+							<label class="fl">验证码：</label>
+							<input class="code-txt fl" type="text" name="verify" datatype="*"/>
+							<img src="<?php echo U('Common/verify')?>" onclick="fleshVerify();" id="verifyImg" style="cursor:pointer; margin-left:20px"/>
+						</li>
+					</ul>
+					<div class="btn-bar3">
+						<!-- <a class="btn btn3 tc" href="#">在线咨询</a> -->
+						<button class="btn tc btn3 ml10" type="submit">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div class="side fr">
+			<include file="profile" />
+			<include file="Public:online" />
+		</div>
+	</div>	
+	<script type="text/javascript">
+	// 刷新验证码
+	function fleshVerify(){
+		var src = "<?php echo U('Common/verify')?>"+ '?' + new Date().getTime();
+		$('#verifyImg').attr('src', src);
+	}
+	</script>	
+	<!-- footer -->

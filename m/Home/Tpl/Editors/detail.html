@@ -1,0 +1,16 @@
+<div class='site-content' >
+    <div class='page_menu' ><img src='__APP__/Home/Tpl/Public/images/home_icon.png' class="home-icon" ><a href="/"> 首页</a> > <a href="{:U('/editors/lists')}">编辑团队</a>  </div>
+
+    <div class='page_content' >
+            <div class="center editors_ditail_img">
+                <img src="{$url}{$editor.avatar}" alt="{$editor.name}">
+            </div>
+            <div class="art_title">
+                {$editor.name}
+            </div>
+            <div class="art_content">
+               {$editor.introduction}
+            </div>
+        <div class='center'><a href="javascript:" onclick="kf1()"><button class="editor-button">立刻咨询</button></a></div>
+    </div>    
+</div>

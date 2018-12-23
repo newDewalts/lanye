@@ -1,0 +1,25 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/about_us.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > <a href="{:U('About/index')}" >关于我们</a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:about_left_menu" />
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-title' >
+                        <img src="__PUBLIC__/images/news_icon_title.png"  class='news_icon_title'  /> 
+                        <div class='layui-inline bold letter' >{$result.title}</div> 
+                        <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                    </div>
+                    <div class='artice-right-content' >
+                        {$result.content}
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

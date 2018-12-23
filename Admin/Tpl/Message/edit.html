@@ -1,0 +1,76 @@
+<div class="mainnav_title">
+	<a href="{:U('Message/index')}" class="btn">SCI评估信息列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'edit'">
+		<span class="btn btn-info">修改SCI评估信息</span>&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="feedback-form" action="{:U('Message/edit')}">
+	
+	<div class="control-group">
+		<label class="control-label span2" for="fullname">姓名:</label>
+		<div class="controls">
+			<input type="text" name="name" id="name" value="{$Message.name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+
+
+	<div class="control-group">
+		<label class="control-label span2" for="content">留言内容:</label>
+		<div class="controls">
+			<textarea name="liuyan" id="content" class="textarea-remark2">{$Message.liuyan}</textarea>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">显示:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="status" value="1" <if condition="$Message['status'] eq 1">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="status" value="0" <if condition="$Message['status'] eq 0">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$Message['id'] gt 0">
+				<input type="hidden" name="id" value="{$Message['id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<div class="height20"></div>
+<div class="height20"></div>
+
+<script type="text/javascript">
+$(function(){
+	/*
+	$('#article-form').validate({
+		rules: {
+			'cat_id': {
+				required: true
+			},
+			'title': {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+	*/
+});
+</script>

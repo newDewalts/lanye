@@ -1,0 +1,62 @@
+<div class="mainnav_title">
+	<a href="{:U('Role/index')}" class="btn">角色列表</a>
+
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Role/add')}" class="btn btn-info">添加角色</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改角色</span>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="role-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Role/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Role/edit')}</if>">
+	
+	<div class="control-group">
+		<label class="control-label span2" for="name">角色名称:</label>
+		<div class="controls">
+			<input type="text" name="name" id="name" value="{$role.name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label span2">描述:</label>
+		<div class="controls">
+			<textarea name="remark" class="textarea-remark">{$role.remark}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">状态:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="status" value="1" <if condition="empty($role) || ($role['status'] eq 1)">checked="checked"</if> />启用
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="status" value="0" <if condition="!empty($role) && ($role['status'] eq 0)">checked="checked"</if> />禁用
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$role['id'] gt 0">
+				<input type="hidden" name="id" value="{$role['id']}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#role-form').validate({
+		rules: {
+			'name': {required: true}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

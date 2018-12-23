@@ -1,0 +1,61 @@
+<div class="height20"></div>
+
+<form method='post' id="user-form" action="{:U('Index/profile')}">
+	<div class="control-group">
+		<label class="control-label span2" for="username">用户名:</label>
+		<div class="controls" style="height: 30px; line-height: 30px;">
+			<span>{$userInfo.username}</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="nickname">昵称:</label>
+		<div class="controls">
+			<input type="text" name="nickname" id="nickname" value="{$userInfo.nickname}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="email">邮箱:</label>
+		<div class="controls">
+			<input type="text" name="email" id="email" value="{$userInfo.email}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="mobile">手机:</label>
+		<div class="controls">
+			<input type="text" name="mobile" id="mobile" value="{$userInfo.mobile}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="phone">电话:</label>
+		<div class="controls">
+			<input type="text" name="phone" id="phone" value="{$userInfo.phone}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#user-form').validate({
+		rules: {
+			email: {
+				required: true, 
+				email: true
+			},
+			mobile: {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

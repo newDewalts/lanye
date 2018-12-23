@@ -1,0 +1,49 @@
+<div class="mainnav_title">
+	<a href="{:U('PeriodicalCate/index')}" class="btn btn-info">期刊分类列表</a>
+	&nbsp;
+	<a href="{:U('PeriodicalCate/add')}" class="btn">添加分类</a>
+</div>
+<div class="height20"></div>
+
+<if condition="!empty($periodicalCateList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>分类名称</th>
+			<th class="span2">分类ID</th>
+			<th class="span2">排序</th>
+			<th class="span2">在首页显示</th>
+			<th class="span2">在导航显示</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="periodicalCateList" id="periodicalCate">
+		<tr>
+			<td style="padding-left:{$periodicalCate['level']*25-15}px;">{$periodicalCate.cat_name}</td>
+			<td>{$periodicalCate.cat_id}</td>
+			<td>{$periodicalCate.orders}</td>
+			<td>
+				<if condition="$periodicalCate['show_index'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td>
+				<if condition="$periodicalCate['show_nav'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('PeriodicalCate/add', array('pid'=>$periodicalCate['cat_id']))}" title="添加子分类"><i class="icon-plus"></i></a> &nbsp;&nbsp;
+					<a href="{:U('PeriodicalCate/edit', array('cat_id'=>$periodicalCate['cat_id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('PeriodicalCate/delete', array('cat_id'=>$periodicalCate['cat_id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+<else/>
+	<div>没有任何记录</div>
+</if>

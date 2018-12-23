@@ -1,0 +1,110 @@
+<div class="mainnav_title">
+	<a href="{:U('Role/index')}" class="btn">返回</a>
+</div>
+<div class="height20"></div>
+
+<style type="text/css">
+.top-node{padding-left: 50px;}
+.module{padding-left: 10px;}
+.module dt{ background: #eee; height: 30px; padding-left: 10px;}
+.module dd{margin-left: 0; padding: 10px;}
+.save-access{padding-left: 50px;}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	/*
+	$('input[level=1]').click(function(){
+		var inputs = $(this).parents('.app').find("input[type='checkbox']");
+		$(this).attr('checked') ? inputs.attr('checked', 'checked') : inputs.removeAttr('checked');
+	});
+	*/
+	$('input[level=2]').click(function(){
+		var inputs = $(this).parents('.module').find("input[type='checkbox']");
+		var app    = $(this).parents('.app');
+		var parent = app.find("input[level=1]");
+		
+		if ($(this).attr('checked')) {
+			// 上级节点也被选中
+			parent.attr('checked', 'checked');
+			// 所以子节点也被选中
+			inputs.attr('checked', 'checked');
+		} else {
+			// 取消所以子节点选中
+			inputs.removeAttr('checked');
+			
+			// 如果是父节点下的最后一个取消的
+			var has_checked = false;
+			$.each(app.find("input[level=2]"), function(i, n){
+				if ($(n).attr('checked')){
+					has_checked = true;
+				}
+			});
+			// 没有二级节点选中
+			if (!has_checked) {
+				parent.removeAttr('checked');
+			}
+		}
+	});
+	
+	$('input[level=3]').click(function(){
+		var module = $(this).parents('.module');
+		var parent = module.find("input[level=2]");
+		
+		if ($(this).attr('checked')) {
+			// 有一个选中则父节点选中
+			parent.attr('checked', 'checked');
+		} else {
+			// 最后一个取消则父节点取消
+			var has_checked = false;
+			$.each(module.find('dd input[level=3]'), function(i, n){
+				if ($(n).attr('checked')){
+					has_checked = true;
+				}
+			});
+			if (!has_checked) {
+				parent.removeAttr('checked');
+			}
+		}
+	});
+});
+</script>
+
+<form action="{:U('Role/access')}" method="post">
+
+<volist name="nodeTree" id="app">
+<div class="app">
+	<p class="top-node">
+		<label class="checkbox inline">
+			<input type="checkbox" name="access[]" value="{$app.id}_1" level="1" <if condition="in_array($app['id'], $accessList)">checked="checked"</if> />
+			<strong>{$app.title}</strong>
+		</label>
+	</p>
+	
+	<volist name="app['children']" id="module">
+	<dl class="module">
+		<dt>
+			<label class="checkbox inline">
+				<input type="checkbox" name="access[]" value="{$module.id}_2" level="2" <if condition="in_array($module['id'], $accessList)">checked="checked"</if> />
+				<strong>{$module.title}</strong>
+			</label>
+		</dt>
+		<dd>
+			<volist name="module['children']" id="action">
+				<label class="checkbox inline">
+					{$action.title}<input type="checkbox" name="access[]" value="{$action.id}_3" level="3" <if condition="in_array($action['id'], $accessList)">checked="checked"</if> />
+				</label>
+			</volist>
+		</dd>
+	</dl>
+	</volist>
+</div>
+</volist>
+<div class="height20"></div>
+<p class="save-access">
+	<input type="hidden" name="role_id" value="{$role_id}">
+	<button type="submit" class="btn">保存授权</button>
+</p>
+</form>
+
+

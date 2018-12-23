@@ -1,0 +1,61 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">编辑团队</a>
+</div>
+<script>
+function js_aup(_name, _value) {
+
+    var newurl = '';
+	if (_value === null) {
+		return false;
+	}
+	newurl = '?' + _name + '=' + _value;
+    location.href = newurl;
+}
+</script>
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="edit_menu">
+        <span>编辑团队</span>
+		<ul>
+		<?php
+			foreach($editArr as $key => $edit){
+				foreach($edit as $k => $v){
+		?>
+			<li><a href="javascript:js_aup('style',<?php echo $v['cat_id']; ?>);"><?php echo $v['cat_name']; ?></a></li>
+		<?php }} ?>
+		</ul>
+    </div>
+	
+	<div class="edit_detail">
+		<ul>
+			<volist name="listArr" id="list">
+				<li>
+					<div style="height:180px;">
+						<div class="ed_det_img">
+							<img src="{$list.avatar}" width="130" height="160" />
+						</div>
+						<div class="ed_det_cent">
+							<span>{$list.name}</span>
+							<p style="text-indent:2em;">{$list.introduction}</p>
+						</div>
+					</div>
+				</li>
+			</volist>
+		</ul>
+		<div class="page">{$pages}</div>
+		
+	</div>
+	
+	
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

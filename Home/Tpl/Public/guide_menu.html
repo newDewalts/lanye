@@ -1,0 +1,25 @@
+<div class="box2 bgc1">
+	<h2>服务指南</h2>
+		<ul class="about-nav edit-nav">
+			<?php foreach($guide_menu_info as $k=>$v):?>
+			<?php if($active_cat_id==$v['cat_id']):?>
+				<li class="active">
+					<?php else:?>
+				<li>
+				<?php endif;?>
+				<a class="about-subnav" href="<?php echo U('guides/'.$v['cat_id'])?>"><?php echo $v['cat_name']?></a>
+					<?php if($v['lists']):?>
+				<div class="edit-class-nav">
+					<?php $count = count($v['lists']);?>
+					<?php foreach($v['lists'] as $key=>$val):?>
+					<a <?php if($article_id==$val['id']){echo 'class="active"';}?> href="<?php echo U('guide/'.$val['id'])?>"><?php echo $val['title'];?></a>
+					<?php if(($key+1)!=$count):?>
+					<tt>|</tt>
+					<?php endif;?>
+					<?php endforeach;?>
+				</div>
+					<?php endif;?>
+				</li>
+					<?php endforeach;?>
+				</ul>
+				</div>

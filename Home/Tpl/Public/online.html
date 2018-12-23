@@ -1,0 +1,63 @@
+			<div class="mt10">
+				<a href="<?php echo U('Join/16')?>">
+					<img width="310" height="78" src="../Public/image/ad10.jpg" alt="加盟代理"/>
+				</a>
+			</div>
+			<div class="box1 mt10">
+				<div class="title tc">
+					<h5>在线投稿</h5>
+				</div>
+				<div class="clearfix">
+					<form id="form" class="bgc2 form form-bd" method="post" action="<?php echo U('form/contribute')?>">
+						<p id="msgdemo2" class="Validform_checktip"></p>
+						<ul class="clearfix">
+							<li class="txt">
+								<label>真实姓名：</label>
+								<input type="text" name="realname" value="" datatype="zh2-4"/>
+							</li>
+							<li class="txt mt5">
+								<label>电　　话：</label>
+								<input type="text" name="mobile" datatype="m"/>
+							</li>
+							<li class="txt mt5">
+								<label>电子邮箱：</label>
+								<input type="text" name="email" datatype="e"/>
+							</li>
+							<li class="txt mt5">
+								<label>期刊级别：</label>
+								<select name="grade">
+									<option>省级</option>
+									<option>国家级</option>
+									<option>核心刊</option>
+									<option>SCI期刊</option>
+								</select>
+							</li>
+							<li class="txt mt5 upload relative">
+								<label>上传文章：</label>
+								<input type="text" value="选择上传文件" id="txtFileName2" disabled="disabled" autocomplete="off" class="inputxt" plugin="swfupload" datatype="*" />
+								<span id="spanButtonPlaceholder"></span>
+								<input type="hidden" pluginhidden="swfupload" name="attach" id="hidFileID" value="" />	
+							</li>
+							<li class="txt mt5">
+								<label>验 证 码 ：</label>
+								<input type="text" name="verify" datatype="*" style="width:80px"/>
+								<div class="verification fr ml10">
+									<img src="<?php echo U('Common/verify')?>" onclick="fleshVerify();" id="verifyImg" style="cursor:pointer;"/>
+								</div>
+							</li>
+						</ul>
+						<p class="tip spirit">填写详细信息可以提高发稿成功率</p>
+						<div class="mt10">
+							<!-- <a class="sheet spirit" href="#">投稿信息表下载</a> -->
+							<button class="btn tc" type="submit">点击提交</button>
+						</div>
+					</form>
+				</div>	
+			</div>	
+			<script type="text/javascript">
+			// 刷新验证码
+			function fleshVerify(){
+				var src = "<?php echo U('Common/verify')?>"+ '?' + new Date().getTime();
+				$('#verifyImg').attr('src', src);
+			}
+			</script>

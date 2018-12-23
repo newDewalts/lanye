@@ -1,0 +1,17 @@
+
+<div class='site-content' >
+    <div class='page_menu' ><img src='__APP__/Home/Tpl/Public/images/home_icon.png' class="home-icon" ><a href="/"> 首页</a>  > {$cat_name.cat_name}</div>
+
+    <div class='page_content' >
+        <foreach name="service_li" item="vo" >
+            <div class="art_title">
+                {$vo.title}
+            </div>
+            <div class="art_content">
+                {$vo.content}
+            </div>
+	</foreach>
+    </div>    
+</div>
+
+

@@ -1,0 +1,72 @@
+<div class="mainnav_title">
+	<a href="{:U('Message/index')}" class="btn btn-info">SCI评估留言列表</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Message/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="姓名" name="name" value="{$search['name']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($messageList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>姓名</th>
+                        <th>优惠</th>
+			<th>留言</th>
+			<th>附件</th>
+			<th>添加时间</th>
+			<th>显示</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="messageList" id="vo">
+		<tr>
+			<td class="span2">{$vo.name}</td>
+                        <td>
+                            <switch name="vo.youhui">
+                                <case value="2">免费评估</case>
+                                <case value="3">免费选题</case>
+                                <case value="4">免费查重</case>
+                                <case value='5'>免费询问信</case>
+                                <case value="6">免费cover letter</case>
+                                <case value="7">免费设计课题</case>
+                                <case value="8">免费标书评估</case>
+                                <case value="9">在线下单9折</case>
+                                <default />
+                                    
+                            </switch>
+                        </td>
+			<td>{$vo.liuyan}</td>
+			<td><img style='width:40px;' src="__PUBLIC__/images/timg.jpg"/></td>
+			<td class="span2">{$vo.addtime}</td>
+			<td class="span2">
+				<if condition="$vo['status'] eq 1">
+					<span class="color-green">是</span>
+				<else/>
+					<span class="color-red">否</span>
+				</if>
+			</td>
+
+			<td class="span2">
+				<span class="tooltip-container">
+					<a style='margin-right:20px;'  href="{:U('Message/downFile',array('id'=>$vo['id']))}"><img src='__PUBLIC__/images/down.gif' /></a>
+					<a href="{:U('Message/edit', array('id' =>$vo['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Message/delete', array('id' =>$vo['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

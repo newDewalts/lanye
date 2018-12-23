@@ -1,0 +1,35 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_editors.jpg"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > <a href="{:U('/editors/index')}" >编辑团队</a>  </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:editors_left_menu" />  
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-content' >
+                        <div class="art_title" >{$edit_info.name}</div>
+                        <div class='artice-content' >
+                            <div style="text-align: center;margin-bottom: 10px;">
+                                    <img src="{$edit_info.avatar}" alt="" width="250px;" >
+                              </div>
+                            {$edit_info.introduction}
+                        </div>
+                        <div class='statement' >
+                            声明：本网所有文章（包括图片和音视频资料）系出于传递更多信息之目的，且明确注明来源和作者，不希望被转载的媒体或个人可与我们联系(dajin@sciedit.cn)，我们将立即进行删除处理。所有文章仅代表作者观点，不代表本站立场。
+                        </div>
+                        <div class='p-box' >
+                            <div class='layui-row' >
+                                <div class='layui-col-lg6 left pl10' >上一篇:<if condition="$front neq ''"><a href="{:U('Editors/detail',array('id'=>$front['id']))}">{$front.name}</a><else/>暂无</if></div>
+                                <div class='layui-col-lg6 right pr10' >下一篇:<if condition="$after neq ''"><a href="{:U('Editors/detail',array('id'=>$after['id']))}">{$after.name}</a><else/>暂无</if></div>
+                            </div>    
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

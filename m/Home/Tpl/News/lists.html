@@ -1,0 +1,31 @@
+<div class='site-content' >
+    <div class='page_menu' ><img src='__APP__/Home/Tpl/Public/images/home_icon.png' class="home-icon" ><a href="/"> 首页</a> > <a href="{:U('news/lists')}">新闻资讯</a> 
+        <notempty name='news_cat' >
+            > <a href="{:U('news/lists',array('cat_id'=>$news_cat['cat_id']))}">{$news_cat.cat_name}</a> 
+        </notempty>    
+    </div>
+
+    <div class='page_content' >
+        <volist name='newArr' id='vo' >
+            <div class='news-list' >
+                <div class='layui-row' >
+                    <div class='news-left' >
+                        <div class='news-title' > <a href="{:U('/news/detail',array('id'=>$vo['id']))}" >{$vo.title}</a></div>
+                        <div class='news-date' >{$vo.addtime|date='Y-m-d',###}</div>
+                    </div>
+                    <div class='news-right' >
+                        <empty name="vo['thumb']" >
+                            <img src="__APP__/Home/Tpl/Public/images/news_img_1.png" alt="">
+                        <else />  
+                             <a href="{:U('/news/detail',array('id'=>$vo['id']))}" ><img src="{$url}/{$vo.thumb}" class="full-width"  /></a>
+                        </empty>   
+                    </div>
+                </div>    
+            </div>
+        </volist> 
+    </div> 
+    <div class="p-box" >
+        {$show}
+    </div>
+</div>
+

@@ -1,0 +1,17 @@
+<div class="mainnav_title">
+	<a href="{:U('Sysconfig/index', array('type' => 1))}" class="btn <eq name='type' value='1'>btn-info</eq>">基础配置</a>
+	&nbsp;
+	<!-- <a href="{:U('Sysconfig/index',  array('type' => 2))}" class="btn <eq name='type' value='2'>btn-info</eq>">验证码</a>
+	&nbsp;-->
+	<a href="{:U('Sysconfig/index',  array('type' => 3))}" class="btn <eq name='type' value='3'>btn-info</eq>">邮箱配置</a>
+	&nbsp; 
+</div>
+<div class="height20"></div>
+
+<if condition="$type eq 1">
+	<include file="base"/>
+<elseif condition="$type eq 2"/>
+	<include file="verifyCode"/>
+<elseif condition="$type eq 3"/>
+	<include file="email"/>
+</if>

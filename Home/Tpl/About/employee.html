@@ -1,0 +1,44 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/about_us.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > <a href="{:U('About/index')}" >关于我们</a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:about_left_menu" />
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-title' >
+                        <img src="__PUBLIC__/images/news_icon_title.png"  class='news_icon_title'  /> 
+                        <div class='layui-inline bold letter' >员工认证</div> 
+                        <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                    </div>
+                    <div class='artice-right-content' >
+                        <div class="server-title" style='margin:25px 0;font-size:25px;'>员工信息</div>
+                            <?php if($ployee_info){  ?>
+                                <div class='empro-info' style="margin:0 auto;">
+                                        <dl class='dl-info'>
+                                                <!-- <dt class='dt-avatar'><?php if($ployee_info['avatar']){ ?><img src="{$ployee_info.avatar}" /><?php } ?></dt> -->
+                                                <dd><label>姓名：</label>{$ployee_info.fullname}</dd><br/>
+                                                <dd><label>工号：</label>{$ployee_info.identifier}</dd><br/>
+                                                <dd><label>职务：</label>{$ployee_info.position}</dd><br/>
+                                                <dd><label>所在部门：</label>{$ployee_info.department}</dd><br/>
+                                                <dd><label>工作情况：</label>{$ployee_info.working}</dd><br/>
+                                                <dd><label>员工电话：</label>{$ployee_info.phone}</dd><br/>
+                                                <dd><label>员工邮箱：</label>{$ployee_info.email}</dd>
+                                        </dl>
+                                </div>	
+                            <?php }else{ ?>
+                                <div class='empro-info'>
+                                        <strong style="color:#ff0000;font-size: 20px;">未查询到记录</strong>
+                                </div>	
+                              <?php } ?>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    
+

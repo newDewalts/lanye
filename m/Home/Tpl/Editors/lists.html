@@ -1,0 +1,26 @@
+<div class='site-content' >
+    <div class='page_menu' ><img src='__APP__/Home/Tpl/Public/images/home_icon.png' class="home-icon" ><a href="/"> 首页</a> > <a href="{:U('editors/lists')}">编辑团队</a>   </div>
+
+    <div class='page_content' >
+        <div class="layui-row" >
+            <volist name="editorArr" id="vo" >
+                <div class="layui-col-xs6" >
+                    <div class="editor-list editor-list-height" >
+                        <div class="editor-img-box editor-img-box-height" >
+                            <a href="{:U('/editors/detail',array('id'=>$vo['id']))}" ><img src="{$url}{$vo.avatar}" class="editor-img"  /></a>
+                            <div class="editor-name" >{$vo.name}</div>
+                        </div>
+                        <div class="editor-txt" >
+                            {$vo.summary}
+                        </div>    
+                        <a href="{:U('/editors/detail',array('id'=>$vo['id']))}" ><div class="editor-button" >查看详情</div></a>
+                    </div> 
+                </div> 
+            </volist>    
+        </div>
+    </div> 
+</div>
+
+
+
+

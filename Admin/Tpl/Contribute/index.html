@@ -1,0 +1,60 @@
+<div class="mainnav_title">
+	<a href="{:U('Contribute/index')}" class="btn btn-info">在线投稿列表</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Contribute/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="真实姓名" name="realname" value="{$search['realname']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+	<form method="get" action="{:U('Contribute/daochu_lesson')}" class="form-inline" style="display: inline-block;position: absolute;top: 14px;margin-left: 120px;">
+		<button type="submit" class="btn"> 导出</button>
+	</form>
+</div>
+
+<if condition="!empty($contributeList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>真实姓名</th>
+			<th>手机/电话</th>
+			<th>期刊级别</th>
+			<th>添加时间</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="contributeList" id="contribute">
+		<tr>
+			<td>{$contribute.realname}</td>
+			<td>{$contribute.mobile} <if condition="!empty($contribute['phone'])"> / {$contribute.phone}</if></td>
+			<td>{$contribute.grade}</td>
+			<td>{$contribute.addtime|date="Y-m-d H:i",###}</td>
+			<td>
+				<if condition="$contribute['status'] eq 1">
+					<span style="color: #CCC;">已查看</span>
+				<else/>
+					<span class="color-red">未查看</span>
+				</if>
+			</td>
+			<td class="span2">
+				<span class="tooltip-container">
+					<a href="{:U('Contribute/detail', array('id' =>$contribute['id']))}" title="查看详细"><i class="icon-eye-open"></i></a>
+					&nbsp;&nbsp;&nbsp;
+					<a href="__ROOT__/Uploads/attachment/{$contribute.attach}" title="下载附件" target="_blank"><i class="icon-download-alt"></i></a>
+					&nbsp;&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Contribute/delete', array('id' =>$contribute['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

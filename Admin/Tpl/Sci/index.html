@@ -1,0 +1,74 @@
+<div class="mainnav_title">
+	<a href="{:U('Sci/index')}" class="btn btn-info">SCI影响因子列表</a>
+	&nbsp;
+	<a href="{:U('Sci/add')}" class="btn">添加SCI影响因子</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Sci/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="标题" name="title" value="{$search['name']}">
+		&nbsp;&nbsp;
+		<select name="cat_id" id="cat_id" class="span3">
+			<option value="">--请选择分类--</option>
+			<volist name="menu_cat" id="impactCat">
+				<option value="{$impactCat.id}" <if condition="$search['cat_id'] eq $impactCat['id']">selected="selected"</if> >
+				{$impactCat.name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($impactList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>缩写名/全名</th>
+			<th>分类</th>
+			<th>ISSN号</th>
+			<th>年文章数量</th>
+			<th>MedSci指数</th>
+			<th>投稿难易</th>
+			<th>一审周期</th>
+			<th>IF值</th>	
+			<th>添加时间</th>		
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="impactList" id="list">
+		<tr>
+			<td>{$list.id}</td>
+			<td>
+				{$list.name}
+			</td>
+			<td>{$list.cat_id}</td>
+
+			<td>{$list.issn}</td>
+			<td>{$list.article_num}</td>
+			<td>{$list.medSci}</td>
+			<td>{$list.how}</td>
+			<td>{$list.first}</td>
+			<td>{$list.if}</td>
+
+			<td>{$list.addtime|date="Y-m-d",###}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Sci/edit', array('id' =>$list['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Sci/delete', array('id' =>$list['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

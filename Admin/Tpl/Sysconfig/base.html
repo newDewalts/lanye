@@ -1,0 +1,166 @@
+<form method='post' id="base-form" action="{:U('Sysconfig/index')}">
+	<div class="control-group">
+		<label class="control-label span3" for="site_name">网站名称:</label>
+		<div class="controls">
+			<input type="text" name="site_name" id="site_name" value="{$config.site_name}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="site_url">网站地址:</label>
+		<div class="controls">
+			<input type="text" name="site_url" id="site_url" value="{$config.site_url}">
+			<span class="help-inline">以“http:”//开头</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="seo_title">网站标题:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="seo_title" id="seo_title" value="{$config.seo_title}">
+			<span class="help-inline">seo_title</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="seo_keywords">关键词:</label>
+		<div class="controls">
+			<textarea name="seo_keywords" class="span6 textarea-remark2" id="seo_keywords">{$config.seo_keywords}</textarea>
+			<span class="help-inline">seo_keywords</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="seo_description">描述:</label>
+		<div class="controls">
+			<textarea name="seo_description" class="span6 textarea-remark2" id="seo_description">{$config.seo_description}</textarea>
+			<span class="help-inline">seo_description</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="record_number">备案号:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="record_number" id="record_number" value="{$config.record_number}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="address">公司地址:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="address" id="address" value="{$config.address}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="code">邮政编码:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="code" id="code" value="{$config.code}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="email">Email:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="email" id="email" value="{$config.email}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="ts_email">投诉Email:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="ts_email" id="ts_email" value="{$config.ts_email}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="tel">电话:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="tel" id="tel" value="{$config.tel}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="statistical_code">统计代码:</label>
+		<div class="controls">
+			<textarea name="statistical_code" class="span6 textarea-remark2" id="statistical_code">{$config.statistical_code}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="tq_code">53客服:</label>
+		<div class="controls">
+			<textarea name="tq_code" class="span6 textarea-remark2" id="tq_code">{$config.tq_code}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="enterprise_qq_code">企业QQ代码:</label>
+		<div class="controls">
+			<textarea name="enterprise_qq_code" class="span6 textarea-remark2" id="enterprise_qq_code">{$config.enterprise_qq_code}</textarea>
+		</div>
+	</div>
+<!-- 	<div class="control-group">
+		<label class="control-label span3" for="register_give_coupon">注册时是否发放优惠券:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="register_give_coupon" value="1"  <if condition="$config['register_give_coupon'] eq 1">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="register_give_coupon" value="0" <if condition="$config['register_give_coupon'] eq 0">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="register_coupon_money">发放优惠券金额:</label>
+		<div class="controls">
+			<input type="text" name="register_coupon_money" id="register_coupon_money" value="{$config.register_coupon_money}"/>
+			<span class="help-inline">(在“注册时是否发放优惠券”允许时此选项才有效)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3" for="register_coupon_valid_time">发放优惠券的有效期:</label>
+		<div class="controls">
+			<select id="register_coupon_valid_time" name="register_coupon_valid_time" class="valid">
+				<option value="30" 
+					<eq name="config['register_coupon_valid_time']" value="30">selected="selected"</eq> 
+				>一个月(30天)</option>
+				<option value="90" 
+					<eq name="config['register_coupon_valid_time']" value="90">selected="selected"</eq> 
+				>三个月(90天)</option>
+				<option value="180" 
+					<eq name="config['register_coupon_valid_time']" value="180">selected="selected"</eq> 
+				>六个月(180天)</option>
+				<option value="360" 
+					<eq name="config['register_coupon_valid_time']" value="360">selected="selected"</eq> 
+				>一年(360天)</option>
+			</select>
+			<span class="help-inline">单位(天)&nbsp;(在“注册时是否发放优惠券”允许时此选项才有效)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3">暂时关闭网站:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="site_close" value="1"  <if condition="$config['site_close'] eq 1">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="site_close" value="0" <if condition="$config['site_close'] eq 0">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span3">关闭网店的原因:</label>
+		<div class="controls">
+			<textarea name="site_close_reason" class="span4" style="height:60px;">{$config.site_close_reason}</textarea>
+		</div>
+	</div> -->
+	<div class="control-group">
+		<label class="control-label span3">&nbsp;</label>
+		<div class="controls">
+			<input type="hidden" name="type" value="1"/>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+$(function(){
+	$('#base-form').validate({
+		rules: {
+			register_coupon_money: {
+				digits: true,
+				min: 1
+			}
+		}
+	});
+});
+</script>

@@ -1,0 +1,43 @@
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">用户登录</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	
+	<!--右边-->
+    <div class="login">
+        <div class="screenBox" style="margin-top:20px;padding-left:50px;">
+			<p class="login_p">还没有账户！ <a href="{:U('User/register')}">立即注册</a></p>
+			<form class="action_form" action="{:U('User/login')}" method="post" name="formUser">
+				<div class="action_rom1" style="padding-top:20px;">
+					<label><em>*</em>用户名：</label>
+					<input type="text" class="action_txt" name="username" id="username" />
+				</div>
+				<div class="action_rom1">
+					<label><em>*</em>密码：</label>
+					<input type="text" class="action_txt must" name='password' id='password'/>
+				</div>
+				<div class="action_rom1">
+					<label><em>*</em>验证码：</label>
+					<input type="text" class="action_txt" name='code' id="code"/> 
+					<span class="action_tip" id="email_notice"><img src="{:U('User/verify')}" onClick="this.src+='?rand='+Math.random();" /></span>
+				</div>
+				<div class="action_rom2">
+					
+						<input type="submit" name='Submit' class="action_btn" value="登陆" />
+					
+						<input type="reset" class="action_btn sp" value="重置" />
+					
+				</div>
+			</form>
+		</div>
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

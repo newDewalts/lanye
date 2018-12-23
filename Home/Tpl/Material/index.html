@@ -1,0 +1,118 @@
+<!--banner-->
+<div class="bannerbox1"><a href="{$bannerArr.link}"><img src="{$bannerArr.ad_img}" alt="诚信，便捷，成功发表文章" /></a></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">学习资源</a>
+</div>
+
+
+	<div class="slideTxtBox">
+		<div class="hd">
+			<ul>
+				<volist name="menu" id='list'>
+				<li>{$list.cat_name}</li>
+				</volist>
+			</ul>
+		</div>
+		<div class="bd">
+			<volist name="mater_top_list" id="list">
+			<ul>
+				<li>
+					<div class="bd_img"><a href="#"><img src="__PUBLIC__/images/learn.png" alt="达晋医学编译-千人计划" /></a></div>
+					<div class="bd_con">
+						<ul>
+							<volist name="list.one" id="ls_o">
+							<li><a title="{$ls_o.title}" href="{:U('Material/mat_detail',array('id'=>$ls_o['id'],'cat_id'=>$ls_o['cat_id']))}"><label>></label>{$ls_o.title|msubstr=0,17,'utf-8'}</a></li>
+							</volist>
+						</ul>
+					</div>
+					<div class="bd_right">
+						<ul>
+						<volist name="list.two" id="ls_t" key="k">
+							<if condition="$k eq 1">
+							<li class="first">
+								<h3>{$ls_t.title}</h3>
+								<empty name="ls_t.thumb">
+								<img src="__PUBLIC__/images/icon_18.png" alt="{$ls_t.title}" />
+								<else />
+								<img src="{$ls_t.thumb}" alt="{$ls_t.title}" />
+								</empty>
+								
+								<p>{$ls_t.summary|msubstr=0,52,'utf-8'}<a href="{:U('Material/mat_detail',array('id'=>$ls_t['id'],'cat_id'=>$ls_t['cat_id']))}">[详细]</a></p>
+							</li>
+							<else />
+							<li><a href="{:U('Material/mat_detail',array('id'=>$ls_t['id'],'cat_id'=>$ls_t['cat_id']))}">{$ls_t.title}</a></li>
+							</if>
+						</volist>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			</volist>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+
+
+<div style="clear:both;"></div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="t_left_con">
+			<div class="t_left_con_list border_none">
+				<p>热门资讯</p>
+				<ul>
+				<volist name="hot_article" id="list">
+					<li><a title="{$list.title}" href="{:U('Material/mat_detail',array('id'=>$list['id'],'cat_id'=>$list['cat_id']))}">{$list.title|msubstr=0,16,'utf-8'}</a></li>
+				</volist>
+				</ul>
+			</div>
+			
+        </div>
+		<include file="Public/tougao" />
+    </div>
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+	<!--右边-->
+    <div class="train_r">
+		<volist name="article_list" id="list" key="k">
+		<?php if($k%2 == 1){?>
+		<div class="material">
+		<?php }else{ ?>
+		<div class="material margin_l border_r">
+		<?php } ?>
+		</if>
+			<h3>{$list.cat_name}<span class="more"><a href="{:U('Material/mat_list',array('cat_id'=>$list['cat_id']))}">更多>></a></span></h3>
+			<ul>
+			<volist name="list.listArr" id="ls" key="num">
+				<if condition="$num eq 1">
+				<li class="first">
+					<empty name="ls.thumb">
+					<img src="__PUBLIC__/images/icon_18.png" alt="{$list.cat_name}"/>
+					<else />
+					<img src="{$ls.thumb}" alt="{$list.cat_name}" />
+					</empty>
+					<p style="height:30px;line-height:30px;font-size:16px;font-weight:bold;" title="{$ls.title}">{$ls.title|msubstr=0,13,'utf-8'}</p>
+					<p>{$ls.summary|msubstr=0,46,'utf-8'}<a href="{:U('Material/mat_detail',array('id'=>$ls['id'],'cat_id'=>$ls['cat_id']))}">[详细]</a></p>
+				</li>
+				<else />
+				<li><a href="{:U('Material/mat_detail',array('id'=>$ls['id'],'cat_id'=>$ls['cat_id']))}"><label>></label>{$ls.title|msubstr=0,22,'utf-8'}</a></li>
+				</if>
+			</volist>
+			</ul>
+		</div>
+		</volist>
+    </div>
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

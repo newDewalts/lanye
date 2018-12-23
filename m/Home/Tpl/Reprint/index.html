@@ -1,0 +1,45 @@
+<div class="position">
+    <div class="position_img">
+        <img src="../Public/images/position.png" alt="">
+    </div>
+    <div class="position_title">
+        <a href="/"> 首页</a> >
+        <a href="{:U('reprint/index')}">文章转载</a>
+    </div>
+</div>
+
+<div class="side">
+    <fieldset>
+        <legend>文章转载</legend>
+    </fieldset>
+    <div class="side_div">
+        <foreach name="cat_list" item="vo">
+            <a href="{:U('reprint/index')}?cat_id={$vo.cat_id}">
+                <div class="side_li" id="side_li{$vo.cat_id}">
+                    {$vo.cat_name}
+                </div>
+            </a>
+        </foreach>
+    </div>
+</div>
+
+<div class="reprint_lists">
+    <foreach name="reprintArr" item="vo">
+        <div class="reprint_lists_li">
+            <a href="{:U('reprint/detail')}?id={$vo.id}">
+                <p class="reprint_lists_li_title">{$vo.title}</p>
+                <p class="reprint_lists_li_font">{$vo.summary}</p>
+            </a>
+        </div>
+    </foreach >
+</div>
+
+<div style="text-align: center;margin-bottom: 0.5rem;margin-top: 0.5rem;">
+    {$show}
+</div>
+
+
+<script>
+    var id = {$Think.get.cat_id};
+    $('#side_li'+id).addClass('side_li_on');
+</script>

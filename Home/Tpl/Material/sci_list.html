@@ -1,0 +1,47 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">SCI期刊</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <p>SCI期刊</p>
+                  <li><a>基础医学</a></li>
+                  <li><a>临床医学</a></li>
+               </ul>
+           </div>
+        </div>
+    </div>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="list_img">
+			<ul>
+				<foreach name='listArr' item='item'>
+					<li>
+						<div class=""><a href="{:U('Material/sci_detail',array('id' => $item['pre_id']))}" target="_blank"><img src="{$item.pre_image_thumb}" alt="{$item.pre_name}" width="120" height="160" /></a></div>
+						<div class="title img_title"><a href="{:U('Material/sci_detail',array('id' => $item['pre_id']))}" target="_blank">{$item.pre_name|msubstr=0,10,'utf-8',false}</a></div>
+					</li>
+				</foreach>
+			</ul>
+			<div style="clear:both;"></div>
+			<p>{$pages}</p>
+			
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

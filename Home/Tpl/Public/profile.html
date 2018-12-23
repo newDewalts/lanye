@@ -1,0 +1,22 @@
+			<div class="box2 bgc1">
+			    <h2>{$cat_name}</h2>
+				<!-- <h2>中文期刊</h2> -->
+				<ul class="about-nav edit-nav">
+				    <volist name="periodical_menu" id="menu">
+				        <if condition="$cate_id eq $menu['cat_id']"><li class="active">
+				        <else />
+				        	<li>
+				        </if>
+					        <a class="about-subnav" href="{:U('periodical/lists', array('id' => $menu['cat_id']))}" title="{$menu['keywords']}" target="_blank"> {$menu['cat_name']} </a>
+					    	<if condition="$menu['cat_name'] eq '医药期刊'">
+					    		<div class="edit-class-nav">
+					    			<volist name="medicineList" id="List">
+						    			<a href="{:U('periodical/lists', array('id' => $List['cat_id']))}" title="{$List['keywords']}" target="_blank"> {$List['cat_name']} </a>
+						    			<tt>|</tt>
+					    			</volist>
+					    		</div>
+					    	</if>
+				    	</li>
+				    </volist>
+				</ul>
+			</div>

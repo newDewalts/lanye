@@ -1,0 +1,280 @@
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/themes/default/default.css" />
+<!--
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/plugins/code/prettify.css" />
+-->
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/lang/zh_CN.js"></script>
+<!--
+<script charset="utf-8" src="__PUBLIC__/Js/kindeditor/plugins/code/prettify.js"></script>
+-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/calendar/win2k.css"/>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+
+<script type="text/javascript">
+// 内容编辑器
+KindEditor.ready(function(K) {
+	K.create('#content', {
+		allowFileManager: true,
+		uploadJson : "{:U('Public/Kupload')}",
+		fileManagerJson : "{:U('Public/KfileManager')}"
+	});
+	
+	// 缩略图单个上传按钮
+	var upload_thumb_btn = K.uploadbutton({
+			button : K('#upload_thumb_btn')[0],
+			fieldName : 'imgFile',
+			url : "{:U('Public/Kupload')}",
+			afterUpload : function(data) {
+				if (data.error === 0) {
+					var url = K.formatUrl(data.url, 'absolute');
+					K('#thumb').val(url);
+					
+					// 显示缩略图
+					show_thumb_pic(url, '#thumb-show', '#thumb-delete-btn');
+				} else {
+					alert(data.message);
+				}
+			},
+			afterError : function(str) {
+				alert('自定义错误信息: ' + str);
+			}
+	});
+	upload_thumb_btn.fileBox.change(function(e) {
+		upload_thumb_btn.submit();
+	});
+});
+
+$(function() {
+	// 新闻添加日期
+	Calendar.setup({
+		weekNumbers: true,
+		inputField: "addtime",
+		trigger: "addtime",
+		//dateFormat: "%Y-%m-%d %H:%M:%S",
+		dateFormat: "%Y-%m-%d",
+		//showTime: true,
+		minuteStep: 1,
+		onSelect: function () { this.hide();}
+	});
+
+});
+</script>
+<div class="mainnav_title">
+	<a href="{:U('Reprint/index')}" class="btn">新闻列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Reprint/add')}" class="btn btn-info">添加新闻</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改新闻</span>
+		&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<div style="position:relative;">
+	<div style="position:absolute; top: 226px; *top: 240px; left: 630px;">
+		<input type="button" id="upload_thumb_btn" value="上传" />
+	</div>
+<form method='post' id="news-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Reprint/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Reprint/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span2" for="cat_id">新闻行业分类:</label>
+		<div class="controls">
+			<select name="cat_id" id="cat_id">
+				<option value="">--请选择行业分类--</option>
+				<volist name="catIndustryList" id="catIndustry">
+					<option value="{$catIndustry.cat_id}"
+						<if condition="!empty($news) && ($news['cat_id'] eq $catIndustry['cat_id'])">
+						selected="selected"
+						</if>
+					>{$catIndustry.cat_name}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<!-- <div class="control-group">
+		<label class="control-label span2" for="year_id">新闻年份:</label>
+		<div class="controls">
+			<select name="year_id" id="year_id">
+				<option value="">--请选择年份--</option>
+				<volist name="catYearList" id="catYear">
+					<option value="{$catYear.cat_id}"
+						<if condition="!empty($news) && ($news['year_id'] eq $catYear['cat_id'])">
+						selected="selected"
+						</if>
+					>{$catYear.cat_name}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div> -->
+	<div class="control-group">
+		<label class="control-label span2" for="title">标题:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="title" id="title" value="{$news.title}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<img id="thumb-show" style="width: 100px; height: 67px;"
+				<empty name="news['thumb']">
+					src="../Public/img/default_thumb.jpg"
+				<else /> 
+					src="{$news.thumb}" 
+				</empty>
+			/>
+			<a id="thumb-delete-btn" href="javascript:void(0);" onclick="delete_thumb(this, '#thumb-show', '#thumb', '{:U('Public/deleteAttach')}');"
+				<empty name="news['thumb']">
+					hasThumb="0"
+				<else /> 
+					hasThumb="1"
+				</empty>
+			>删除</a>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label span2" for="thumb">缩略图:</label>
+		<div class="controls" style="height: 30px;">
+			<input class="span6" type="input" name="thumb" id="thumb" value="{$news.thumb}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="summary">摘要:</label>
+		<div class="controls">
+			<textarea name="summary" id="summary" class="textarea-remark2">{$news.summary}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">内容:</label>
+		<div class="controls">
+			<textarea name="content" id="content" style="width: 800px; height: 300px; visibility:hidden;">{$news.content}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="reprint_url">转载URL:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="reprint_url" id="reprint_url" value="{$news.reprint_url}">
+			<span class="help-inline">以“http://”开头</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="author">作者:</label>
+		<div class="controls">
+			<input type="text" name="author" id="author" value="{$news.author}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="copyfrom">来源:</label>
+		<div class="controls">
+			<input type="text" name="copyfrom" id="copyfrom" value="{$news.copyfrom}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="addtime">添加时间:</label>
+		<div class="controls">
+			<input type="text" name="addtime" id="addtime" 
+				<if condition="$Think.const.ACTION_NAME eq 'edit'" >
+					value="{$news.addtime|date="Y-m-d",###}"
+				<else/>
+					value="<?php echo date('Y-m-d');?>"
+				</if> 
+			>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="keywords">SEO关键词:</label>
+		<div class="controls">
+			<textarea name="keywords" id="keywords" class="textarea-remark2">{$news.keywords}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="description">SEO描述:</label>
+		<div class="controls">
+			<textarea name="description" id="description" class="textarea-remark2">{$news.description}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">状态:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="status" value="1" <if condition="empty($news) || ($news['status'] eq 1)">checked="checked"</if> />启用
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="status" value="0" <if condition="!empty($news) && ($news['status'] eq 0)">checked="checked"</if> />禁用
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">推荐到首页:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="show_index" value="1" <if condition="!empty($news) && ($news['show_index'] eq 1)">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="show_index" value="0" <if condition="empty($news) || ($news['show_index'] eq 0)">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="video_url">视频URL:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="video_url" id="video_url" value="{$news.video_url}">
+			<span class="help-inline">以“http://”开头</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input type="text" name="orders" id="orders" value="{$news.orders}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="hits">点击次数:</label>
+		<div class="controls">
+			<input type="text" name="hits" id="hits" value="{$news.hits}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$news['id'] gt 0">
+				<input type="hidden" name="id" value="{$news['id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+</div>
+
+<div class="height20"></div>
+<div class="height20"></div>
+
+<script type="text/javascript">
+$(function(){
+	$('#news-form').validate({
+		rules: {
+			cat_id: {
+				required: true
+			},
+			year_id: {
+				required: true
+			},
+			title: {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

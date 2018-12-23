@@ -1,0 +1,34 @@
+<div class="mainnav_title">
+	<a href="{:U('NavPos/index')}" class="btn btn-info">导航位列表</a>
+	<a href="{:U('NavPos/add')}" class="btn">添加导航位</a>
+</div>
+<div class="height20"></div>
+
+<if condition="!empty($navPosList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>导航位名称</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="navPosList" id="vo">
+		<tr>
+			<td>{$vo.id}</td>
+			<td>{$vo.pos_title}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('NavPos/edit', array('id' => $vo['id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('NavPos/delete', array('id' => $vo['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+<else/>
+	<div>没有任何记录</div>
+</if>
+

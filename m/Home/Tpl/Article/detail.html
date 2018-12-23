@@ -1,0 +1,90 @@
+{__NOLAYOUT__}
+<include file="Public:deheader" />
+<body>
+<div id="Div_Wrap">
+  <header id="Hea_FixTop" class="text-center">
+    <a href="{$forward_url}"></a>
+    <h3>{$detail['title'] | strip_tags | msubstr=0,12,'utf-8',false}</h3>
+  </header>
+  <div class="Div_FillTopSpace"></div>
+  <div class="Div_disContainer">
+    <span class="span_text">{$detail['title'] | strip_tags | msubstr=0,12,'utf-8',false}</span>
+    <article id="Art_proArticle" class="Art_norArticle container-fluid">
+		<font style="FONT-FAMILY: 微软雅黑"></font>
+		<p style="TEXT-JUSTIFY: inter-ideograph; TEXT-ALIGN: left; LINE-HEIGHT: 18pt; MARGIN: 0cm 0cm 0pt; FONT-FAMILY: 'Calibri','sans-serif'; BACKGROUND: white; FONT-SIZE: 10.5pt" align="left">
+		  <font style="FONT-FAMILY: 微软雅黑">
+		    <b style="FONT-FAMILY: "><span style="FONT-FAMILY: ">摘要：</span></b>
+			<span style="FONT-FAMILY: 微软雅黑">{$detail['summary']|strip_tags|msubstr=0,120,'utf-8',false}</span>
+		  </font>
+		</p>
+		<p style="TEXT-JUSTIFY: inter-ideograph; TEXT-ALIGN: left; LINE-HEIGHT: 18pt; MARGIN: 0cm 0cm 0pt; FONT-FAMILY: 'Calibri','sans-serif'; BACKGROUND: white; FONT-SIZE: 10.5pt" align="left">
+		  <font style="FONT-FAMILY: 微软雅黑">
+		    <b style="FONT-FAMILY: "><span style="FONT-FAMILY: ">详情：</span></b>
+		    <span style="FONT-FAMILY: 微软雅黑">{$detail['content']} </span>
+		  </font>
+		</p>
+		<!-- <div style="text-align:center">
+		  <img src="{$url}{$detail['thumb']}">
+		</div> -->
+    </article>
+    
+    
+    
+	<include file="Public/recommand" />
+
+
+
+	<script type="text/javascript" src="../Public/css/cart.js"></script>
+	<script type="text/javascript">
+		function buyNow(id,proID,name,price){
+			flag = addGoods(proID,name,"1",price,"","3227","1");
+			if(flag){
+				location.assign("/wap/cart.html");
+			}
+		}
+	</script>
+	<style type="text/css">
+		input::-webkit-input-placeholder{
+			font-size:14px;
+			line-height:30px;
+		}
+		/*bootstrap*/
+		@media screen and (min-width:639px) and (max-width:719px){
+		}
+		@media screen and (min-width:539px) and (max-width:639px){
+		}
+		@media screen and (min-width:479px) and (max-width:539px){
+		#list_class .left{
+			width:70%;
+		}
+		#list_class .left div,#list_class .left a{
+			font-size:14px;
+		}
+		}
+		@media screen and (min-width:419px) and (max-width:479px){
+		}
+		@media screen and (min-width:359px) and (max-width:419px){
+		}
+		@media screen and (max-width:479px){
+		#list_class .left{
+			width:auto;
+			float:none;
+			margin-bottom:0;
+		}
+		#list_class .left div,#list_class .left a{
+			font-size:14px;
+		}
+		#list_class .right{
+			float:none;
+			margin-top:5px;
+			margin-left:16px;
+		}
+		}
+	</style>
+
+
+  </div>
+  <div class="Div_FillBottomSpace"></div>
+</div>
+
+<include file="Public:defooter" />

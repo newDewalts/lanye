@@ -1,0 +1,49 @@
+<!--banner-->
+<div class="bannerbox1"><img src="__PUBLIC__/images/banner_01.png" /></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">中文期刊</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+		<include file="Public/tougao" />
+    </div>
+
+
+	<!--右边-->
+    <div class="train_r">
+		<div class="search_result">
+			<ul class="search_ul">
+			<volist name="result" id="list">
+				<li>
+					<a href="{:U('Journal/detail',array('id'=>$list['pre_id']))}"><img src="{$list.pre_image_thumb}" alt="{$list.pre_name}" width="95" height="120" /></a>
+					<div class="ed_det_cent">
+						<span>{$list.pre_name}</span>
+						<p>I S S N： {$list.pre_issn}</p>
+						<p>出版国家： {$list.pre_country} </p>
+						<p>出版周期： {$list.pre_journal} </p>
+						<p>影响因子： {$list.pre_factor} </p>
+						<p>研究领域： {$list.pre_sciences} </p>
+					</div>
+					<div style="clear:both;"></div>
+				</li>
+			</volist>
+			</ul>
+			
+			<div class="page">
+				{$pages}
+			</div>
+		</div>	
+    </div>
+			
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

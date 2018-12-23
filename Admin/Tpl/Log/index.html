@@ -1,0 +1,36 @@
+<if condition="!empty($logList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>用户名</th>
+			<th>IP</th>
+			<th>时间</th>
+			<th>提示信息</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="logList" id="log">
+		<tr>
+			<td>{$log.id}</td>
+			<td>{$log.username}</td>
+			<td>{$log.ip}</td>
+			<td>{$log.time|date="Y-m-d H:i:s",###}</td>
+			<td>{$log.note}</td>
+			<td><a href="{:U('Log/del', array('id' => $log['id']))}" onclick="return confirm_redirect('你确认执行此操作吗？');" ><i class="icon-trash"></i>删除</a></td>
+		</tr>
+		</volist>
+		<tr>
+			<td colspan="6">
+				<a href="{:U('Log/delete', array('day' => 1))}" onclick="return confirm_redirect('你确认执行此操作吗？');" class="btn btn-primary">删除一个月前的所有记录</a>
+				&nbsp;&nbsp;&nbsp;
+				<a href="{:U('Log/delete', array('day' => 2))}" onclick="return confirm_redirect('你确认执行此操作吗？');" class="btn btn-primary">删除三个月前的所有记录</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

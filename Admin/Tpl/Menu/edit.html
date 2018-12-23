@@ -1,0 +1,115 @@
+<div class="mainnav_title">
+	<a href="{:U('Menu/index')}" class="btn">后台管理菜单</a>
+	<a href="{:U('Menu/add')}" class="btn btn-info">添加菜单</a>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="menu-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Menu/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Menu/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span1" for="pid">上级:</label>
+		<div class="controls">
+			<select name="pid" id="pid">
+				<option value="0">一级菜单</option>
+				<volist name="menuOptions" id="vo">
+					<option value="{$vo.menu_id}"
+					<if condition="$pid eq $vo['menu_id']">
+						selected="selected"
+					</if>
+					>
+					<?php 
+						if ($vo['level'] > 1) {
+							echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $vo['level']);
+						}
+					?>
+					{$vo.name}</option>
+				</volist>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="name">名称:</label>
+		<div class="controls">
+			<input type="text" name="name" id="name" value="{$menu.name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="model">模块:</label>
+		<div class="controls">
+		    <input type="text" name="model" id="model" value="{$menu.model}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="action">方法:</label>
+		<div class="controls">
+		    <input type="text" name="action" id="action" value="{$menu.action}">
+			<span class="help-inline">默认:index</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="param">参数:</label>
+		<div class="controls">
+		    <input type="text" name="param" id="param" value="{$menu.param}">
+			<span class="help-inline">例:groupid=1&type=2</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1">备注:</label>
+		<div class="controls">
+			<textarea name="remark" class="textarea-remark">{$menu.remark}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1">状态:</label>
+		<div class="controls">
+		    <input type="radio" name="status" value="1" <if condition="empty($menu) || ($menu['status'] eq 1)">checked="checked"</if> />启用
+			&nbsp;
+		    <input type="radio" name="status" value="0" <if condition="!empty($menu) && ($menu['status'] eq 0)">checked="checked"</if> />禁用</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="orders">排序:</label>
+		<div class="controls">
+		    <input type="text" name="orders" value="{$menu.orders}"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1" for="type">类型:</label>
+		<div class="controls">
+		    <select name="type">
+			    <option value="1" <if condition="$menu['type'] eq 1">selected="selected"</if> >后台管理</option>
+			</select>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span1">&nbsp;</label>
+		<div class="controls">
+			<if condition="$menu['menu_id'] gt 0">
+				<input type="hidden" name="menu_id" value="{$menu['menu_id']}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+jQuery.validator.addMethod( "stringEn",  function (value, element){       
+	return   this.optional(element) || /^[a-zA-Z]+$/.test(value);
+} , "只能输入英文字母" );
+
+$(function(){
+	$('#menu-form').validate({
+		rules: {
+			'name': {required: true},
+			'model': {
+				required: true,
+				stringEn: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

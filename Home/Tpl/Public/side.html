@@ -1,0 +1,183 @@
+<div class="main">
+    <div class="title">
+        <img src="__PUBLIC__/images/home/title-icon.png"><span><a href="/">首页</a></span> >> <span id='cat-nav'><a id='a-nav' href="{:U('Service/index')}">服务项目</a></span>
+    </div>
+    <?php if($pid == 11){ ?>
+    <div class="side">
+        <div class="side-list">
+            <!-- <div class="side-list-title"><div>服务项目</div><div>SERVER  ITEM</div></div> -->
+            <div class="side-list-content">
+                <foreach name='service_list' item='vo'>
+                    <div class="side-item">
+                        <div class="side-item-title"><a href="{:U('Service/index',array('cat_id'=>$vo['cat_id']))}">{$vo.cat_name}</a></div>
+                        <div class="triangle"></div>
+                        <ul class="sci_item <?php if($_GET['cat_id'] == $vo['cat_id']){echo now;}  ?>">
+                            <foreach name="vo.info" item='val'>
+                                <li><a href="{:U('Service/index',array('id'=>$val['id'],'cat_id'=>$val['cat_id']))}">{$val.title}</a></li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </foreach>
+
+                    <?php if($_GET['cat_id']==72){ ?>
+                                <script>
+                                    $('.nav_on').removeClass('nav_on');
+                                    $('.nav_kyfw').addClass('nav_on')
+                                </script>
+                    <?php }else if($_GET['cat_id']==76){ ?>
+                                 <script>
+                                    $('.nav_on').removeClass('nav_on');
+                                    $('.nav_bsfx').addClass('nav_on')
+                                </script>
+                     <?php }else if($_GET['cat_id']==77){ ?>
+                                 <script>
+                                    $('.nav_on').removeClass('nav_on');
+                                    $('.nav_fwjx').addClass('nav_on')
+                                </script>
+                    <?php } ?>
+                <?php }else if($pid == 3){ ?>
+                <div class="side">
+                    <div class="side-list">
+                        <div class="side-list-content">
+                            <div class="side-item">
+                                <div class="side-item-title">服务优势</div>
+                                <div class="triangle"></div>
+                                <ul class="sci_item now">
+                                    <foreach name='service_list' item='vo'>
+                                        <li><a href="{:U('ServiceAdvant/index',array('cat_id'=>$vo['cat_id']))}">{$vo.cat_name}</a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                            <?php }else if($pid == 12){  ?>
+                            <div class="side">
+                                <div class="side-list">
+                                    <!-- <div class="side-list-title"><div>关于我们</div><div>ABOUT US</div></div>    -->
+                                    <div class="side-list-content">
+                                        <div class="side-item">
+                                            <div class="side-item-title">关于我们</div>
+                                            <div class="triangle"></div>
+                                            <ul class="sci_item now">
+                                                <li><a href="{:U('About/index',array('cat_id'=>$vo['cat_id']))}">公司简介</a></li>
+                                                <li><a href="{:U('About/contact',array('cat_id'=>41))}">联系我们</a></li>
+                                                <!-- <li><a href="{:U('About/paymethod',array('cat_id'=>40))}">支付方式</a></li> -->
+                                                <li><a href="{:U('About/identify',array('cat_id'=>41))}">员工认证</a></li>
+                                                <li><a href="{:U('About/join',array('cat_id'=>125))}">加入我们</a></li>
+                                                <li><a href="{:U('About/tousu',array('cat_id'=>126))}">投诉与建议</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <script>
+                                            $('.nav_on').removeClass('nav_on');
+                                            $('.nav_about').addClass('nav_on')
+                                        </script>
+                                        <?php }else if($pid == 13){ ?>
+                                        <div class="side">
+                                            <div class="side-list">
+                                                <!-- <div class="side-list-title"><div>联系我们</div><div>CONTACT US</div></div> -->
+                                                <!-- <div class="side-list-content">
+            <foreach name='service_list' item='vo'>
+                <div class="side-item">
+                    <div><a href="{:U('Contact/index',array('cat_id'=>$vo['cat_id']))}">{$vo.cat_name}</a></div>
+                    <ul class="sci_item <?php if($_GET['cat_id'] == $vo['cat_id']){echo now;}  ?>">
+                        <foreach name="vo['info']" item='val'>
+                        <li><a href="{:U('Service/index',array('id'=>$val['id'],'cat_id'=>$val['cat_id']))}">{$val.title}</a></li>
+                        </foreach>
+                    </ul>
+                </div>
+            </foreach> -->
+                                                <?php }else if($pid == 14){ ?>
+                                                <div class="side">
+                                                    <div class="side-list">
+                                                        <div class="side-list-content">
+                                                            <div class="side-item">
+                                                                <div class="side-item-title">编辑团队</div>
+                                                                <div class="triangle"></div>
+                                                                
+                                                            </div>
+                                                <?php }else if($pid == 122){ ?>
+                                                    <div class="side">
+                                                        <div class="side-list">
+                                                  
+                                                            <div class="side-list-content">
+                                                              
+                                                                <div class="side-item">
+                                                                    <div class="side-item-title">文章转载</div>
+                                                                    <div class="triangle"></div>
+                                                                    <ul class="sci_item now">
+                                                                        <foreach name="reprint_cat_li" item='val'>
+                                                                            <li><a href="{:U('Reprint/index',array('cat_id'=>$val['cat_id']))}">{$val.cat_name}</a></li>
+                                                                        </foreach>
+                                                                    </ul>
+                                                                </div>
+                                                                
+                                                                <script>
+                                                                    $('.nav_on').removeClass('nav_on');
+                                                                    $('.nav_reprint').addClass('nav_on')
+                                                                </script>
+
+                                                            <?php }else{ ?>
+                                                            <div class="side">
+                                                                <div class="side-list">
+                                                          
+                                                                    <div class="side-list-content">
+                                                                      
+                                                                        <div class="side-item">
+                                                                            <div class="side-item-title">新闻资讯</div>
+                                                                            <div class="triangle"></div>
+                                                                            <ul class="sci_item now">
+                                                                                <li><a href="{:U('Article/index')}">最新消息</a></li>
+                                                                                
+                                                                                <li><a href="{:U('/newscat/2')}">公司新闻</a></li>
+                                                                                <!-- <li><a href="{:U('Article/index')}">文章列表</a></li> -->
+                                                                            </ul>
+                                                                        </div>
+                                                                        
+                                                                        <script>
+                                                                            $('.nav_on').removeClass('nav_on');
+                                                                            $('.nav_news').addClass('nav_on')
+                                                                        </script>
+                                                                        <?php } ?>
+                                                                        <!--        <div class="side-item">
+                    <div>科研实验</div>
+                </div>
+                <div class="side-item">
+                    <div>课题设计</div>
+                </div>
+                <div class="side-item">
+                    <div>实验委托</div>
+                </div>
+                <div class="side-item">
+                    <div>基金申请</div>
+                </div>
+                <div class="side-item">
+                    <div>留 学</div>
+                </div>
+                <div class="side-item">
+                    <div>访 学</div>
+                </div>
+                <div class="side-item">
+                    <div>实验委托</div>
+                </div> -->
+                                                                    </div>
+                                                                </div>
+                                                                <div class="side-tel">
+                                                                    <!-- <img src="__PUBLIC__/images/home/side/server-tel.png"> -->
+                                                                    <div>
+                                                                        <div class="side-tel-title">服务热线：</div>
+                                                                        <div class="side-tel-num">020-85600812</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                            $(function() {
+
+                                                                $('.side-item').mouseover(function() {
+                                                                    $('.side-item > ul').attr('class', 'sci_item');
+                                                                    $(this).find('.sci_item').attr('class', 'sci_item now');
+
+                                                                    $('.triangle').hide();
+                                                                    $('.now').prev('.triangle').show();
+                                                                });
+                                                                $('.now').prev('.triangle').show();
+                                                            })
+                                                            </script>

@@ -1,0 +1,76 @@
+<div class="mainnav_title">
+	<a href="{:U('Editor/index')}" class="btn btn-info">编辑列表</a>
+	&nbsp;
+	<a href="{:U('Editor/add')}" class="btn">添加编辑</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Editor/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="姓名" name="name" value="{$search['name']}">
+		&nbsp;&nbsp;
+		<select name="cat_id" id="cat_id" class="span3">
+			<option value="">--请选择专业科目分类--</option>
+			<volist name="catList" id="cat">
+				<option value="{$cat.cat_id}" <if condition="$search['cat_id'] eq $cat['cat_id']">selected="selected"</if> >{$cat.cat_name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($editorList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>头像</th>
+			<th>姓名</th>
+			<th>专业科目</th>
+			<th>添加时间</th>
+			<th>状态</th>
+			<th>推荐到首页</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="editorList" id="editor">
+		<tr>
+			<td class="span2">
+				<if condition="!empty($editor['avatar'])">
+					<img src="{$editor['avatar']}" style="width: 100px;"/>
+				</if>
+			</td>
+			<td>{$editor.name}</td>
+			<td>{$catListArr[$editor['cat_id']]}</td>
+			<td>{$editor.addtime|date="Y-m-d H:i",###}</td>
+			<td>
+				<if condition="$editor['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>
+				<if condition="$editor['show_index'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td>
+				<span class="tooltip-container">
+					
+					<a href="{:U('Editor/edit', array('id' =>$editor['id']))}" title="编辑"><i class="icon-edit"></i>编辑</a>
+					&nbsp;&nbsp;
+					
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Editor/delete', array('id' =>$editor['id']))}" title="删除"><i class="icon-trash"></i>删除</a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

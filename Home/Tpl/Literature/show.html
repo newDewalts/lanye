@@ -1,0 +1,61 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">文献频道</a><notempty name="cat_name"><span>>></span><a href="javascript:;">{$cat_name}</a></notempty>
+</div>
+<!--文献查询-->
+<include file="Public/wenxian_query" />
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu border_top">
+               <ul class="trainmenu2">
+				  <volist name="menu" id="ls">
+					<li <if condition="$cat_id eq $ls['cat_id']">class='on'</if>><a href="{:U('Literature/index',array('cat_id'=>$ls['cat_id']))}">{$ls.cat_name}</a></li>
+				  </volist>
+               </ul>
+           </div>
+        </div>
+    </div>
+<script>
+	$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+});
+</script>
+
+	<!--右边-->
+    <div class="train_r border_top">
+        <div class="train_c">
+			<h3>{$info.title|msubstr=0,46,'utf-8',false}</h3>
+			<p>作者：{$info.author} &nbsp;&nbsp;&nbsp;时间：{$info.addtime|date='Y-m-d',###} &nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" style="color:#218DD6;text-decoration:underline;" href="{:U('Literature/detail',array('id'=>$info['id'],'cat_id'=>$info['cat_id'],'pid'=>$cat_id))}">阅读全文</a></p>
+			<ul class="literature_show">
+				<li><label>引用：</label>{$info.quote}</li>
+				<!--li><label>关键词：</label>{$info.quote}</li-->
+				<li><label>作者：</label>{$info.author}</li>
+				<li><label>作者单位：</label>{$info.author_company}</li>
+				<li><label>出版年份：</label>{$info.year}</li>
+				<li><label>期刊页数：</label>{$info.page}</li>
+				<li><label>收录者：</label>{$info.included}</li>
+				<li class="summary"><label>摘要：</label>{$info.summary}</li>
+			</ul>
+			<div class="news_centent" style="padding-left:0px;">
+				<a target="_blank" class="lit_a" href="{:U('Literature/detail',array('id'=>$info['id'],'cat_id'=>$info['cat_id'],'pid'=>$cat_id))}">阅读全文</a>
+				<p class="p_top">上一篇：<?php if(!$on_title){echo '没有了';}?><a href="{:U('Literature/show',array('id' => $on_title['id'],'cat_id' => $on_title['cat_id'],'pid'=>$cat_id))}">{$on_title.title}</a></p>
+				<p>下一篇：<?php if(!$next_title){echo '没有了';}?><a href="{:U('Literature/show',array('id' => $next_title['id'],'cat_id' => $next_title['cat_id'],'pid'=>$cat_id))}">{$next_title.title}</a></p>
+			</div>
+			
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

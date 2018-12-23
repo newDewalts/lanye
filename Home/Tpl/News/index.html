@@ -1,0 +1,49 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_news.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> ><a href="{:U('/newscat/3')}" > 新闻资讯 </a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:news_left_menu" />  
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-title' >
+                        <img src="__PUBLIC__/images/news_icon_title.png"  class='news_icon_title'  /> 
+                        <div class='layui-inline bold letter' >{$news_cat['cat_name']}</div> 
+                        <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                    </div>
+                    <div class='artice-right-content' >
+                        <foreach name='news_list' item='vo'>
+                            <div class='artice-news-list' >
+                                <div class='layui-row' >
+                                    <div class='artice-news-left'  >
+                                            <notempty name="vo.thumb">
+                                                <img src="{$vo.thumb}"  />
+                                            <else />
+                                                <img src="__PUBLIC__/images/news_imgs_8.png"  />
+                                            </notempty>
+                                    </div>
+                                    <div class='artice-news-right'  >
+                                        <div class="title hide-long" ><a href="{:U('News/detail',array('id'=>$vo['id'],'type'=>'news'))}" >{$vo.title}</a></div>
+                                        <div class="txt" >{$vo.content|strip_tags|subtext=85}</div>
+                                        <div class="button-box" >
+                                            <div class="date" >{$vo['addtime']|date="Y-m-d",###}</div>
+                                            <div class="artice-news-more" ><a  href="{:U('News/detail',array('id'=>$vo['id'],'type'=>'news'))}" >查看更多 >></a></div>
+                                        </div>
+                                    </div>
+                                </div>    
+                             </div>
+                        </foreach>
+                        
+                    </div>  
+                    <div class='page_box' >
+                        {$pages}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

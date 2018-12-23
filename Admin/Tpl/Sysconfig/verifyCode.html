@@ -1,0 +1,36 @@
+<form method='post' id="verifyCode-form" action="{:U('Sysconfig/index')}">
+	<table class="table table-bordered">
+		<tr>
+			<td class="span2">注册:</td>
+			<td>
+				<label class="radio inline">
+					<input type="radio" name="verify_register" value="1"  <if condition="$config['verify_register'] eq 1">checked="checked"</if> />开启
+				</label>
+				&nbsp;
+				<label class="radio inline">
+					<input type="radio" name="verify_register" value="0" <if condition="$config['verify_register'] eq 0">checked="checked"</if> />关闭
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="span2">发表反馈:</td>
+			<td>
+				<label class="radio inline">
+					<input type="radio" name="verify_feedback" value="1"  <if condition="$config['verify_feedback'] eq 1">checked="checked"</if> />开启
+				</label>
+				&nbsp;
+				<label class="radio inline">
+					<input type="radio" name="verify_feedback" value="0" <if condition="$config['verify_feedback'] eq 0">checked="checked"</if> />关闭
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="span2">&nbsp;</td>
+			<td>
+				<input type="hidden" name="forward_url" value="{:U('Sysconfig/index',  array('type' => 2))}"/>
+				<input type="hidden" name="type" value="2"/>
+				<button type="submit" class="btn">提交</button>
+			</td>
+		</tr>
+	</table>
+</form>

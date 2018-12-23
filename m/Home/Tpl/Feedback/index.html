@@ -1,0 +1,13 @@
+<ul id="type_name">
+<li>客户留言</li>
+</ul>
+<ul id="list_type">
+	<volist name="lists" id="vo">
+<li>
+  	<span style="color:red;">{$vo.fullname}</span>
+  	<p style="padding-top:12px;">{$vo.content}</p>
+  	<div class="clear"></div>
+</li>
+</volist>
+</ul>
+{$pageShow}

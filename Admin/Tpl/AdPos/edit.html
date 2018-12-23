@@ -1,0 +1,50 @@
+<div class="mainnav_title">
+	<a href="{:U('AdPos/index')}" class="btn">广告位列表</a>
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('AdPos/add')}" class="btn btn-info">添加广告位</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改广告位</span>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="adPos-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('AdPos/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('AdPos/edit')}</if>">
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pos_title">广告位名称:</label>
+		<div class="controls">
+			<input type="text" name="pos_title" id="pos_title" value="{$adPos.pos_title}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="pos_desc">描述:</label>
+		<div class="controls">
+			<textarea class="textarea-remark" name="pos_desc" id="pos_desc">{$adPos.pos_desc}</textarea>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$adPos['pos_id'] gt 0">
+				<input type="hidden" name="pos_id" value="{$adPos['pos_id']}"/>
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#adPos-form').validate({
+		rules: {
+			'pos_title': {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

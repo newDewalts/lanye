@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{$seoInfo.title}</title>
+    <meta name="keywords" content="{$sConfig.seo_keywords}" />
+    <meta name="description" content="{$sConfig.seo_description}" />
+    <script src='__PUBLIC__/Js/jquery.js'></script>
+    <script src="__PUBLIC__/Js/jquery.bxslider.min.js"></script>
+    <script src="__PUBLIC__/Js/ajaxfileupload.js"></script>
+    <script src="__PUBLIC__/Js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.bxslider.css">
+    <link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+    <script src="__PUBLIC__/layui/layui.js"></script>
+    <link rel="stylesheet" href="../Public/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <script>
+        //跳转到移动端
+        var is_mobi = navigator.userAgent.toLowerCase().match(/(ipod|iphone|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|wince)/i) != null;
+        if (is_mobi ) {
+            window.location.href = "http://m.lanye.me/";
+        }
+    </script>
+
+
+</head>
+<header>
+    <div class="menu-top" >
+        <div class="container-box" >
+            <div class="layui-row">
+                <div class="menu-top-txt" >
+                    <div class="layui-inline" ><img src="__PUBLIC__/images/icon_phone.png"  />服务热线 :  020-89819613</div>
+                    <div class="layui-inline" ><img src="__PUBLIC__/images/icon_time.png"  />工作时间：09:00 am  - 18:00 pm</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-box" >
+        <div class="menu">
+            <div class="layui-row" >
+                <div class="menu-left" >
+                    <a href="/"  ><img src="__PUBLIC__/images/logo.png"  /></a>
+                </div>
+                <div class="menu-right" >
+                    <div class="layui-row"  >
+                        <div class="nav" >
+                            <ul>
+                                <li><a href="/"   <if condition="$module_name eq 'index'" >class='current'</if>   >首   页</a></li>
+                                <li><a href="/service/cat_id/73" <if condition="$module_name eq 'service'" >class='current'</if> >服务项目</a></li>
+                                <li><a href="/sci/index.htm" <if condition="$module_name eq 'sci'" >class='current'</if> >SCI影响因子</a></li>
+                                <li><a href="/study/index.htm" <if condition="$module_name eq 'study'" >class='current'</if> >学习资源</a></li>
+                                <li><a href="{:U('/newscat/3')}" <if condition="$module_name eq 'news'" >class='current'</if> >新闻资讯</a></li>
+                                <li><a href="/about/index.htm" <if condition="$module_name eq 'about'" >class='current'</if>   >关于我们</a></li>
+                            </ul>
+                        </div>
+                        <div class="tougao">
+                            <a href="{:U('/contribute/index')}" ><img src="__PUBLIC__/images/tougao.png"  /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+

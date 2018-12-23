@@ -1,0 +1,51 @@
+<!--banner-->
+<!--div class="bannerbox"><img src="__PUBLIC__/images/banner_10.png" /></div-->
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">关于我们</a>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+				  <p>关于我们</p>
+                  <volist name="about_menu" id="menu">
+					<li><a href="{:U('About/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				  </volist>
+				  <li class="on"><a href="{:U('About/news')}">公司新闻</a></li>
+               </ul>
+           </div>
+        </div>
+    </div>
+
+<script>
+$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+})
+</script>
+
+	<!--右边-->
+    <div class="train_r">
+        <div class="train_c">
+			<ul>
+				<volist name="news_list" id="list">
+					<li><a href="{:U('About/news_detail',array('id' => $list['id'],'cat_id' => $list['cat_id']))}"><label>></label>{$list.title}</a><span>{$list.addtime|date='Y-m-d',###}</span></li>
+				</volist>	
+			</ul>
+			<div style="clear:both;"></div>
+			<div class="page">{$pages}</div>
+		</div>
+        
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

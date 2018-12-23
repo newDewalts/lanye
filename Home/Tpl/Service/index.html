@@ -1,0 +1,68 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_xm.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > <a href="#" >服务项目</a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <div class="artice-left-title" >服务项目</div>
+                    <div class="artice-menu" >
+                        <foreach name='service_list' item='vo'>
+                            <div class="artice-menu-list <if condition='$vo.cat_id eq $cid ' >artice-menu-select</if>" >
+                                <div class="artice-menu-title" >
+                                    <img src="__PUBLIC__/images/page_menu_active.png" class="artice-active"  />
+                                    <img src="__PUBLIC__/images/page_icon_{$key+1}.png" class="artice-icon"  /> 
+                                    <div class='txt' >{$vo.cat_name}</div>
+                                </div>
+                                <div class="artice-menu-nav" >
+                                    <foreach name="vo.info" item='val'>
+                                        <div class='artice-nav-list' ><img src="__PUBLIC__/images/page_li_icon.png" class="artice-li-icon"  />  <a href="{:U('Service/index',array('id'=>$val['id'],'cat_id'=>$val['cat_id']))}">{$val.title}</a> </div>
+                                    </foreach>
+                                </div>
+                            </div>
+                        </foreach>
+                    </div>
+                    <div class='hotline' >
+                        <div class='txt' >服务热线</div>
+                        <div class='number' >020-89819613</div>
+                    </div>    
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-content' >
+                         <div class='artice-right-title' >
+                            <img src="__PUBLIC__/images/page_title_icon.png"  class='page_icon_title'  /> 
+                            <div class='layui-inline bold letter' >{$service_info.title}</div> 
+                            <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                        </div>
+                        <div class='artice-content' >
+                            {$service_info.content}
+                        </div>
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    
+
+
+
+
+
+
+<script>
+
+$(function() {
+
+    $('.artice-menu-list').mouseover(function() {  
+        $('.artice-menu-list').removeClass('artice-menu-select');
+        $(this).addClass('artice-menu-select');
+    });
+
+
+})
+
+</script>
+

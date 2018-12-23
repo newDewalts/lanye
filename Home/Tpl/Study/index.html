@@ -1,0 +1,140 @@
+<div class="content" >
+    <div class="container-box" >
+        <div class="page-menu pt15" > 当前位置: <a href="/" >首页</a> > 学习资源 </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class='study-top-left' >
+                    <ul class="study-top-left-bxslider">
+                        <volist name='ad_study' id='vo' >
+                            <li><img src='{$vo.ad_img}'  style="width: 720px;height: 328px;"/></li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class='study-top-right' >
+                    <div class='study-title-today' >
+                        <div class="today-title" >今日要点</div>
+                        <div class='today-line' ></div>
+                        <div class='today-more' ><a href="{:U('/news/index',array('cat_id'=>1))}">更多 >></a></div>
+                    </div>
+                    <div class='study-top-right-content' >
+                        <div class='study-news-top hide-long' ><notempty name="news_list[0]"  ><a href="{:U('/news/detail',array('id'=>$$news_list[0]['id']))}" >{$news_list[0]['title']}</a></notempty></div>
+                        <div class='layui-row'>
+                            <volist name="news_list" id="vo" offset="2" length='12'>
+                                <div class='layui-col-lg6' ><div class='study-sci-list hide-long' ><a href="{:U('/news/detail',array('id'=>$vo['id']))}" >[{$vo.title|subtext=15}]</a></div></div>
+                            </volist>
+                        </div>
+                        <div class='study-news-top hide-long mb5'><notempty name="news_list[1]"  ><a href="{:U('/news/detail',array('id'=>$$news_list[1]['id']))}" >{$news_list[1]['title']}</a></notempty></div>
+                        <div class='study-news-txt' >
+                            {$news_list[1]['content']|strip_tags|subtext=150}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='study-title-sci' >
+                <span>SCI编译指导</span>
+                <div class='today-more' ><a href="{:U('/study/cat',array('cat_id'=>47))}">更多 >></a></div>
+            </div>
+            <div class='layui-row' >
+                <div class='study-sci-1' >
+                    <a href="javascript:void(0);" onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww8.53kf.com%2FwebCompany.php%3Farg%3D10151809%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26lnk_overflow%3D0%26language%3Dzh-cn%26charset%3Dgbk%26referer%3D%7Bhz6d_referer%7D%26keyword%3Dhttp%253A%252F%252Fwww.lanye.wood%252Fabout%252Findex.htm%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D9f3cef5346c7881775447248b1b44ab1%26is_group%3D#liyc#%2C#liyc#_blank#liyc#%2C#liyc#height%3D600%2Cwidth%3D800%2Ctop%3D50%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"><img src='__PUBLIC__/images/study_img_1.png' /></a>
+                </div>
+                <div class='study-sci-2' >
+                    <div class='study-title-today' >
+                        <div class="today-title" >今日要点</div>
+                        <div class='today-line2' ></div>
+                    </div>
+                    <div class='study-sci-box' >
+                        <div class='layui-row' >
+                            <div class='study-sci-left' ><a href="{:U('/study/detail',array('id'=>$article_list_sci_new[0]['id']))}" ><img src="{$article_list_sci_new[0]['thumb']}"/></a></div>
+                            <div class='study-sci-right' >
+                                <div class='study-sci-news-title hide-long' ><a href="{:U('/study/detail',array('id'=>$article_list_sci_new[0]['id']))}" >{$article_list_sci_new[0]['title']}</a></div>
+                                <div class='study-sci-news-txt ' >
+                                    {$article_list_sci_new[0]['summary']|subtext=100}
+                                    <a href="{:U('/study/detail',array('id'=>$article_list_sci_new[0]['id']))}" >[详情]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='study-sci-box2'>
+                        <div class='layui-row' >
+                            <volist name="article_list_sci_new" id="vo" offset="1" length='7'>
+                                <div class='layui-col-lg6' ><div class='study-sci-list hide-long' ><a  href="{:U('/study/detail',array('id'=>$vo['id']))}" ><img src='__PUBLIC__/images/study-li-icon.png' /> {$vo.title}</a></div></div>
+                            </volist>
+                        </div>
+                    </div>
+                    <div class='study-sci-box3'>
+                        <div class='layui-row' >
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_1.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_2.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_3.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_4.png' /></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class='study-sci-3' >
+                    <div class='study-hot' >SCI编译指导热门文章</div>
+                    <div class='study-hot-box' >
+                        <volist name="article_list_sci" id="vo" >
+                            <div class='study-hot-list ' ><div class='study-hot-icon hot-bg{$i}'>{$i}</div>
+                                <div class='study-hot-txt hide-long' ><a href="{:U('/study/detail',array('id'=>$vo['id']))}" >{$vo.title}</a></div>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+            <div class='study-title-sci' >
+                <span>写作指导</span>
+                <div class='today-more' ><a href="{:U('study/cat',array('cat_id'=>84))}">更多 >></a></div>
+            </div>
+            <div class='layui-row mb40' >
+                <div class='study-sci-1' >
+                    <a href="javascript:void(0);" onclick="hz6d_is_exist('setIsinvited()%3Bwindow.open(#liyc#http%3A%2F%2Fwww8.53kf.com%2FwebCompany.php%3Farg%3D10151809%26style%3D1%26kflist%3Doff%26kf%3D%26zdkf_type%3D1%26lnk_overflow%3D0%26language%3Dzh-cn%26charset%3Dgbk%26referer%3D%7Bhz6d_referer%7D%26keyword%3Dhttp%253A%252F%252Fwww.lanye.wood%252Fabout%252Findex.htm%26tfrom%3D1%26tpl%3Dcrystal_blue%26uid%3D9f3cef5346c7881775447248b1b44ab1%26is_group%3D#liyc#%2C#liyc#_blank#liyc#%2C#liyc#height%3D600%2Cwidth%3D800%2Ctop%3D50%2Cleft%3D200%2Cstatus%3Dyes%2Ctoolbar%3Dno%2Cmenubar%3Dno%2Cresizable%3Dyes%2Cscrollbars%3Dno%2Clocation%3Dno%2Ctitlebar%3Dno#liyc#)');"><img src='__PUBLIC__/images/study_img_2.png' /></a>
+                </div>
+                <div class='study-sci-2' >
+                    <div class='study-title-today' >
+                        <div class="today-title" >今日要点</div>
+                        <div class='today-line2' ></div>
+                    </div>
+                    <div class='study-sci-box' >
+                        <div class='layui-row' >
+                            <div class='study-sci-left' ><a href="{:U('/study/detail',array('id'=>$article_list_sci_xie[0]['id']))}" ><img src="{$article_list_sci_xie[0]['thumb']}"/></a></div>
+                            <div class='study-sci-right' >
+                                <div class='study-sci-news-title hide-long' ><a href="{:U('/study/detail',array('id'=>$article_list_sci_xie[0]['id']))}" >{$article_list_sci_xie[0]['title']}</a></div>
+                                <div class='study-sci-news-txt ' >
+                                    {$article_list_sci_xie[0]['summary']|subtext=100}
+                                    <a href="{:U('/study/detail',array('id'=>$article_list_sci_xie[0]['id']))}" >[详情]</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='study-sci-box2'>
+                        <div class='layui-row' >
+                            <volist name="article_list_sci_xie" id="vo" offset="1" length='7'>
+                                <div class='layui-col-lg6' ><div class='study-sci-list hide-long' ><a  href="{:U('/study/detail',array('id'=>$vo['id']))}" ><img src='__PUBLIC__/images/study-li-icon.png' /> {$vo.title}</a></div></div>
+                            </volist>
+                        </div>
+                    </div>
+                    <div class='study-sci-box3'>
+                        <div class='layui-row' >
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_5.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_6.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_7.png' /></a></div>
+                            <div class='layui-col-lg3' ><a><img src='__PUBLIC__/images/study_list_8.png' /></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class='study-sci-3' >
+                    <div class='study-hot' >写作指导热门文章</div>
+                    <div class='study-hot-box' >
+                        <volist name="article_list_sci_xie_hot" id="vo" >
+                            <div class='study-hot-list ' ><div class='study-hot-icon hot-bg{$i}'>{$i}</div>
+                                <div class='study-hot-txt hide-long' ><a href="{:U('/study/detail',array('id'=>$vo['id']))}" >{$vo.title}</a></div>
+                            </div>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>    

@@ -1,0 +1,169 @@
+<div class="mainnav_title">
+	<a href="{:U('User/index')}" class="btn">用户列表</a>
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('User/add')}" class="btn btn-info">添加用户</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改用户</span>
+	</if>
+	<a href="{$forward_url}" class="btn">返回</a>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="user-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('User/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('User/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span2" for="role_id">用户角色:</label>
+		<div class="controls">
+			<select name="role_id" id="role_id">
+				<option value="">--请选择角色--</option>
+				<volist name="roleList" id="vo">
+					<option value="{$vo.id}"
+						<if condition="!empty($user) && ($user['role_id'] eq $vo['id'])">
+						selected="selected"
+						</if>
+					>{$vo.name}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="username">用户名称:</label>
+		<div class="controls" style="height:30px; line-height: 30px;">
+			<if condition="$Think.const.ACTION_NAME eq 'edit'">
+				<span>{$user.username}</span>
+			<else/>
+				<input type="text" name="username" id="username">
+				<em class="color-red">*</em>
+			</if>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="nickname">昵称:</label>
+		<div class="controls">
+			<input type="text" name="nickname" id="nickname" value="{$user.nickname}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="email">邮箱:</label>
+		<div class="controls">
+			<input type="text" name="email" id="email" value="{$user.email}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="mobile">手机:</label>
+		<div class="controls">
+			<input type="text" name="mobile" id="mobile" value="{$user.mobile}">
+			<!-- <em class="color-red">*</em> -->
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="phone">电话:</label>
+		<div class="controls">
+			<input type="text" name="phone" id="phone" value="{$user.phone}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="zip_code">邮编:</label>
+		<div class="controls">
+			<input type="text" name="zip_code" id="zip_code" value="{$user.zip_code}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="address">地址:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="address" id="address" value="{$user.address}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="password">密码:</label>
+		<div class="controls">
+		    <input type="password" name="password" id="password">
+			<if condition="$Think.const.ACTION_NAME eq 'edit'">
+				<span class="help-inline">不修改密码无需填写</span>
+			<else/>
+				<em class="color-red">*</em>
+			</if>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="repassword">密码确认:</label>
+		<div class="controls">
+		    <input type="password" name="repassword" id="repassword">
+			<if condition="$Think.const.ACTION_NAME eq 'edit'">
+				<span class="help-inline">不修改密码无需填写</span>
+			<else/>
+				<em class="color-red">*</em>
+			</if>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">状态:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="status" value="1" <if condition="empty($user) || ($user['status'] eq 1)">checked="checked"</if> />启用
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="status" value="0" <if condition="!empty($user) && ($user['status'] eq 0)">checked="checked"</if> />禁用
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">备注:</label>
+		<div class="controls">
+			<textarea name="remark" class="textarea-remark">{$user.remark}</textarea>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$user['user_id'] gt 0">
+				<input type="hidden" name="user_id" value="{$user['user_id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+	$('#user-form').validate({
+		rules: {
+			'role_id': {
+				required: true
+			},
+			'username': {
+				required: true,
+				minlength: 3
+			},
+			'email': {
+				required: true, 
+				email: true
+			},
+			//'mobile': {
+			//	required: true
+			//},
+			'password': {
+				<if condition="$Think.const.ACTION_NAME eq 'add'">
+					required: true,
+				</if>
+				minlength: 6
+			},
+			'repassword': {
+				<if condition="$Think.const.ACTION_NAME eq 'add'">
+					required: true,
+				</if>
+				minlength: 6,
+				equalTo: "#password"
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

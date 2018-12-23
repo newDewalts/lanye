@@ -1,0 +1,95 @@
+<div class="mainnav_title">
+	<a href="{:U('Article/index')}" class="btn btn-info">文章列表</a>
+	&nbsp;
+	<a href="{:U('Article/add')}" class="btn">添加文章</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Article/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="标题" name="title" value="{$search['title']}">
+		&nbsp;&nbsp;
+		<select name="cat_id" id="cat_id" class="span3">
+			<option value="">--请选择行业分类--</option>
+			<volist name="articleCatOptions" id="articleCat">
+				<option value="{$articleCat.cat_id}" <if condition="$search['cat_id'] eq $articleCat['cat_id']">selected="selected"</if> >
+				<?php 
+					if ($articleCat['level'] > 1) {
+						echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $articleCat['level']);
+					}
+				?>{$articleCat.cat_name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($articleList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>PID</th>
+			<th>标题</th>
+			<th>分类</th>
+			<th>添加时间</th>
+			<th>排序</th>
+			<th>点击数</th>
+			<th>状态</th>
+			<th>推荐到首页</th>
+                        <th>热门文章</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="articleList" id="article">
+		<tr>
+			<td>{$article.id}</td>
+			<td>{$article.pid}</td>
+			<td>
+				{$article.title}
+				<if condition="!empty($article['thumb'])">
+					<img src="../Public/img/has_thumb.gif"/>
+				</if>
+			</td>
+			<td>{$articleCatArr[$article['cat_id']]}</td>
+			<td>{$article.addtime|date="Y-m-d",###}</td>
+			<td>{$article.orders}</td>
+			<td>{$article.hits}</td>
+			<td>
+				<if condition="$article['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>
+				<if condition="$article['headline'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+                        <td>
+				<if condition="$article['hot'] eq 1">
+                                        是
+                                <else />
+                                       否
+				</if>
+			</td>
+			<td class="span2">
+				<span class="tooltip-container">
+					<a href="{:U('Article/edit', array('id' =>$article['id']))}" title="编辑"><i class="icon-edit"></i>编辑</a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Article/delete', array('id' =>$article['id']))}" title="删除"><i class="icon-trash"></i>删除</a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

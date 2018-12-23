@@ -1,0 +1,345 @@
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/themes/default/default.css" />
+<!--
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/plugins/code/prettify.css" />
+-->
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/lang/zh_CN.js"></script>
+<!--
+<script charset="utf-8" src="__PUBLIC__/Js/kindeditor/plugins/code/prettify.js"></script>
+-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/calendar/win2k.css"/>
+<script type="text/javascript" src="__PUBLIC__/Js/calendar/calendar.js"></script>
+
+<script type="text/javascript">
+// 内容编辑器
+KindEditor.ready(function(K) {
+	K.create('#pre_contents', {
+		allowFileManager: true,
+		uploadJson : "{:U('Public/Kupload')}",
+		fileManagerJson : "{:U('Public/KfileManager')}"
+	});
+	K.create('#pre_parameter', {
+		allowFileManager: true,
+		uploadJson : "{:U('Public/Kupload')}",
+		fileManagerJson : "{:U('Public/KfileManager')}"
+	});
+	
+	// 缩略图单个上传按钮
+	var upload_thumb_btn = K.uploadbutton({
+			button : K('#upload_thumb_btn')[0],
+			fieldName : 'imgFile',
+			url : "{:U('Public/Kupload')}",
+			afterUpload : function(data) {
+				if (data.error === 0) {
+					var url = K.formatUrl(data.url, 'absolute');
+					K('#thumb').val(url);
+					// 显示缩略图
+					show_thumb_pic(url, '#thumb-show', '#thumb-delete-btn');
+				} else {
+					alert(data.message);
+				}
+			},
+			afterError : function(str) {
+				alert('自定义错误信息: ' + str);
+			}
+	});
+	upload_thumb_btn.fileBox.change(function(e) {
+		upload_thumb_btn.submit();
+	});
+});
+
+$(function() {
+	// 新闻添加日期
+	Calendar.setup({
+		weekNumbers: true,
+		inputField: "date_time",
+		trigger: "date_time",
+		//dateFormat: "%Y-%m-%d %H:%M:%S",
+		dateFormat: "%Y-%m-%d",
+		//showTime: true,
+		minuteStep: 1,
+		onSelect: function () { this.hide();}
+	});
+	
+	Calendar.setup({
+		weekNumbers: true,
+		inputField: "pre_create_date",
+		trigger: "pre_create_date",
+		//dateFormat: "%Y-%m-%d %H:%M:%S",
+		dateFormat: "%Y-%m-%d",
+		//showTime: true,
+		minuteStep: 1,
+		onSelect: function () { this.hide();}
+	});
+
+});
+</script>
+<div class="mainnav_title">
+	<a href="{:U('Periodical/index')}" class="btn">期刊列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Periodical/add')}" class="btn btn-info">添加期刊</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改期刊</span>
+		&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<div style="position:relative;">
+	<div style="position:absolute; top: 177px; *top: 185px; left: 630px;">
+		<input type="button" id="upload_thumb_btn" value="上传" />
+	</div>
+<form method='post' id="periodical-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Periodical/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Periodical/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span2" for="cat_id">期刊分类:</label>
+		<div class="controls">
+		    <!-- cate_id是期刊列表中，期刊分类的编号 -->
+			<select name="cate_id" id="cate_id">
+				<option value="">--请选择期刊分类--</option>
+				<volist name="periodicalCateOptions" id="periodicalCate">
+					<option value="{$periodicalCate.cat_id}" style="padding-left:{$periodicalCate['level']*25-15}px;"
+						<if condition="!empty($periodical) && ($periodical['cate_id'] eq $periodicalCate['cat_id'])">
+						selected="selected"
+						</if>
+					>{$periodicalCate.cat_name}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="pre_name">期刊名称:</label>
+		<div class="controls">
+			<input class="span6" type="text" name="pre_name" id="pre_name" value="{$periodical.pre_name}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<img id="thumb-show" style="width: 100px; height: 67px;"
+				<empty name="periodical['pre_image_thumb']">
+					src="../Public/img/default_thumb.jpg"
+				<else /> 
+					src="{$periodical.pre_image_thumb}" 
+				</empty>
+			/>
+			<a id="thumb-delete-btn" href="javascript:void(0);" onclick="delete_thumb(this, '#thumb-show', '#thumb', '{:U('Public/deleteAttach')}');"
+				<empty name="periodical['pre_image_thumb']">
+					hasThumb="0"
+				<else /> 
+					hasThumb="1"
+				</empty>
+			>删除</a>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_image_thumb">期刊封页图:</label>
+		<div class="controls" style="height: 30px;">
+			<input class="span6" type="input" name="pre_image_thumb" id="thumb" value="{$periodical.pre_image_thumb}" />
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_language">期刊语言种类:</label>
+		<div class="controls">
+			<input type="text" name="pre_language" id="pre_language" value="{$periodical.pre_language}"/>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">内容:</label>
+		<div class="controls">
+			<textarea name="pre_contents" id="pre_contents" style="width: 800px; height: 300px; visibility:hidden;">{$periodical.pre_contents}</textarea>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">参数描述:</label>
+		<div class="controls">
+			<textarea name="pre_parameter" id="pre_parameter" style="width: 800px; height: 300px; visibility:hidden;">{$periodical.pre_parameter}</textarea>
+		</div>
+	</div>	
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_manage">出版社主管单位:</label>
+		<div class="controls">
+			<input type="text" name="pre_manage" id="pre_manage" value="{$periodical.pre_manage}"/>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_press">出版社:</label>
+		<div class="controls">
+			<input type="text" name="pre_press" id="pre_press" value="{$periodical.pre_press}"/>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_area">地区:</label>
+		<div class="controls">
+			<input type="text" name="pre_area" id="pre_area" value="{$periodical.pre_area}"/>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_journal">期刊出版频率:</label>
+		<div class="controls">
+			<input type="text" name="pre_journal" id="pre_journal" value="{$periodical.pre_journal}"/>
+		</div>
+	</div>	
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_issn">期刊国际编号:</label>
+		<div class="controls">
+			<input type="text" name="pre_issn" id="pre_issn" value="{$periodical.pre_issn}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_cn">期刊国内编号:</label>
+		<div class="controls">
+			<input type="text" name="pre_cn" id="pre_cn" value="{$periodical.pre_cn}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_code">邮发代号:</label>
+		<div class="controls">
+			<input type="text" name="pre_code" id="pre_code" value="{$periodical.pre_code}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_format">开本:</label>
+		<div class="controls">
+			<input type="text" name="pre_format" id="pre_format" value="{$periodical.pre_format}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_create_date">创刊时间:</label>
+		<div class="controls">
+			<input type="text" name="pre_create_date" value="{$periodical.pre_create_date}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_quote">期刊被引用次数:</label>
+		<div class="controls">
+			<input type="text" name="pre_quote" id="pre_quote" value="{$periodical.pre_quote}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_factor">影响因子:</label>
+		<div class="controls">
+			<input type="text" name="pre_factor" id="pre_factor" value="{$periodical.pre_factor}"/>
+	    </div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="date_time">添加时间:</label>
+		<div class="controls">
+			<input type="text" name="date_time" id="date_time" 
+				<if condition="$Think.const.ACTION_NAME eq 'edit'" >
+					value="{$periodical.date_time|date='Y-m-d',###}"
+				<else/>
+					value="<?php echo date('Y-m-d');?>"
+				</if> 
+			/>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_keywords">期刊关键字:</label>
+		<div class="controls">
+			<textarea name="pre_keywords" id="keywords" class="textarea-remark2">{$periodical.pre_keywords}</textarea>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="pre_desc">期刊简介描述:</label>
+		<div class="controls">
+			<textarea name="pre_desc" id="pre_desc" class="textarea-remark2">{$periodical.pre_desc}</textarea>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">状态:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="pre_status" value="1" <if condition="empty($periodical) || ($periodical['pre_status'] eq 1)">checked="checked"</if> />启用
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="pre_status" value="0" <if condition="!empty($periodical) && ($periodical['pre_status'] eq 0)">checked="checked"</if> />禁用
+			</label>
+		</div>
+	</div>
+	
+	 <div class="control-group">
+		<label class="control-label span2">推荐:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="is_recommend" value="1" <if condition="!empty($periodical) && ($periodical['is_recommend'] eq 1)">checked="checked"</if> />是
+			</label>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="is_recommend" value="0" <if condition="empty($periodical) || ($periodical['is_recommend'] eq 0)">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input type="text" name="orders" id="orders" value="{$periodical.orders}">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="hits">点击次数:</label>
+		<div class="controls">
+			<input type="text" name="hits" id="hits" value="{$periodical.hits}">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$periodical['pre_id'] gt 0">
+				<input type="hidden" name="pre_id" value="{$periodical['pre_id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+</div>
+
+<div class="height20"></div>
+<div class="height20"></div>
+
+<script type="text/javascript">
+$(function(){
+	$('#periodical-form').validate({
+		rules: {
+			pre_id: {
+				required: true
+			},
+			pre_name: {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

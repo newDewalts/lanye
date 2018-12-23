@@ -1,0 +1,107 @@
+<body class="sciedit-news">
+
+<!-- 左边服务项目导航栏 -->
+<include file="Public:side"/>
+
+    <div class="content">
+        <ul class="news-list">
+            <foreach name='news_list' item='vo'>
+            <li class="item">
+                <div class="date">
+                    <div class="day"><?php echo substr(date('Y-m-d',$vo['addtime']),8); ?></div>
+                    <div class="ym"><?php echo substr(date('Y-m-d',$vo['addtime']),0,7); ?></div>
+                </div>
+                <div class="text">
+                    <div class="text-title"><a href="{:U('Reprint/detail',array('id'=>$vo['id']))}">{$vo.title}</a></div>
+                    <div class="text-content">{$vo.summary}</div>
+                </div>
+            </li>
+            </foreach>
+            <!-- <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li>
+            <li class="item">
+                <div class="date">
+                    <div class="day">21</div>
+                    <div class="ym"><span>2017</span>-<span>09</span></div>
+                </div>
+                <div class="text">
+                    <div class="text-title">中国团队鉴定出一条人膀胱癌干细胞干性维持的</div>
+                    <div class="text-content">一、《规范》修订的背景 2003 年，国家食品药品监督管理局发布施行《药物非临床研究质量管理规范》（原局令第 2 号），对规范行业行为，推动药品研发，确保药品质量起到了积极的…</div>
+                </div>
+            </li> -->
+        </ul>
+        <div class="page">
+            {$pages}
+            <!-- <a>首页</a>
+            <a>上一页</a>
+            <ul>
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+                <li><a>6</a></li>
+            </ul>
+            <a>下一页</a>
+            <a>尾页</a> -->
+        </div>
+    </div>
+
+    <div class="server-bottom">
+        <a onclick="kf1()"><div class="server-bottom-button">在线咨询</div></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+    $('#a-nav').text('文章转载');
+    $('#a-nav').attr('href',"{:U('Reprint/index')}");
+</script>

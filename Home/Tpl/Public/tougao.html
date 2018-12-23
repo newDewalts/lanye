@@ -1,0 +1,38 @@
+<div class="online_tougao">
+	<h3>在线留言</h3>
+	<form class="action_tougao" action="{:U('Contribute/index')}" method="post" name="formUser" enctype="multipart/form-data">
+		<div class="action_rom1" style="padding-top:20px;">
+			<label><em></em>称呼：</label>
+			<input type="text" class="action_txt" name="realname" id="true_name" />
+		</div>
+		<div class="action_rom1">
+			<label><em></em>电话/邮件：</label>
+			<input type="text" class="action_txt must" name='mobile' id='mobile_phone'/>
+		</div>
+		<div class="action_rom1" style="margin-bottom:50px;">
+			<label><em></em>备注：</label>
+			<textarea name="content" style="width:153px;height:80px;"></textarea> 
+		</div>
+		<div class="action_rom1">
+			<label style="padding-top:10px;width:60px;text-align:right;margin-right:20px;"><input id="up_check" type="checkbox"></label>如果有文章或数据
+		</div>
+		<div id="upfile" class="action_rom1" style="padding-bottom:10px;display:none;">
+			<label><em></em>上传文件：</label>
+			<input type="file" class="action_txt" name='attach' id="attach"/> 
+		</div>
+		<div class="action_rom2">
+			<input type="submit" name='Submit' class="action_btn" value="提交" />
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		$('#up_check').click(function(){
+			if($(this).is(':checked')){
+				$('#upfile').css('display','block');
+			}else{
+				$('#upfile').css('display','none');
+			}
+		});
+	});
+</script>

@@ -1,0 +1,81 @@
+	<!-- header -->	
+	<include file="Public:menu" />
+	
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+		
+		
+			<div class="column-title">
+				<h2>{$pre_array['cat_name']}</h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">首页</a>
+				<tt>></tt>
+				<a href="{:U('/contact/index',array('id'=>31))}">{$class_name}</a>
+				<tt>></tt>
+				<span>{$pre_array['cat_name']}</span>
+			</div>
+			
+			<div class="title-img mt20">
+				<img src="{$banner_image}"/>
+			</div>			
+
+			<div class="bank mt10">
+				<table class="bank-tab" border="0" cellpadding="0" cellspacing="0">
+					<tbody>
+					   <tr>
+					       <volist name="lists" id="vo" key="k">
+					          <if condition="$k eq 1">
+					          <th width = "181">{$vo}</th>
+					          </if>
+					          <if condition="$k eq 2">
+					          <th width = "260">{$vo}</th>
+					          </if>
+					          <if condition="$k eq 3">
+					          <th width = "229">{$vo}</th>
+					          </if>
+					       </volist>
+					   </tr> 
+					   
+						<volist name="head_array" id="vo">
+						<tr>
+							<td>
+								<img src="{$vo['thumb']}"/>
+							</td>
+							<td class="bank-info">
+								{$vo['content']}
+							</td>
+							<td class="tc plr15">
+								{$vo['summary']}
+							</td>
+						</tr>
+						</volist>
+						
+						<volist name="unhead_array" id="vo">
+						<tr>
+							<td>
+								<img src="{$vo['thumb']}" />
+							</td>
+							<td class="bank-info">
+								{$vo['content']}
+							</td>
+							<if condition="0 eq $vo['status']">
+								<td class="plr15 ptb10" rowspan="4">
+									{$vo['summary']}
+								</td>
+							</if>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
+		<div class="side fr">
+			<include file="profile" />
+			<include file="Public:online" />
+		</div>
+	</div>		
+	<!-- footer -->

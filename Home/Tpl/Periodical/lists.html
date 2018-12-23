@@ -1,0 +1,42 @@
+<!-- header -->	
+<include file="Public:menu" />
+	<!-- 中文期刊 -->
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<div class="column-title">
+				<h2>{$cate_arr['cat_name']}</h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">{$home_name}</a>
+				<tt>></tt>
+				<a href="<?php echo U('/periodicals')?>">{$per_name}</a>
+				<tt>></tt>
+				<span><a href="<?php echo U('periodicals/'.$cate_arr['cat_id'])?>">{$cate_arr['cat_name']}</a></span>
+			</div>
+			<div class="content mt10">
+				<ul class="book clearfix">
+					<volist name="periodicals" id="List">
+						<li>
+							<a class="cover" href="<?php echo U('periodical/'.$List['pre_id'])?>" target="_blank">
+								<img src="{$List['pre_image_thumb']}"  height="148" width="110" alt="{$List['pre_name']}"/>
+							</a>
+							<h5 class="tc">
+								<a href="<?php echo U('periodical/'.$List['pre_id'])?>" target="_blank">
+									《{$List['pre_name']}》
+								</a>
+							</h5>
+						</li>	
+					</volist>
+				</ul>
+				<ul class="pagination mt20">
+					{$pageShow}
+				</ul>	
+			</div>
+		</div>
+		<div class="side fr">
+			<include file="profile" />
+			<include file="Public:online"  />
+		</div>
+	</div>	
+<!-- footer -->

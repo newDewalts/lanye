@@ -1,0 +1,26 @@
+  <include file="Public/inside" />
+  
+  
+  <!-- <ul id="company">
+    <li class="logo"><a href="__APP__/nwdetail/{$company_ins['id']}"><img src="{$url}{$company_ins['thumb']}"></a></li>
+    <li class="nr">{$company_ins['summary']|strip_tags|msubstr=0,190,'utf-8',true}</li>
+    <li class="clear"></li>
+  </ul> -->
+
+
+
+  <ul id="type_name">
+    <li>{$catInfo['cat_name']}</li>
+  </ul>
+  <ul id="list_type">
+  	<volist name="lists" id="vo">
+    <li>
+      <a href="__APP__/ardetail/{$vo['id']}">
+      	<img src="{$url}{$vo['thumb']}" alt="{$vo['title']}">
+      	<span><b>{$vo['title'] | strip_tags | msubstr=0,10,'utf-8',false}</b>{$vo['summary'] | strip_tags | msubstr=0,90,'utf-8',false}</span>
+      	<div class="clear"></div>
+      </a>
+    </li>
+    </volist>
+  </ul>
+  {$pageShow}

@@ -1,0 +1,49 @@
+	<!-- header -->	
+	<include file="Public:menu" />
+	<!-- 招聘及优惠 -->
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<volist name="data" id="data">
+				<if condition="$cat_id eq $data['cat_id']">
+					<div class="column-title">
+						<h2>{$data['cat_name']}</h2>
+					</div>
+					<div class="breadcrumb">
+						当前位置：
+						<a href="/">{$home_name}</a>
+						<tt>></tt>
+						<a href="<?php echo U('Join/15')?>" title="{$data['pre_name']}">{$data['pre_name']}</a>
+						<tt>></tt>
+						<span>{$data['cat_name']}</span>
+					</div>
+					<div class="clearfix mt15">
+						<if condition="$cat_id eq $index_data['num']">
+							<img src="{$index_data['thumb']}">
+							<div class="content mt20">
+								<dl class="join-block">
+									<dd>{$index_data['content']}</dd>
+								</dl>
+							</div>
+						</if>
+					</div>
+				</if>
+			</volist>	
+		</div>
+		<div class="side fr">
+			<div class="box2 bgc1">
+				<h2>{$index_name}</h2>
+				<ul class="about-nav">
+					<volist name="join_menu" id="menu">
+					    <if condition="$cat_id eq $menu['cat_id']"><li class="active">
+					    <else />
+					       <li>
+					    </if>
+						<a class="about-subnav" href="<?php echo U('Join/'.$menu['cat_id'])?>">{$menu['cat_name']}</a>
+						</li>
+					</volist>
+				</ul>
+			</div>
+            <include file="Public:online" />
+		</div>
+	</div>	
+	<!-- footer -->

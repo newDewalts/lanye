@@ -1,0 +1,27 @@
+<div class='site-content' >
+    <div class='page_menu' ><img src='__APP__/Home/Tpl/Public/images/home_icon.png' class="home-icon" ><a href="/"> 首页</a> > 学习资源 > <a href="{:U('study/cat',array('cat_id'=>$article_cat['cat_id']))}" >{$article_cat.cat_name}</a>   </div>
+
+    <div class='page_content' >
+        <volist name='news_list' id='vo' >
+            <div class='news-list' >
+                <div class='layui-row' >
+                    <div class='news-left' >
+                        <div class='news-title' > <a href="{:U('/study/detail',array('id'=>$vo['id']))}" >{$vo.title}</a></div>
+                        <div class='news-date' >{$vo.addtime|date='Y-m-d',###}</div>
+                    </div>
+                    <div class='news-right' >
+                        <empty name="vo['thumb']" >
+                            <img src="__APP__/Home/Tpl/Public/images/news_img_1.png" alt="">
+                        <else />  
+                             <a href="{:U('/study/detail',array('id'=>$vo['id']))}" ><img src="{$url}/{$vo.thumb}" class="full-width"  /></a>
+                        </empty>   
+                    </div>
+                </div>    
+            </div>
+        </volist> 
+    </div> 
+    <div class="p-box" >
+        {$show}
+    </div>
+</div>
+

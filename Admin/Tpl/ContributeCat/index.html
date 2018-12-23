@@ -1,0 +1,47 @@
+<div class="mainnav_title">
+	<a href="{:U('ContributeCat/index')}" class="btn btn-info">分类列表</a>
+	&nbsp;
+	<a href="{:U('ContributeCat/add')}" class="btn">添加分类</a>
+</div>
+<div class="height20"></div>
+
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>分类名称</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="catList" id="cat">
+		<tr id="cat_id_{$cat.cat_id}"  parent-id="{$cat.pid}"
+			<if condition="$cat['children'] gt 0">
+				is-load="0" status="close" 
+			<else />
+				is-load="1" status="open"
+			</if> 
+		>
+			<td>
+				<if condition="$cat['children'] gt 0">
+					<a href="javascript:void(0);" onclick="getChildrenCategory(this, '{:U('ContributeCat/getChildren')}', {$cat.cat_id}, 0);" title="展开"><img src="../Public/img/icon-plus.gif"/></a>
+				<else />
+					<a href="javascript:void(0);" title="折叠"><img src="../Public/img/icon-minus.gif"/></a>
+				</if>
+				<span>{$cat.cat_name}</span>
+				<span style="color:#CCC">(id:{$cat.cat_id})</span>
+			</td>
+			<td>{$cat.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('ContributeCat/add', array('pid'=>$cat['cat_id']))}" title="添加子节点"><i class="icon-plus"></i></a> &nbsp;
+					<a href="{:U('ContributeCat/edit', array('id'=>$cat['cat_id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;
+					<if condition="empty($cat['children'])">
+						<a href="{:U('ContributeCat/delete', array('id'=>$cat['cat_id']))}" title="删除" onclick="return confirm_redirect('你确认删除此记录吗？');"><i class="icon-trash"></i></a>
+					</if>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>

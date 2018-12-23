@@ -1,0 +1,91 @@
+<div class="mainnav_title">
+	<a href="{:U('Service/index')}" class="btn btn-info">服务文章列表</a>
+	&nbsp;
+	<a href="{:U('Service/add')}" class="btn">添加服务文章</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Service/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="标题" name="title" value="{$search['title']}">
+		&nbsp;&nbsp;
+		<select name="cat_id" id="cat_id" class="span3">
+			<option value="">--请选择分类--</option>
+			<volist name="serviceCatOptions" id="serviceCat">
+				<option value="{$serviceCat.cat_id}" <if condition="$search['cat_id'] eq $serviceCat['cat_id']">selected="selected"</if> >
+				<?php 
+					if ($serviceCat['level'] > 1) {
+						echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $serviceCat['level']);
+					}
+				?>{$serviceCat.cat_name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($serviceList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>标题</th>
+			<th>分类</th>
+			<th>添加时间</th>
+			<th>排序</th>
+			<th>在显示导航</th>
+			<th>状态</th>
+			<th>最新？</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="serviceList" id="service">
+		<tr>
+			<td>{$service.id}</td>
+			<td>
+				{$service.title}
+				<if condition="!empty($service['thumb'])">
+					<img src="../Public/img/has_thumb.gif"/>
+				</if>
+			</td>
+			<td>{$serviceCatArr[$service['cat_id']]}</td>
+			<td>{$service.addtime|date="Y-m-d",###}</td>
+			<td>{$service.orders}</td>
+			<td class="span2">
+				<if condition="$service['show_nav'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td>
+				<if condition="$service['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>
+				<if condition="$service['is_new'] eq 1">
+					<span class="color-green">是</span>
+				<else/>
+					<span class="color-red">否</span>
+				</if>
+			</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Service/edit', array('id' =>$service['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Service/delete', array('id' =>$service['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

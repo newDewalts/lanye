@@ -1,0 +1,80 @@
+<div class="mainnav_title">
+	<a href="{:U('Node/index')}" class="btn btn-info">节点列表</a>
+	<a href="{:U('Node/add')}" class="btn">添加节点</a>
+</div>
+<div class="height20"></div>
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>节点名</th>
+			<th>状态</th>
+			<th>排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="nodeList" id="app">
+		<tr>
+			<td>{$app.title}</td>
+			<td>
+				<if condition="$app['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>{$app.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="__URL__/add/pid/{$app.id}" title="添加子节点"><i class="icon-plus"></i></a> &nbsp;
+					<a href="__URL__/edit/id/{$app.id}" title="编辑"><i class="icon-edit"></i></a>
+				</span>
+			</td>
+		</tr>
+			<volist name="app['children']" id="module">
+				<tr>
+					<td style="padding-left: 25px;">{$module.title}</td>
+					<td>
+						<if condition="$module['status'] eq 1">
+							<span class="color-green">启用</span>
+						<else/>
+							<span class="color-red">禁用</span>
+						</if>
+					</td>
+					<td>{$module.orders}</td>
+					<td>
+						<span class="tooltip-container">
+							<a href="__URL__/add/pid/{$module.id}" title="添加子节点"><i class="icon-plus"></i></a> &nbsp;
+							<a href="__URL__/edit/id/{$module.id}" title="编辑"><i class="icon-edit"></i></a> &nbsp;
+							<if condition="empty($module['children'])">
+								<a href="__URL__/delete/id/{$module.id}" title="删除" onclick="return confirm_redirect('你确认删除此记录吗？');"><i class="icon-trash"></i></a>
+							</if>
+						</span>
+					</td>
+				</tr>
+				
+				<volist name="module['children']" id="action">
+					<tr>
+						<td style="padding-left: 50px;">{$action.title}</td>
+						<td>
+							<if condition="$action['status'] eq 1">
+								<span class="color-green">启用</span>
+							<else/>
+								<span class="color-red">禁用</span>
+							</if>
+						</td>
+						<td>{$action.orders}</td>
+						<td>
+							<span class="tooltip-container">
+								<a href="__URL__/add/pid/{$action.id}" title="添加子节点"><i class="icon-plus"></i></a> &nbsp;
+								<a href="__URL__/edit/id/{$action.id}" title="编辑"><i class="icon-edit"></i></a> &nbsp;
+								<a href="__URL__/delete/id/{$action.id}" title="删除" onclick="return confirm_redirect('你确认删除此记录吗？');"><i class="icon-trash"></i></a>
+							</span>
+						</td>
+					</tr>
+				</volist>
+			</volist>	
+		</volist>
+	</tbody>
+</table>

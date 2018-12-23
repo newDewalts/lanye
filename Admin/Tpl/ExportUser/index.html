@@ -1,0 +1,24 @@
+<style type="text/css">
+.info h1{font-size: 20px;}
+.info p{
+	font-size: 16px;
+	margin-top: 20px;
+}
+</style>
+
+<div class="info">
+	<h1>操作说明</h1>
+	<p>
+		1. 生成Excel文件 &nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="{:U('ExportUser/createExcelFile')}" class="btn btn-info btn-small">立即生成</a>
+	</p>
+	<p>
+		2. 下载Excel文件 &nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="{:U('ExportUser/download')}" class="btn btn-info btn-small">进入下载页</a>
+	</p>
+	
+	<p>
+		下载完成后，请清空生成的Excel文件 &nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="{:U('ExportUser/clean')}" class="btn btn-info btn-small">清空</a>
+	</p>
+</div>

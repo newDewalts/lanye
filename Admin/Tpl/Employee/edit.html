@@ -1,0 +1,238 @@
+<link rel="stylesheet" href="__PUBLIC__/Js/kindeditor/themes/default/default.css" />
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/kindeditor/lang/zh_CN.js"></script>
+
+<script type="text/javascript">
+// 内容编辑器
+KindEditor.ready(function(K) {
+	// 头像上传按钮
+	var avatar_upload_btn = K.uploadbutton({
+			button : K('#avatar_upload_btn')[0],
+			fieldName : 'imgFile',
+			url : "{:U('Public/Kupload', array('dir'=>'Employee'))}",
+			afterUpload : function(data) {
+				if (data.error === 0) {
+					var url = K.formatUrl(data.url, 'absolute');
+					K('#avatar').val(url);
+					// 显示缩略图
+					show_thumb_pic(url, '#avatar-show', '#avatar-delete-btn');
+				} else {
+					alert(data.message);
+				}
+			},
+			afterError : function(str) {
+				alert('自定义错误信息: ' + str);
+			}
+	});
+	avatar_upload_btn.fileBox.change(function(e) {
+		avatar_upload_btn.submit();
+	});
+	
+	// 风采照片上传按钮
+	var photo_upload_btn = K.uploadbutton({
+			button : K('#photo_upload_btn')[0],
+			fieldName : 'imgFile',
+			url : "{:U('Public/Kupload', array('dir'=>'Employee'))}",
+			afterUpload : function(data) {
+				if (data.error === 0) {
+					var url = K.formatUrl(data.url, 'absolute');
+					K('#photo').val(url);
+					// 显示缩略图
+					show_thumb_pic(url, '#photo-show', '#photo-delete-btn');
+				} else {
+					alert(data.message);
+				}
+			},
+			afterError : function(str) {
+				alert('自定义错误信息: ' + str);
+			}
+	});
+	photo_upload_btn.fileBox.change(function(e) {
+		photo_upload_btn.submit();
+	});
+});
+</script>
+</script>
+
+<div class="mainnav_title">
+	<a href="{:U('Employee/index')}" class="btn">员工列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Employee/add')}" class="btn btn-info">添加员工</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改员工</span>&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<div style="position:relative;">
+	<div style="position:absolute; top: 130px; *top: 133px; left: 640px;">
+		<input type="button" id="avatar_upload_btn" value="上传" />
+	</div>
+	<div style="position:absolute; top: 280px; *top: 283px; left: 640px;">
+		<input type="button" id="photo_upload_btn" value="上传" />
+	</div>
+<form method='post' id="employee-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Employee/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Employee/edit')}</if>">
+	
+	<div class="control-group">
+		<label class="control-label span2" for="fullname">姓名:</label>
+		<div class="controls">
+			<input type="text" name="fullname" id="fullname" value="{$employee.fullname}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<img id="avatar-show" style="width: 100px; height: 67px;"
+				<empty name="employee['avatar']">
+					src="../Public/img/default_thumb.jpg"
+				<else /> 
+					src="{$employee.avatar}" 
+				</empty>
+			/>
+			<a id="avatar-delete-btn" href="javascript:void(0);" onclick="delete_thumb(this, '#avatar-show', '#avatar', '{:U('Public/deleteAttach')}');"
+				<empty name="employee['avatar']">
+					hasThumb="0"
+				<else /> 
+					hasThumb="1"
+				</empty>
+			>删除</a>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="avatar">头像:</label>
+		<div class="controls" style="height: 30px;">
+			<input class="span6" type="text" name="avatar" id="avatar" value="{$employee.avatar}" />
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<img id="photo-show" style="width: 150px; height: 100px;"
+				<empty name="employee['photo']">
+					src="../Public/img/default_thumb.jpg"
+				<else /> 
+					src="{$employee.photo}" 
+				</empty>
+			/>
+			<a id="photo-delete-btn" href="javascript:void(0);" onclick="delete_thumb(this, '#photo-show', '#photo', '{:U('Public/deleteAttach')}');"
+				<empty name="employee['photo']">
+					hasThumb="0"
+				<else /> 
+					hasThumb="1"
+				</empty>
+			>删除</a>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="photo">风采照片:</label>
+		<div class="controls" style="height: 30px;">
+			<input class="span6" type="text" name="photo" id="photo" value="{$employee.photo}" />
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2" for="identifier">工号:</label>
+		<div class="controls">
+			<input type="text" name="identifier" id="identifier" value="{$employee.identifier}" />
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="department">部门:</label>
+		<div class="controls">
+			<input type="text" name="department" id="department" value="{$employee.department}" />
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="position">职位:</label>
+		<div class="controls">
+			<input type="text" name="position" id="position" value="{$employee.position}" />
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="working">在职状态:</label>
+		<div class="controls">
+			<input type="text" name="working" id="working" value="{$employee.working}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="phone">联系电话:</label>
+		<div class="controls">
+			<input type="text" name="phone" id="phone" value="{$employee.phone}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="email">电子邮箱:</label>
+		<div class="controls">
+			<input type="text" name="email" id="phone" value="{$employee.email}" />
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">状态:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="status" value="1" <if condition="empty($employee) || ($employee['status'] eq 1)">checked="checked"</if> />启用
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="status" value="0" <if condition="!empty($employee) && ($employee['status'] eq 0)">checked="checked"</if> />禁用
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input type="text" name="orders" id="orders" value="{$employee.orders}">
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$employee['id'] gt 0">
+				<input type="hidden" name="id" value="{$employee['id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+</div>
+
+<div class="height20"></div>
+<div class="height20"></div>
+
+<script type="text/javascript">
+$(function(){
+	$('#employee-form').validate({
+		rules: {
+			fullname: {
+				required: true
+			},
+			identifier: {
+				required: true
+			},
+			department: {
+				required: true
+			},
+			position: {
+				required: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

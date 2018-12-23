@@ -1,0 +1,45 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_editors.jpg"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> >  <a href="{:U('/editors/index')}" > 编辑团队 </a> </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:editors_left_menu" />  
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-title' >
+                        <img src="__PUBLIC__/images/news_icon_title.png"  class='news_icon_title'  /> 
+                        <div class='layui-inline bold letter' >编辑团队</div> 
+                        <img src="__PUBLIC__/images/page_line.png"  class='page_title_line'  />  
+                    </div>
+                    <div class='artice-right-content' >
+                        <foreach name='listArr' item='vo'>
+                            <div class='artice-news-list' >
+                                <div class='layui-row' >
+                                    <div class='artice-news-left'  >
+                                        <img src="{$vo.avatar}"  />
+                                    </div>
+                                    <div class='artice-news-right'  >
+                                        <div class="title hide-long" ><a href="{:U('Editors/detail',array('id'=>$vo['id']))}" >{$vo.name}</a></div>
+                                        <div class="txt" >{$vo.introduction|strip_tags|subtext=85}</div>
+                                        <div class="button-box" >
+                                            
+                                            <div class="artice-news-more" ><a  href="{:U('Editors/detail',array('id'=>$vo['id']))}" >查看更多 >></a></div>
+                                        </div>
+                                    </div>
+                                </div>    
+                             </div>
+                        </foreach>
+                        
+                    </div>  
+                    <div class='page_box' >
+                        {$pages}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

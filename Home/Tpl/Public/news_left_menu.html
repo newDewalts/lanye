@@ -1,0 +1,19 @@
+<div class="artice-left-title" >新闻资讯</div>
+    <div class="artice-menu" >
+        <div class="artice-menu-list artice-menu-select" >
+            <div class="artice-menu-title" >
+                <img src="__PUBLIC__/images/page_menu_active.png" class="artice-active"  />
+                <img src="__PUBLIC__/images/page_icon_news.png" class="artice-icon"  /> 
+                <div class='txt' >新闻资讯</div>
+            </div>
+            <div class="artice-menu-nav" >
+                <volist  name="news_cat_list" id="vo"  >
+                    <div class='artice-nav-list' ><img src="__PUBLIC__/images/page_li_icon.png" class="artice-li-icon"  />  <a href="{:U('/newscat/'.$vo['cat_id'])}">{$vo.cat_name}</a> </div>
+                </volist>    
+            </div>
+        </div>
+    </div>
+<div class='hotline' >
+        <div class='txt' >服务热线</div>
+        <div class='number' >020-89819613</div>
+</div>  

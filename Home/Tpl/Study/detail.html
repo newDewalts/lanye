@@ -1,0 +1,37 @@
+<div class="content" >
+    <div class="page-banner" >
+        <img src="__PUBLIC__/images/banner_news.png"  />
+    </div>
+    <div class="container-box" >
+        <div class="page-menu" > 当前位置: <a href="/" >首页</a> > 学习资源 </div>
+        <div class="article-box" >
+            <div class="layui-row" >
+                <div class="artice-left" >
+                    <include file="Public:study_left_menu" />  
+                </div>
+                <div class="artice-right" >
+                    <div class='artice-right-content' >
+                        <div class="art_title" >{$news_info.title}</div>
+                        <div class='art-msg border-b' >
+                            <div class='layui-inline msg1 ' >来源：{$news_info.copyfrom}</div>
+                            <div class='layui-inline msg1 ' >作者：<empty name="news_info.autho" >匿名<else />{$news_info.author}</empty></div>
+                            <div class='layui-inline msg1 ' >时间：{$news_info['addtime']|date="Y-m-d",###}</div>
+                        </div>
+                        <div class='artice-content' >
+                            {$news_info.content}
+                        </div>
+                        <div class='statement' >
+                            声明：本网所有文章（包括图片和音视频资料）系出于传递更多信息之目的，且明确注明来源和作者，不希望被转载的媒体或个人可与我们联系(dajin@sciedit.cn)，我们将立即进行删除处理。所有文章仅代表作者观点，不代表本站立场。
+                        </div>
+                        <div class='p-box' >
+                            <div class='layui-row' >
+                                <div class='layui-col-lg6 left pl10' >上一篇:<if condition="$one_prev neq ''"><a href="{:U('study/detail',array('id'=>$one_prev['id']))}">{$one_prev.title}</a><else/>暂无</if></div>
+                                <div class='layui-col-lg6 right pr10' >下一篇:<if condition="$one_next neq ''"><a href="{:U('study/detail',array('id'=>$one_next['id']))}">{$one_next.title}</a><else/>暂无</if></div>
+                            </div>    
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>    

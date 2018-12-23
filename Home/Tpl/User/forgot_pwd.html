@@ -1,0 +1,104 @@
+<body>
+	
+	<!-- header -->	
+	<include file="Public/menu"/>
+	<!-- 会员中心 -->
+	
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<div class="column-title">
+				<h2>会员登录与注册</h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">{$home_name}</a>
+				<tt>></tt>
+				<span>密码找回</span>
+			</div>
+			<div class="content clearfix mt20">
+				<div class="block3 fl">
+					<h2 class="tc">密码找回</h2>
+					<form class="form6" method="post" action="">
+						<ul>
+							<li>
+								<label>用户名：	</label>
+								<input type="text" name="username"/>
+							</li>
+							<li>
+								<label>注册邮箱：</label>
+								<input type="text" name="email"/>
+							</li>
+						</ul>
+						<div class="login mt15">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="btn btn3">找回</button>
+						</div>
+					</form>
+					<!-- <div class="coagent mt15">
+						<h5>用第三方账号直接登录</h5>
+						<div class="clearfix mt10">
+							<a href="#">
+								<img src="../Public/image/sina-btn.jpg">
+							</a>
+							<a class="ml10" href="#">
+								<img src="../Public/image/qq-btn.jpg">
+							</a>
+						</div>
+					</div> -->
+				</div>
+				<div class="block3 ml20 fl">
+					<h2 class="tc">会员注册</h2>
+					<form class="form6 form7" id="form1" method="post" action="<?php echo U('Member/login')?>">
+						<ul>
+							<li>
+								<label><span class="red">* </span>用户名：	</label>
+								<input type="text" datatype="*" name="username"/>
+							</li>
+							<li>
+								<label><span class="red">* </span>密码：	</label>
+								<input type="password" datatype="*" name="password"/>
+							</li>
+							<li>
+								<label><span class="red">* </span>确认密码：	</label>
+								<input type="password" datatype="*" name="repassword"/>
+							</li>
+							<li>
+								<label><span class="red">* </span>邮箱：	</label>
+								<input type="text" datatype="e" name="email"/>
+							</li>
+							<li>
+								<label><span class="red">* </span>手机：	</label>
+								<input type="text" datatype="m" name="mobile"/>
+							</li>
+							<li>
+								<label><span class="red">* </span>验证码：	</label>
+								<input class="txt7" type="text" name="verify" datatype="*"/>
+								<span class="code7">
+									<img src='<?php echo U('Common/verify')?>' onclick="fleshVerify();" id="verifyImg"/>
+								</span>
+							</li>
+						</ul>
+						<div class="reg mt15">
+							<label class="block">
+								<input type="checkbox" checked="checked"/>
+								我已阅读并接受<a  class="blue" href="#">《辑文用户注册协议》 </a>
+							</label>
+							<input type="hidden" name="action" value="reg"/>
+							<button class="btn btn3 mt10">立即注册</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="side fr">
+			<include file="Public/member_menu"/>	
+			<include file="Public:online"/>	
+		</div>
+	</div>
+	<script type="text/javascript">
+	// 刷新验证码
+	function fleshVerify(){ 
+		var src = '<?php echo U('Common/verify')?>'+ '?' + new Date().getTime();
+		$('#verifyImg').attr('src', src);
+	}
+	</script>

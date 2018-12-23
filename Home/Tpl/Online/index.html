@@ -1,0 +1,109 @@
+<body class="sciedit-online">
+    <div class="main">
+        <div class="side">
+            <div class="side-list">
+                <div class="side-list-content">
+                    <div class="side-item">
+                        <div class="side-item-title">免费评估</div>
+                        <!-- <div class="triangle" style="display: block;"></div> -->
+                    </div>
+                    <script>
+                    $('.nav_on').removeClass('nav_on');
+                    $('.nav_about').addClass('nav_on')
+                    </script>
+                </div>
+            </div>
+            <div class="side-tel">
+                <div>
+                    <div class="side-tel-title">服务热线：</div>
+                    <div class="side-tel-num">020-85600812</div>
+                </div>
+            </div>
+        </div>
+        <style>
+        .online_div {
+            width: 358px;
+            height: 600px;
+            border: 1px solid #b7b0b0;
+            text-align: center;
+            border-radius: 11px;
+            border-top: none;
+        }
+
+        .online_div form {
+            width: 80%;
+            margin: auto;
+            position: relative;
+            padding-top: 32px;
+        }
+
+        .online_div .layui-form .activity_label span{
+            color: #6C6C6C;
+            text-align: left;
+            line-height: 37px;
+        }
+
+        .online_div .update_btn{
+            background: url('../Public/image/update.png') no-repeat;
+            width: 30px;
+            height: 30px;
+            float: right;
+            margin-top: -29px;
+            margin-right: 5px;
+        }
+        .tj_but{
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            background: #F86556;
+            border: none;
+            color: #fff;
+            margin-top: 27px;
+            font-size: 17px;
+            cursor:pointer;
+        }
+
+        </style>
+        <div class="content">
+            <div class="online_div">
+                <img src="../Public/image/online.png" alt="">
+                <form action="/index/messages.htm" enctype="multipart/form-data" method="post" class="layui-form">                  
+                    <select name="city" lay-verify="required">
+                        <option value="">评估项目</option>
+                        <option value="0">免费评估</option>
+                        <option value="1">快速评估</option>
+                        <option value="2">深度评估</option>                   
+                    </select>
+                    
+                    <div style="margin-top: 20px;">
+                         <label class="activity_label">
+                            <span class="layui-input" id="act-file-name2">文件上传</span>
+                            <div class="update_btn"></div>
+                            <input type="file" name="filename" id="act-file2" required style="display: none;">
+                        </label>
+                    </div>
+                   
+
+                     <input type="text" name="name" required placeholder="姓名" class="layui-input" style="margin-top: 20px;">    
+                     <input type="text" name="phone" required placeholder="电话" class="layui-input" style="margin-top: 20px;">  
+
+                     <textarea name="liuyan" required lay-verify="required" placeholder="留言" class="layui-textarea" style="margin-top: 20px;"></textarea>
+
+                     <button class="tj_but">提交并评估</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+
+$('#act-file2').change(function() {
+    var name = $(this).val();
+    filename = name.slice(12);
+
+    $('#act-file-name2').text(filename);
+ 
+})
+
+
+
+</script>

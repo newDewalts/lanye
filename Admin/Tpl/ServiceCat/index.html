@@ -1,0 +1,43 @@
+<div class="mainnav_title">
+	<a href="{:U('ServiceCat/index')}" class="btn btn-info">服务分类</a>
+	&nbsp;
+	<a href="{:U('ServiceCat/add')}" class="btn">添加服务分类</a>
+</div>
+<div class="height20"></div>
+
+<if condition="!empty($serviceCatList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>分类名称</th>
+			<th class="span2">分类ID</th>
+			<th class="span2">在导航显示</th>
+			<th class="span2">排序</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="serviceCatList" id="serviceCat">
+		<tr>
+			<td style="padding-left:{$serviceCat['level']*25-15}px;">{$serviceCat.cat_name}</td>
+			<td>{$serviceCat.cat_id}</td>
+			<td>
+				<if condition="$serviceCat['show_nav'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td>{$serviceCat.orders}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('ServiceCat/add', array('pid'=>$serviceCat['cat_id']))}" title="添加子分类"><i class="icon-plus"></i></a> &nbsp;&nbsp;
+					<a href="{:U('ServiceCat/edit', array('cat_id'=>$serviceCat['cat_id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('ServiceCat/delete', array('cat_id'=>$serviceCat['cat_id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+<else/>
+	<div>没有任何记录</div>
+</if>

@@ -1,0 +1,71 @@
+<!--banner-->
+<div class="bannerbox1"><img src="__PUBLIC__/images/banner_01.png" alt="SCI期刊编辑团队" /></div>
+
+<div class="place layout">
+    <a href="/">首页</a><span>>></span><a href="javascript:;">编辑团队</a><notempty name="cat_name"><span>>></span><a href="javascript:;">{$cat_name}</a></notempty>
+</div>
+
+<!--项目-->
+<div class="mainbox">
+<div class="main"> 
+	<!--左边-->
+	<div class="train_l">
+        <div class="train_box">
+           <div class="menu">
+               <ul class="trainmenu2">
+                  <volist name="Advantage_m" id="menu">
+					<li <if condition="$cat_id eq $menu['cat_id']">class='on'</if>><a href="{:U('Advantage/index',array('cat_id'=>$menu['cat_id']))}">{$menu.cat_name}</a></li>
+				  </volist>
+               </ul>
+           </div>
+        </div>
+    </div>
+<script>
+$(function(){
+	$(".trainmenu2 li").last().css('border-bottom','none');
+})
+</script>
+
+	<!--右边-->
+    <div class="train_r2">
+		<div class="train_r2_list" style="padding-bottom:20px;">
+			<div class="train_r2_list_left" style="height:120px;">全部分类：</div>
+			<div class="train_r2_list_right">
+			
+				<ul>
+					<volist name="editor" id="ed_list">
+						<li><a href="{:U('Advantage/editor',array('style'=>$ed_list['cat_id'],'cat_id'=>$cat_id))}">{$ed_list.cat_name}</a></li>
+					</volist>
+					<li class="back_no"><a href="{:U('Advantage/editor',array('cat_id'=>$cat_id))}">全部>></a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+        <div class="edit_detail">
+			<ul>
+				<volist name="listArr" id="list">
+					<li>
+						<div style="height:180px;margin-bottom:10px;">
+							<img src="{$list.avatar}" width="130" height="160" alt="达晋编辑{$list.name}" />
+							<div class="ed_det_cent">
+								<span>{$list.name}</span>
+								<p style="text-indent:2em;">{$list.introduction|msubstr=0,250,'utf-8'}</p>
+							</div>
+						</div>
+					</li>
+				</volist>
+			</ul>
+			<div class="clear"></div>
+			<div class="page">{$pages}</div>
+		</div>
+		
+    </div>
+    
+</div>
+
+<div style="clear:both;"></div>
+
+</div>
+

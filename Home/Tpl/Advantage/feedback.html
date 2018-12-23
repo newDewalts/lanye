@@ -1,0 +1,101 @@
+<body>
+
+	<!-- header -->	
+	
+	<include file="Public/menu" />
+	<!-- 关于我们 -->
+	
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<div class="column-title">
+				<h2><?php echo $advantage_info['title']?></h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">{$home_name}</a>
+				<tt>></tt>
+				<a href="<?php echo U('/advantage')?>">服务优势</a>
+				<tt>></tt>
+				<span><?php echo $advantage_info['title'];?></span>
+			</div>
+			<div class="clearfix mt15">
+				<img src="<?php echo $advantage_info['thumb'];?>" alt="<?php echo $advantage_info['title']?>">
+			</div>
+			<div class="content mt10">
+				<div class="comment-box">
+					<ul class="comment-list">
+						<?php foreach($feedback_info as $val):?>
+						<li>
+							<dl>
+								<dt class="blue font14">
+									<?php echo $val['fullname']?>：
+								</dt>
+								<dd class="gray">
+									<?php echo $val['content']?>
+								</dd>
+							</dl>
+						</li>
+						<?php endforeach;?>
+						
+					</ul>
+					
+					<!-- 分页 -->
+					
+					<ul class="pagination mt10">
+						<?php echo $pages?>
+					</ul>
+				</div>
+				<div class="comment-form mt20">
+					<div class="title5">
+						留言板
+					</div>
+					<!-- <p id="msgdemo3" class="Validform_checktip"></p> -->
+					<form class="form2 form5" id="form1" method="post" action="<?php echo U('/feedback')?>">
+						<ul>
+							<li>
+								<label>标题：</label>
+								<input type="text" name="fullname" value="" datatype="*"/>
+							</li>
+							<li>
+								<label>Email：</label>
+								<input type="text" name="email" value="" datatype="e"/>
+							</li>
+							<li>
+								<label>内容：</label>
+								<textarea datatype="*" name="content"></textarea>
+							</li>
+							<li class="clearfix">
+								<label class="fl">验证码：</label>
+								<input class="code-txt fl" type="text" name="verify" datatype="*"/>
+								<div class="verification fl ml10">
+									<img src="<?php echo U('Common/verify')?>" onclick="fleshVerify();" id="verifyImg" style="cursor:pointer;"/>
+								</div>
+							</li>
+						</ul>
+						<button class="btn margin1">提交</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="side fr">
+			<div class="box2 bgc1">
+				<h2>服务优势</h2>
+				<ul class="about-nav">
+					<?php foreach($advantage_list as $val):?>
+					<li <?php if($advantage_info['id']==$val['id']){echo 'class="active"';}?>>
+						<a class="about-subnav" href="<?php echo U('advantage/'.$val['id'])?>"><?php echo $val['title']?></a>
+					</li>
+					<?php endforeach;?>
+				</ul>
+			</div>
+
+			<include file="Public/online"/>
+		</div>
+	</div>
+	<script type="text/javascript">
+	// 刷新验证码
+	function fleshVerify(){ 
+		var src = "<?php echo U('Common/verify')?>"+ '?' + new Date().getTime();
+		$('#verifyImg').attr('src', src);
+	}
+	</script>

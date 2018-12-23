@@ -1,0 +1,65 @@
+<div class="mainnav_title">
+	<a href="{:U('Sci/cat')}" class="btn btn-info">SCI分类</a>
+	&nbsp;
+	<a href="{:U('Sci/addCat')}" class="btn">添加SCI分类</a>
+</div>
+<div class="height20"></div>
+
+
+<if condition="!empty($catList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>PID</th>
+			<th>分类名</th>
+			<th>分类级别</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="catList" id="list">
+		<tr>
+			<td>{$list.id}</td>
+			<td>{$list.pid}</td>
+			<td>
+				<if condition="$list['pid'] eq 0">
+					
+				<else />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</if>
+				{$list.name}
+			</td>
+			<td class="span2">
+				<if condition="$list['pid'] eq 0">
+					一级分类
+				<else />
+					二级分类
+				</if>
+
+			</td>
+			<td>
+				<if condition="$list['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('Sci/editCat', array('id' =>$list['id']))}" title="编辑"><i class="icon-edit"></i></a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Sci/deleteCat', array('id' =>$list['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

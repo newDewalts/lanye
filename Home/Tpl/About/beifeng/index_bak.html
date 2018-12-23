@@ -1,0 +1,52 @@
+<body>
+	
+	<!-- header -->	
+	
+	<include file="Public/menu" />
+	<!-- 关于我们 -->
+	
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<div class="column-title">
+				<h2><?php echo $about_info['title']?></h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">{$home_name}</a>
+				<tt>></tt>
+				<a href="<?php echo U('/about')?>">关于我们</a>
+				<tt>></tt>
+				<span><?php echo $about_info['title'];?></span>
+			</div>
+			<div class="content mt10">
+				<?php echo $about_info['content'];?>
+			</div>
+		</div>
+		<div class="side fr">
+			<div class="box2 bgc1">
+				<h2>关于我们</h2>
+				<ul class="about-nav">
+					<?php foreach($about_menu as $val):?>
+					<?php if($val['id']==$id):?>
+					<li class="active">
+					<?php else:?>
+					<li>
+					<?php endif;?>
+						<a class="about-subnav" href="<?php echo U('About/'.$val['id'])?>"><?php echo $val['title']?></a>
+					</li>
+					<?php endforeach;?>
+					<li>
+						<a class="about-subnav" href="<?php echo U('/identify')?>">员工识别</a>
+					</li>
+					<li>
+						<a class="about-subnav" href="<?php echo U('/news')?>">公司新闻</a>
+					</li>
+					<li>
+						<a class="about-subnav" href="<?php echo U('/video')?>">公司讲座视频</a>
+					</li>
+				</ul>
+			</div>
+
+			<include file="Public/online"/>
+		</div>
+	</div>	

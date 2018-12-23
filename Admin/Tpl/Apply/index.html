@@ -1,0 +1,58 @@
+<div class="mainnav_title">
+	<a href="{:U('Apply/index')}" class="btn btn-info">SCI论文服务在线申请</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Apply/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="姓名" name="username" value="{$search['username']}">
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($applyList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th style="width:50px">编号</th>
+			<th>论文题目</th>
+			<th>姓名</th>
+			<th>联系电话</th>
+			<th>E-mail</th>
+			<th>状态</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="applyList" id="v">
+		<tr>
+			<td>{$v.id}</td>
+			<td>{$v.title}</td>
+			<td class="span2">{$v.username}</td>
+			<td class="span2">{$v.phone}</td>
+			<td class="span2">{$v.email}</td>
+			<td class="span2">
+				<if condition="$v['status'] eq 1">
+					<span class="color-green">已查看</span>
+				<else/>
+					<span class="color-red">未查看</span>
+				</if></td>
+			<td class="span2">{$v.add_time|date="Y-m-d H:i",###}</td>
+			<td class="span2">
+				<span class="tooltip-container">
+					<a href="{:U('Apply/edit', array('id' =>$v['id']))}" title="查看"><i class="icon-eye-open"></i></a>
+					&nbsp;&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Apply/delete', array('id' =>$v['id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>

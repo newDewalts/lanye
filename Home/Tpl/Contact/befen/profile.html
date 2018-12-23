@@ -1,0 +1,46 @@
+				<div class="box2 bgc1">
+					<h2>{$class_name}</h2>
+					<ul class="about-nav">
+					
+						<if condition="$cat_id eq 31">
+							<li class="active">
+						<else />
+							<li>
+						</if>
+							<a class="about-subnav" href="{:U('/contact')}">
+								联系我们
+							</a>
+						</li>
+						
+						<if condition="$cat_id eq 32">
+							<li class="active">
+						<else />
+							<li>
+						</if>
+							<a class="about-subnav" href="{:U('/contact/pay')}">
+								在线支付
+							</a>
+						</li>
+						
+						<if condition="$cat_id eq 33">
+							<li class="active">
+						<else />
+							<li>
+						</if>
+							<a class="about-subnav" href="{:U('/contact/complain')}">
+								投诉建议
+							</a>
+						</li>
+						
+						<if condition="$cat_id eq 34">
+							<li class="active">
+						<else />
+							<li>
+						</if>
+							<a class="about-subnav" href="{:U('/contact/words')}">
+								在线留言
+							</a>
+						</li>
+											
+					</ul>
+				</div>

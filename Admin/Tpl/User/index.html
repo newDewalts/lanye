@@ -1,0 +1,68 @@
+<div class="mainnav_title">
+	<a href="{:U('User/index')}" class="btn btn-info">用户列表</a>
+	<a href="{:U('User/add')}" class="btn">添加用户</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('User/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="用户名" name="username" value="{$search['username']}">
+		<select name="role_id" id="role_id" class="span2">
+			<option value="">--请选择角色--</option>
+			<volist name="roleList" id="vo">
+				<option value="{$vo.id}" <if condition="$search['role_id'] eq $vo['id']">selected="selected"</if> >{$vo.name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($userList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>用户名</th>
+			<th>用户组</th>
+			<th>邮箱</th>
+			<th>注册时间</th>
+			<th>最后登录时间</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="userList" id="user">
+		<tr>
+			<td>{$user.user_id}</td>
+			<td>{$user.username}</td>
+			<td>{$roleArr[$user['role_id']]}</td>
+			<td>{$user.email}</td>
+			<td>{$user.create_time|date="Y-m-d H:i:s",###}</td>
+			<td>{$user.last_login_time|date="Y-m-d H:i:s",###}</td>
+			<td>
+				<if condition="$user['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('User/edit', array('user_id' => $user['user_id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<if condition="($user['user_id'] neq 1)">
+						<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('User/delete', array('user_id' => $user['user_id']))}" title="删除"><i class="icon-trash"></i></a>
+					</if>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

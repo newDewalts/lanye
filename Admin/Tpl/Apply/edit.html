@@ -1,0 +1,138 @@
+<div class="mainnav_title">
+	<a href="{:U('Apply/index')}" class="btn">SCI论文服务在线申请列表</a>
+	<a href="{:U('Apply/keyans')}" class="btn">科研设计/基金申请</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'edit'">
+		<span class="btn btn-info">查看申请信息</span>&nbsp;
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+	<table class="table table-bordered table-hover">
+		<tbody>
+			<tr>
+				<td class="span2">姓名</td>
+				<td>{$apply.username}</td>
+			</tr>
+			<tr>
+				<td class="span2">职称</td>
+				<td>{$apply.job_title}</td>
+			</tr>
+			<tr>
+				<td class="span2">联系手机</td>
+				<td>{$apply.phone}</td>
+			</tr>
+			<tr>
+				<td class="span2">电子邮箱</td>
+				<td>{$apply.email}</td>
+			</tr>
+			<tr>
+				<td class="span2">服务单位</td>
+				<td>{$apply.service_units}</td>
+			</tr>
+			<tr>
+				<td class="span2">QQ号码</td>
+				<td>{$apply.qq}</td>
+			</tr>
+			<tr>
+				<td class="span2">发票抬头</td>
+				<td>{$apply.invoice}</td>
+			</tr>
+			<tr>
+				<td class="span2">发票寄送地址</td>
+				<td>{$apply.invoice_address}</td>
+			</tr>	
+			<if condition="$apply['type'] eq '2'">
+				<tr>
+					<td class="span2">申请书级别</td>
+					<td>{$apply['general_pieces']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">实验室条件</td>
+					<td>{$apply.conditions}</td>
+				</tr>
+				<tr>
+					<td class="span2">申请/预算经费</td>
+					<td>{$apply.target_journal}</td>
+				</tr>
+				<tr>
+					<td class="span2">课题人力资源</td>
+					<td>{$apply.impact_factor}</td>
+				</tr>
+				<tr>
+					<td class="span2">科研隶属单位</td>
+					<td>{$apply.publish_time}</td>
+				</tr>
+				<tr>
+					<td class="span2">字数要求</td>
+					<td>{$apply.number}</td>
+				</tr>
+				<tr>
+					<td class="span2">项目类别</td>
+					<td>{$apply.size}</td>
+				</tr>
+				<tr>
+					<td class="span2">研究方向</td>
+					<td>{$apply['article_type']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">科研基础</td>
+					<td>{$apply.base}</td>
+				</tr>
+				<tr>
+					<td class="span2">专业要求</td>
+					<td>{$apply.professional}</td>
+				</tr>
+			<else/>
+				<tr>
+					<td class="span2">一般件</td>
+					<td>{$apply['general_pieces']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">论文题目</td>
+					<td>{$apply.title}</td>
+				</tr>
+				<tr>
+					<td class="span2">文章类型</td>
+					<td>{$apply['article_type']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">投稿目标期刊</td>
+					<td>{$apply.target_journal}</td>
+				</tr>
+				<tr>
+					<td class="span2">影响因子要求</td>
+					<td>{$apply.impact_factor}</td>
+				</tr>
+				<tr>
+					<td class="span2">发表时间要求</td>
+					<td>{$apply.publish_time}</td>
+				</tr>
+				<tr>
+					<td class="span2">论文评估</td>
+					<td>{$apply['assess']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">英文稿件</td>
+					<td>{$apply['english_manuscript']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">中文稿件</td>
+					<td>{$apply['chinese_manuscript']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">发表支持</td>
+					<td>{$apply['published_support']|get_sci_app}</td>
+				</tr>
+				<tr>
+					<td class="span2">留言</td>
+					<td>{$apply.message}</td>
+				</tr>
+			</if>
+		</tbody>
+	</table>
+<div class="height20"></div>
+<div class="height20"></div>
+<style>.span2{font-weight:600}
+</style>

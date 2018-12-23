@@ -1,0 +1,102 @@
+
+/* 公共样式 */
+.clear {clear:both;}
+.f_l{float:left;}
+.f_r{float:right;}
+
+/* 去除a标签的虚线框  */
+a{outline:none;}
+a:active {star:expression(this.onFocus=this.blur());}
+a:focus {outline:0;}
+
+
+/* 顶部 */
+.header {overflow:hidden;zoom:1;height:70px;background:#3A6EA5}
+.header_footer{width:100%;height:15px;line-height:15px;background:#E2E9EA;overflow:hidden;zoom:1;display:inline-block;zoom:1;*display:inline;}
+.logo {float:left;height:50px;width:190px;overflow:hidden;zoom:1;margin:5px 0 0 8px;_margin-left:4px;}
+.login-info {float:right; margin: 25px 150px 0 0; height:20px;line-height:20px;}
+.login-info  a, .login-info  span {color:#FFF; margin-left: 10px;}
+
+.topmenu {overflow:hidden;zoom:1;float: left;font-size: 14px;font-weight: bold;color: #555555;margin-top:25px;margin-left:10px;}
+.topmenu ul {margin: 0px;padding: 0px;}
+.topmenu li {float: left;margin-right:2px;height: 34px;line-height:34px;}
+.topmenu span {display: block;float: left;padding-left:15px;background: url(../img/admin_nav_bg.png);height: 34px;line-height:34px;color: #fff;}
+.topmenu span a {display: block;float: left;color: #fff;background: url(../img/admin_nav_bg.png) no-repeat right 0;height: 34px;padding-right:15px;height: 34px;line-height:34px;}
+.topmenu .current {display: block;float:left;background:url(../img/admin_nav_bg.png) 0 -43px; border-bottom: none;}
+.topmenu .current a {color: #367ABB;background: url(../img/admin_nav_bg.png) no-repeat right -43px; outline: none;}
+
+
+/* 左侧菜单 */
+#leftMenuBox {float:left;overflow:hidden; zoom:1;display:inline-block;zoom:1;*display:inline;}
+#leftMenu {float:left;background:#F7FBFC;width:200px;}
+#leftMenu {margin:0px;}
+#leftMenu dl dt {float:left;
+
+/*
+background:url(../img/admin_left_menu.gif) no-repeat 12px 6px;width:155px;
+padding-left:35px;
+*/
+width:190px;
+
+height:29px; line-height:29px;border-bottom:1px solid #d5dfe8;text-align:left; font-size:14px;font-weight:bold;}
+#leftMenu dl dd {margin:0;float:left;width:190px;border-bottom:  #EAEFF4 1px solid;height:29px;line-height:29px;}
+#leftMenu dl dd span {margin-top:1px;CURSOR:pointer;padding-left:30px;float:left;width:160px;height:27px;line-height:27px;background:url(../img/admin_dot.gif) no-repeat 15px 10px;}
+#leftMenu dl dd span:hover ,#leftMenu dl dd.on span {background:#E2E9EA url(../img/admin_dot.gif) no-repeat 15px 10px;}
+
+
+/* 主体部分 */
+#Main_content  {margin:0;padding:0;background:#E2E9EA;}
+#MainBox{ float:right;width:100%; margin-left:-224px;margin-right:12px;_margin-right:6px;}
+#MainBox .main_box{ margin-left:224px; overflow:hidden; zoom:1; }
+#MainBox #Main{ width:100%;border:none;}
+#Main_drop {float:left;margin-top:220px;width:12px;overflow:hidden; zoom:1;display:inline-block;zoom:1;*display:inline;}
+#Main_drop img {margin-left:1px; width: 11px; height: 60px;}
+
+
+/* 登陆页 */
+.login-form{
+	background-color: #FFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin: 100px auto 20px;
+    max-width: 450px;
+    padding: 20px 0 30px 150px;
+}
+.login-form .input-prepend .add-on{padding:10px;}
+.login-form .input-prepend input{height: 32px; line-height: 32px;}
+.login-form h2{margin-bottom: 30px;}
+.login-submit-box{padding-left:50px;}
+
+
+
+/* 主体iframe */
+.height20{height: 20px;}
+.color-red{color:red;}
+.color-green{color:green;}
+
+.controls label.error{display:inline; color:#f00; margin-left: 10px;}
+.tooltip-container .tooltip-inner{font-size: 14px;}
+
+.help-inline{color: #888;}
+
+
+.main-box{padding:10px 15px;}
+.mainnav_title{padding: 5px 0 10px;}
+
+/*
+.main-box .table tbody tr td, .main-box .table thead tr th{
+	text-align:center;
+}
+*/
+
+.textarea-remark{width: 250px; height: 100px;}
+.textarea-remark2{width: 400px; height: 80px;}
+
+/* 分页 */
+.pagination ul li a:hover,
+.pagination .disabled .current{background: #f60; color:#fff;}
+
+
+
+

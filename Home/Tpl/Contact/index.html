@@ -1,0 +1,21 @@
+
+<body class="sciedit-server">
+
+<!-- 左边服务项目导航栏 -->
+<include file="Public:side"/>
+    <div class="content">
+
+        <div class="server-title">{$contact_info.title}</div>
+        <div class="server-content">
+           <p>{$contact_info.content}</p>
+            <div class="pic"><img src="../img/server1.png"></div>
+        </div>
+
+
+    </div>
+</div>
+<script type="text/javascript">
+    
+    $('#a-nav').text('联系我们');
+    $('#a-nav').attr('href',"{:U('Contact/index')}");
+</script>

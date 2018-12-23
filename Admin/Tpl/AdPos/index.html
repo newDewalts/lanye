@@ -1,0 +1,36 @@
+<div class="mainnav_title">
+	<a href="{:U('AdPos/index')}" class="btn btn-info">广告位列表</a>
+	<a href="{:U('AdPos/add')}" class="btn">添加广告位</a>
+</div>
+<div class="height20"></div>
+
+<if condition="!empty($adPosList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>广告位名称</th>
+			<th>描述</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="adPosList" id="adPos">
+		<tr>
+			<td>{$adPos.pos_id}</td>
+			<td>{$adPos.pos_title}</td>
+			<td>{$adPos.pos_desc}</td>
+			<td>
+				<span class="tooltip-container">
+					<a href="{:U('AdPos/edit', array('pos_id'=>$adPos['pos_id']))}" title="编辑"><i class="icon-edit"></i></a> &nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('AdPos/delete', array('pos_id'=>$adPos['pos_id']))}" title="删除"><i class="icon-trash"></i></a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+<else/>
+	<div>没有任何记录</div>
+</if>
+

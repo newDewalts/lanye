@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../Public/images/favicon.ico">
+    <title>
+        <empty name="site.title">{$sConfig.seo_title}-蓝译
+            <else />{$site['title']}-蓝译</empty>
+    </title>
+    <meta name="keywords" <empty name="site.keywords">content="{$sConfig.seo_keywords}"
+    <else />content="{$site['keywords']}"</empty>>
+    <meta name="description" <empty name="site.description">content="{$sConfig.seo_description}"
+    <else />content="{$site['description']}"</empty>>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src='../Public/js/jquery.js'></script>
+    <script src="../Public/js/jquery.bxslider.min.js"></script>
+    <script src='../Public/js/common.js'></script>
+    <link rel="stylesheet" type="text/css" href="../Public/css/jquery.bxslider.css">
+    <script src='../Public/layui/layui.js'></script>
+    <link rel="stylesheet" href="../Public/layui/css/layui.css">
+    <link rel="stylesheet" href="../Public/css/style.css">
+</head>
+
+<body>
+<header class="header">
+    <div class='logo' >
+        <a href="{:U('/index')}"><img src='__APP__/Home/Tpl/Public/images/logo.png' class='logo-img' /></a>
+    </div>
+</header>
+        

@@ -1,0 +1,106 @@
+<div class="mainnav_title">
+	<a href="{:U('Nav/index')}" class="btn">导航列表</a>
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Nav/add')}" class="btn btn-info">添加导航</a>
+	<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />
+		<span class="btn btn-info">修改用户</span>
+		<a href="{$forward_url}" class="btn">返回</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="nav-form" action="<if condition="$Think.const.ACTION_NAME eq 'add'">{:U('Nav/add')}<elseif condition="$Think.const.ACTION_NAME eq 'edit'" />{:U('Nav/edit')}</if>">
+	<div class="control-group">
+		<label class="control-label span2" for="pos">导航位置:</label>
+		<div class="controls">
+			<select name="pos" id="pos">
+				<option value="">--请选择导航位置--</option>
+				<volist name="navPos" id="vo">
+					<option value="{$vo.id}"
+						<if condition="!empty($nav) && ($nav['pos'] eq $vo['id'])">
+						selected="selected"
+						</if>
+					>{$vo.pos_title}</option>
+				</volist>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="title">标题:</label>
+		<div class="controls">
+			<input type="text" name="title" id="title" value="{$nav.title}">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="url">链接url:</label>
+		<div class="controls">
+			<input type="text" class="span6" name="url" id="url" value="{$nav.url}">
+			<em class="color-red">*</em>
+			<span class="help-inline">以“http:”//开头</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">是否显示:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="is_show" value="1" <if condition="empty($nav) || ($nav['is_show'] eq 1)">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="is_show" value="0" <if condition="!empty($nav) && ($nav['is_show'] eq 0)">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">在新窗口打开:</label>
+		<div class="controls">
+			<label class="radio inline">
+				<input type="radio" name="opennew" value="1" <if condition="empty($nav) || ($nav['opennew'] eq 1)">checked="checked"</if> />是
+			</label>
+			&nbsp;
+			<label class="radio inline">
+				<input type="radio" name="opennew" value="0" <if condition="!empty($nav) && ($nav['opennew'] eq 0)">checked="checked"</if> />否
+			</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="orders">排序:</label>
+		<div class="controls">
+			<input type="text" name="orders" id="orders" value="{$nav.orders}">
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<if condition="$nav['id'] gt 0">
+				<input type="hidden" name="id" value="{$nav['id']}">
+				<input type="hidden" name="forward_url" value="{$forward_url}">
+			</if>
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+	$('#nav-form').validate({
+		rules: {
+			'pos': {
+				required: true
+			},
+			'title': {
+				required: true,
+			},
+			'url': {
+				required: true, 
+				url: true
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>

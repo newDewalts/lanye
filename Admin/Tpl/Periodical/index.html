@@ -1,0 +1,103 @@
+<div class="mainnav_title">
+	<a href="{:U('Periodical/index')}" class="btn btn-info">期刊列表</a>
+	&nbsp;
+	<a href="{:U('Periodical/add')}" class="btn">添加期刊</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Periodical/index')}" class="form-inline">
+	    <span>出版物编号:</span>
+	    <input type="text" class="input-medium" placeholder="出版物编号" name="pre_issn" value="{$search['pre_issn']}">
+	    <span>影响因子:</span>
+	    <input type="text" class="input-medium" placeholder="影响因子" name="pre_factor" value="{$search['pre_factor']}">
+	    <span>语言:</span>
+	    <input type="text" class="input-medium" placeholder="语言种类" name="pre_language" value="{$search['pre_language']}">
+	    <span>出版社:</span>
+	    <input type="text" class="input-medium" placeholder="出版社" name="pre_press" value="{$search['pre_press']}">
+		<span>标题: </span>
+		<input type="text" class="input-medium" placeholder="期刊名称" name="pre_name" value="{$search['pre_name']}">
+		&nbsp;&nbsp;
+		<select name="cate_id" id="cate_id" class="span3">
+			<option value="">--请选期刊分类--</option>
+			<volist name="periodicalCateOptions" id="periodicalCate">
+				<option value="{$periodicalCate.cat_id}" <if condition="$search['cat_id'] eq $periodicalCate['cat_id']">selected="selected"</if> >
+				<?php 
+					if ($periodicalCate['level'] > 1) {
+						echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $periodicalCate['level']);
+					}
+				?>{$periodicalCate.cat_name}</option>
+			</volist>
+		</select>
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($periodicalList)">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="5%">编号</th>                             <!-- 期刊在数据库中的编号  pre_id； -->
+				<th width="20%">期刊名称</th>                            <!-- 期刊名称  pre_name； -->
+				<th width="15%">期刊分类名称</th>                        <!-- 期刊分类编号  通过 $periodicalCateArr[periodical['cate_id']]获取到期刊分类名称； -->
+				<!--th width="10%">期刊添加时间</th-->                        <!-- 期刊收录时间   date_time； -->
+				<!--th width="10%">期刊出版社</th-->                          <!-- 期刊出版社  pre_press； -->
+				<!--th width="10%">期刊语言种类</th-->                        <!-- 期刊语言种类  pre_language； -->
+				<th width="10%">期刊国外编号</th>                        <!-- 期刊出版编号  pre_issn； -->
+				<!--th width="10%">期刊国内编号</th-->                        <!-- 期刊国内编号  pre_cn ； -->
+				<th width="10%">影响因子</th>                            <!-- 期刊的影响因子  pre_factor； -->
+				<th width="10%">期刊封页图片</th>                        <!-- 期刊封页图片 pre_image_thumb； -->
+				<!--th>期刊内容简洁</th-->                        <!-- 期刊内容  pre_contents； -->
+				<!--th>期刊描述</th-->                            <!-- 期刊描述  pre_desc； -->
+				<!--th>期刊关键字</th-->                          <!-- 期刊的关键字 pre_keywords； -->
+				<th width="10%">点击数</th>                              <!-- 期刊点击数  pre_hits； -->
+				<th width="10%">状态</th>                                <!-- 是否首页显示  pre_status； -->
+				<th width="15%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="periodicalList" id="periodical">
+				<tr>
+					<td>{$periodical.pre_id}</td>
+					<td>
+						{$periodical.pre_name}                                         
+						<if condition="!empty($periodical['pre_img_thumb'])">                   <!-- 判断期刊是否有封页； -->
+							<img src="../Public/img/has_thumb.gif"/>
+						</if>
+					</td>
+					<td>{$periodicalCateArr[$periodical['cate_id']]}</td>                    
+					<!--td>{$periodical.date_time}</td>                                          
+					<td>{$periodical.pre_press}</td>
+					<td>{$periodical.pre_language}</td-->
+					<td>{$periodical.pre_issn}</td>
+					<!--td>{$periodical.pre_cn}</td-->
+					<td>{$periodical.pre_factor}</td>
+					<td><img width="100" src="{$periodical.pre_image_thumb}" /></td>
+					<!--td>{$periodical.pre_contents|strip_tags|msubstr=0,20,'utf-8', false}</td>
+					<td>{$periodical.pre_desc|strip_tags|msubstr=0,20,'utf-8', true}</td>
+					<td>{$periodical.pre_keywords|strip_tags|msubstr=0,20,'utf-8', false}</td-->
+					<td>{$periodical.hits}</td>                                                 <!-- 期刊点击数； -->
+					<td>                                                                        <!-- 期刊状态； -->
+						<if condition="$periodical['pre_status'] eq 1">
+							<span class="color-green">启用</span>
+						<else/>
+							<span class="color-red">禁用</span>
+						</if>
+					</td>
+					<td class="span2">
+						<span class="tooltip-container">
+							<a href="{:U('Periodical/edit', array('pre_id' =>$periodical['pre_id']))}" title="编辑"><i class="icon-edit"></i>编辑</a>
+							&nbsp;&nbsp;
+							<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Periodical/delete', array('pre_id' =>$periodical['pre_id']))}" title="删除"><i class="icon-trash"></i>删除</a>
+						</span>
+					</td>
+				</tr>
+			</volist>
+		</tbody>
+	</table>
+	{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

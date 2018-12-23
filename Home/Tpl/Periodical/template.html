@@ -1,0 +1,100 @@
+<!-- header -->	
+<include file="Public:menu" />
+	<!-- 中文期刊 -->
+	<div class="wrap clearfix mt20">
+		<div class="main fl">
+			<div class="column-title">
+				<h2>{$data['name']}</h2>
+			</div>
+			<div class="breadcrumb">
+				当前位置：
+				<a href="/">{$home_name}</a>
+				<tt>></tt>
+				<if condition="!empty($data['pre_id'])">
+					<a href="<?php echo U('/periodicals')?>">{$data['pre_name']}</a>
+					<tt>></tt>
+					<a href="<?php echo U('periodicals/'.$data['cat_id'])?>">{$data['cat_name']}</a>
+					<tt>></tt>
+					<a href="<?php echo U('periodicals/'.$data['cate_id'])?>">{$data['cate_name']}</a>
+					<tt>></tt>
+					<a href="<?php echo U('periodical/'.$data['id'])?>">{$data['name']}</a>
+				<else />
+					<a href="<?php echo U('/periodicals')?>">{$data['cat_name']}</a>
+					<tt>></tt>
+					<a href="<?php echo U('periodicals/'.$data['cate_id'])?>">{$data['cate_name']}</a>
+					<tt>></tt>
+					<a href="<?php echo U('periodical/'.$data['id'])?>">{$data['name']}</a>
+				</if>
+			</div>
+			<div class="book-info mt20 clearfix">
+				<img src="{$data['image']}" height="148" width="110" alt="{$data['name']}"/>
+				<dl class="fl">
+					<dt>《{$data['name']}》</dt>
+					<dd>
+						刊期：<span>{$data['journal']}</span>        
+					</dd>
+					<dd>
+						国际刊号：<span>ISSN {$data['issn']}</span>        
+					</dd>
+					<dd>
+						影响因子：<span>{$data['factor']}  </span>        
+					</dd>
+					<dd>
+						国内刊号：<span>CN {$data['cn']}</span>        
+					</dd>
+					<dd>
+						引用次数：<span>{$data['quote']}</span>        
+					</dd>
+					<dd>
+						出版地址：<span>{$data['area']}</span>        
+					</dd>
+					<dd class="max">
+						主管单位：<span>{$data['manage']}   </span>        
+					</dd>
+					<dd class="max">
+						主办单位：<span>{$data['press']}</span>        
+					</dd>
+				</dl>
+			</div>
+			<div class="content mt20">
+				<div class="article-title">
+					<h2>《{$data['name']}》</h2>
+					<div>
+						<span>发布时间：{$data['addtime'] | date="Y:m:d",###}</span>
+						<span>来源：{$data['origin']}</span>
+						<span>已浏览：{$data['hits']}次</span>
+					</div>
+				</div>
+				<div class="clearfix plr5">
+					{$data['parameter']}
+					{$data['contents']}
+				</div>
+				<div class="tc mt10">
+					<a href="{:U('Index/contribute')}" class="btn btn3">点击在线投稿</a>
+				</div>
+				
+				
+				<!-- 百度分享 -->
+				<include file="Public:share" />
+				
+				
+				<div class="line2"></div>
+				<div class="news-main">
+					<h2>相关内容</h2>
+					<ul class="clearfix">
+						<volist name="rand_dat" id="vo">
+							<li>
+								<span>></span>
+								<a href="{:U('/article/' . $vo['id'])}">{$vo['title'] | msubstr=0,12,'utf-8', false}</a>
+							</li>
+						</volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="side fr">
+			<include file="profile" />
+			<include file="Public:online"  />
+		</div>
+	</div>	
+<!-- footer -->

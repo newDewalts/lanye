@@ -1,0 +1,87 @@
+<div class="mainnav_title">
+	<a href="{:U('Cooperation/index')}" class="btn btn-info">合作机构列表</a>
+	&nbsp;
+	<a href="{:U('Cooperation/add')}" class="btn">添加合作机构</a>
+</div>
+<div class="height20"></div>
+
+<div class="search-box">
+	<form method="get" action="{:U('Cooperation/index')}" class="form-inline">
+		<span>筛选: </span>
+		<input type="text" class="input-medium" placeholder="标题" name="title" value="{$search['title']}">
+		&nbsp;&nbsp;
+		<!--select name="cat_id" id="cat_id" class="span3">
+			<option value="">--请选择行业分类--</option>
+			<volist name="catIndustryList" id="catIndustry">
+				<option value="{$catIndustry.cat_id}" <if condition="$search['cat_id'] eq $catIndustry['cat_id']">selected="selected"</if> >{$catIndustry.cat_name}</option>
+			</volist>
+		</select-->
+		&nbsp;&nbsp;
+		<!-- <select name="year_id" id="year_id" class="span2">
+			<option value="">--请选择年份--</option>
+			<volist name="catYearList" id="catYear">
+				<option value="{$catYear.cat_id}" <if condition="$search['year_id'] eq $catYear['cat_id']">selected="selected"</if> >{$catYear.cat_name}</option>
+			</volist>
+		</select> -->
+		&nbsp;&nbsp;
+		<button type="submit" class="btn"><i class="icon-search"></i> 搜索</button>
+	</form>
+</div>
+
+<if condition="!empty($newsList)">
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>机构名称</th>
+			<!-- <th>行业分类</th>
+			<th>年份</th> -->
+			<th>添加时间</th>
+			<th>排序</th>
+			<th>推荐到首页</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<volist name="newsList" id="news">
+		<tr>
+			<td style="width:50px;">{$news.id}</td>
+			<td>
+				{$news.title}
+				<if condition="!empty($news['thumb'])">
+					<img src="../Public/img/has_thumb.gif"/>
+				</if>
+			</td>
+			<!-- <td class="span2">{$catIndustryArr[$news['cat_id']]}</td>
+			<td>{$catYearArr[$news['year_id']]}</td> -->
+			<td class="span2">{$news.addtime|date="Y-m-d",###}</td>
+			<td style="width:50px;">{$news.orders}</td>
+			<td style="width:80px;">
+				<if condition="$news['show_index'] eq 1">
+					<i class="icon-ok"></i>
+				</if>
+			</td>
+			<td style="width:50px;">
+				<if condition="$news['status'] eq 1">
+					<span class="color-green">启用</span>
+				<else/>
+					<span class="color-red">禁用</span>
+				</if>
+			</td>
+			<td class="span2">
+				<span class="tooltip-container">
+					<a href="{:U('Cooperation/edit', array('id' =>$news['id']))}" title="编辑"><i class="icon-edit"></i>编辑</a>
+					&nbsp;&nbsp;
+					<a onclick="return confirm_redirect('你确认删除此记录吗？');" href="{:U('Cooperation/delete', array('id' =>$news['id']))}" title="删除"><i class="icon-trash"></i>删除</a>
+				</span>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+{$pageShow}
+<else/>
+	<div>没有任何记录</div>
+</if>
+

@@ -1,0 +1,82 @@
+<div class="mainnav_title">
+	<a href="{:U('Coupon/index')}" class="btn">优惠券列表</a>
+	&nbsp;
+	<if condition="$Think.const.ACTION_NAME eq 'add'">
+		<a href="{:U('Coupon/add')}" class="btn btn-info">发放优惠券</a>
+	</if>
+</div>
+<div class="height20"></div>
+
+<form method='post' id="coupon-form" action="{:U('Coupon/add')}">
+	<div class="control-group">
+		<label class="control-label span2" for="username">接收者:</label>
+		<div class="controls">
+			<input type="text" name="username" id="username">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="money">优惠券金额:</label>
+		<div class="controls">
+			<input type="text" name="money" id="money">
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2" for="valid_time">有效时间:</label>
+		<div class="controls">
+			<select name="valid_time" id="valid_time">
+				<option value="30">一个月(30天)</option>
+				<option value="90">三个月(90天)</option>
+				<option value="180">六个月(180天)</option>
+				<option value="360">一年(360天)</option>
+			</select>
+			<em class="color-red">*</em>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label span2">&nbsp;</label>
+		<div class="controls">
+			<button type="submit" class="btn">提交</button>
+		</div>
+	</div>
+</form>
+
+<div class="height20"></div>
+<div class="height20"></div>
+
+<script type="text/javascript">
+$(function(){
+	$('#coupon-form').validate({
+		onkeyup: false,
+		rules: {
+			username: {
+				required: true,
+				remote: {
+					url: "{:U('Public/checkUsername')}",
+					type: "post",
+					cache: false,
+					data: {
+						username: function() {
+							return $( "#username" ).val();
+						}
+					}
+				}
+			},
+			money: {
+				required: true,
+				digits: true,
+				min: 1
+			}
+		},
+		messages: {
+			username : {
+				remote: '用户不存在'
+			}
+		},
+		success: function( label ) {
+			label.html('<img src="../Public/img/checked.gif"/>');
+		}
+	});
+});
+</script>
